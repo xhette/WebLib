@@ -45,6 +45,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,8 +55,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbonentList.cs" />
+    <Compile Include="Author.cs" />
+    <Compile Include="Book.cs" />
+    <Compile Include="City.cs" />
+    <Compile Include="C_temp_Author.cs" />
+    <Compile Include="C_temp_Book.cs" />
+    <Compile Include="C_temp_City.cs" />
+    <Compile Include="C_temp_Department.cs" />
+    <Compile Include="C_temp_Issue.cs" />
+    <Compile Include="C_temp_Librarian.cs" />
+    <Compile Include="C_temp_Library.cs" />
+    <Compile Include="C_temp_Provider.cs" />
+    <Compile Include="C_temp_Reader.cs" />
+    <Compile Include="C_temp_Shop.cs" />
+    <Compile Include="C_temp_Supply.cs" />
+    <Compile Include="C_temp_Users.cs" />
+    <Compile Include="Department.cs" />
+    <Compile Include="Issue.cs" />
+    <Compile Include="LibDbContext.cs" />
+    <Compile Include="Librarian.cs" />
+    <Compile Include="Library.cs" />
+    <Compile Include="OrderList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Provider.cs" />
+    <Compile Include="Reader.cs" />
+    <Compile Include="Shop.cs" />
+    <Compile Include="Supply.cs" />
+    <Compile Include="Users.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

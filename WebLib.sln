@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebLib", "WebLib\WebLib.csproj", "{5355ACC6-7B91-4997-80AD-03A6F7413279}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AEB9C2B4-7BCE-4AD6-A3AB-9585B944B93D} = {AEB9C2B4-7BCE-4AD6-A3AB-9585B944B93D}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebLib.DataLayer", "WebLib.DataLayer\WebLib.DataLayer.csproj", "{AEB9C2B4-7BCE-4AD6-A3AB-9585B944B93D}"
 EndProject
