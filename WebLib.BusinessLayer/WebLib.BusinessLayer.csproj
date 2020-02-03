@@ -5,10 +5,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AEB9C2B4-7BCE-4AD6-A3AB-9585B944B93D}</ProjectGuid>
+    <ProjectGuid>{5E932989-183B-4D7A-934F-0EF96A9DDEA9}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>WebLib.DataLayer</RootNamespace>
-    <AssemblyName>WebLib.DataLayer</AssemblyName>
+    <RootNamespace>WebLib.BusinessLayer</RootNamespace>
+    <AssemblyName>WebLib.BusinessLayer</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -45,8 +45,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,39 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AbonentList.cs" />
-    <Compile Include="Models\Author.cs" />
-    <Compile Include="Models\Book.cs" />
-    <Compile Include="Models\City.cs" />
-    <Compile Include="TemporalTables\C_temp_Author.cs" />
-    <Compile Include="TemporalTables\C_temp_Book.cs" />
-    <Compile Include="TemporalTables\C_temp_City.cs" />
-    <Compile Include="TemporalTables\C_temp_Department.cs" />
-    <Compile Include="TemporalTables\C_temp_Issue.cs" />
-    <Compile Include="TemporalTables\C_temp_Librarian.cs" />
-    <Compile Include="TemporalTables\C_temp_Library.cs" />
-    <Compile Include="TemporalTables\C_temp_Provider.cs" />
-    <Compile Include="TemporalTables\C_temp_Reader.cs" />
-    <Compile Include="TemporalTables\C_temp_Shop.cs" />
-    <Compile Include="TemporalTables\C_temp_Supply.cs" />
-    <Compile Include="TemporalTables\C_temp_Users.cs" />
-    <Compile Include="Models\Department.cs" />
-    <Compile Include="Models\Issue.cs" />
-    <Compile Include="LibDbContext.cs" />
-    <Compile Include="Models\Librarian.cs" />
-    <Compile Include="Models\Library.cs" />
-    <Compile Include="Models\OrderList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\Provider.cs" />
-    <Compile Include="Models\Reader.cs" />
-    <Compile Include="Models\Shop.cs" />
-    <Compile Include="Models\Supply.cs" />
-    <Compile Include="Models\Users.cs" />
-    <Compile Include="Webpages\webpages_Membership.cs" />
-    <Compile Include="Webpages\webpages_OAuthMembership.cs" />
-    <Compile Include="Webpages\webpages_Roles.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

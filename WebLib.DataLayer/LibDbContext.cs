@@ -8,7 +8,7 @@ namespace WebLib.DataLayer
     public partial class LibDbContext : DbContext
     {
         public LibDbContext()
-            : base("name=LibDbContext")
+            : base("name=LibDbConnection")
         {
         }
 
@@ -24,6 +24,13 @@ namespace WebLib.DataLayer
         public virtual DbSet<Shop> Shop { get; set; }
         public virtual DbSet<Supply> Supply { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<AbonentList> AbonentList { get; set; }
+        public virtual DbSet<OrderList> OrderList { get; set; }
+
+        public virtual DbSet<webpages_Membership> webpages_Membership { get; set; }
+        public virtual DbSet<webpages_OAuthMembership> webpages_OAuthMembership { get; set; }
+        public virtual DbSet<webpages_Roles> webpages_Roles { get; set; }
+
         public virtual DbSet<C_temp_Author> C_temp_Author { get; set; }
         public virtual DbSet<C_temp_Book> C_temp_Book { get; set; }
         public virtual DbSet<C_temp_City> C_temp_City { get; set; }
@@ -36,8 +43,6 @@ namespace WebLib.DataLayer
         public virtual DbSet<C_temp_Shop> C_temp_Shop { get; set; }
         public virtual DbSet<C_temp_Supply> C_temp_Supply { get; set; }
         public virtual DbSet<C_temp_Users> C_temp_Users { get; set; }
-        public virtual DbSet<AbonentList> AbonentList { get; set; }
-        public virtual DbSet<OrderList> OrderList { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -169,14 +174,14 @@ namespace WebLib.DataLayer
 
             modelBuilder.Entity<Library>()
                 .HasMany(e => e.C_temp_Librarian)
-                .WithRequired(e => e.Library1)
-                .HasForeignKey(e => e.Library)
+                .WithRequired(e => e.Library)
+                .HasForeignKey(e => e.LibraryId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Library>()
                 .HasMany(e => e.AbonentList)
-                .WithRequired(e => e.Library1)
-                .HasForeignKey(e => e.Library)
+                .WithRequired(e => e.Library)
+                .HasForeignKey(e => e.LibraryId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Provider>()
@@ -310,223 +315,6 @@ namespace WebLib.DataLayer
                 .WithRequired(e => e.Users)
                 .HasForeignKey(e => e.UserId)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<C_temp_Author>()
-                .Property(e => e.Surname)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Author>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Author>()
-                .Property(e => e.Patronymic)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Author>()
-                .Property(e => e.Operation)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Author>()
-                .Property(e => e.DateTime)
-                .IsFixedLength();
-
-            modelBuilder.Entity<C_temp_Book>()
-                .Property(e => e.Title)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Book>()
-                .Property(e => e.Operation)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Book>()
-                .Property(e => e.DateTime)
-                .IsFixedLength();
-
-            modelBuilder.Entity<C_temp_City>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_City>()
-                .Property(e => e.Operation)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_City>()
-                .Property(e => e.DateTime)
-                .IsFixedLength();
-
-            modelBuilder.Entity<C_temp_Department>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Department>()
-                .Property(e => e.Operation)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Department>()
-                .Property(e => e.DateTime)
-                .IsFixedLength();
-
-            modelBuilder.Entity<C_temp_Issue>()
-                .Property(e => e.Operation)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Issue>()
-                .Property(e => e.DateTime)
-                .IsFixedLength();
-
-            modelBuilder.Entity<C_temp_Librarian>()
-                .Property(e => e.Surname)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Librarian>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Librarian>()
-                .Property(e => e.Patronymic)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Librarian>()
-                .Property(e => e.Address)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Librarian>()
-                .Property(e => e.Phone)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Librarian>()
-                .Property(e => e.Operation)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Librarian>()
-                .Property(e => e.DateTime)
-                .IsFixedLength();
-
-            modelBuilder.Entity<C_temp_Library>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Library>()
-                .Property(e => e.Address)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Library>()
-                .Property(e => e.Phone)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Library>()
-                .Property(e => e.Operation)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Library>()
-                .Property(e => e.DateTime)
-                .IsFixedLength();
-
-            modelBuilder.Entity<C_temp_Provider>()
-                .Property(e => e.Surname)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Provider>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Provider>()
-                .Property(e => e.Patronymic)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Provider>()
-                .Property(e => e.Address)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Provider>()
-                .Property(e => e.Operation)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Provider>()
-                .Property(e => e.DateTime)
-                .IsFixedLength();
-
-            modelBuilder.Entity<C_temp_Reader>()
-                .Property(e => e.Surname)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Reader>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Reader>()
-                .Property(e => e.Patronymic)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Reader>()
-                .Property(e => e.PassSeria)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Reader>()
-                .Property(e => e.PassNumber)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Reader>()
-                .Property(e => e.Address)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Reader>()
-                .Property(e => e.Phone)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Reader>()
-                .Property(e => e.Operation)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Reader>()
-                .Property(e => e.DateTime)
-                .IsFixedLength();
-
-            modelBuilder.Entity<C_temp_Shop>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Shop>()
-                .Property(e => e.Address)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Shop>()
-                .Property(e => e.Phone)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Shop>()
-                .Property(e => e.Operation)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Shop>()
-                .Property(e => e.DateTime)
-                .IsFixedLength();
-
-            modelBuilder.Entity<C_temp_Supply>()
-                .Property(e => e.Summ)
-                .HasPrecision(10, 10);
-
-            modelBuilder.Entity<C_temp_Supply>()
-                .Property(e => e.Operation)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Supply>()
-                .Property(e => e.DateTime)
-                .IsFixedLength();
-
-            modelBuilder.Entity<C_temp_Users>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Users>()
-                .Property(e => e.Operation)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<C_temp_Users>()
-                .Property(e => e.DateTime)
-                .IsFixedLength();
-
             modelBuilder.Entity<AbonentList>()
                 .Property(e => e.ReaderCard)
                 .IsUnicode(false);
@@ -534,6 +322,229 @@ namespace WebLib.DataLayer
             modelBuilder.Entity<OrderList>()
                 .Property(e => e.Cost)
                 .HasPrecision(10, 10);
+
+            modelBuilder.Entity<webpages_Roles> ()
+                .HasMany (e => e.Users)
+                .WithMany (e => e.webpages_Roles)
+                .Map (m => m.ToTable ("webpages_UsersInRoles").MapLeftKey ("RoleId").MapRightKey ("UserId"));
+
+
+            modelBuilder.Entity<C_temp_Author> ()
+                .Property (e => e.Surname)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Author> ()
+                .Property (e => e.Name)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Author> ()
+                .Property (e => e.Patronymic)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Author> ()
+                .Property (e => e.Operation)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Author> ()
+                .Property (e => e.DateTime)
+                .IsFixedLength ();
+
+            modelBuilder.Entity<C_temp_Book> ()
+                .Property (e => e.Title)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Book> ()
+                .Property (e => e.Operation)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Book> ()
+                .Property (e => e.DateTime)
+                .IsFixedLength ();
+
+            modelBuilder.Entity<C_temp_City> ()
+                .Property (e => e.Name)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_City> ()
+                .Property (e => e.Operation)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_City> ()
+                .Property (e => e.DateTime)
+                .IsFixedLength ();
+
+            modelBuilder.Entity<C_temp_Department> ()
+                .Property (e => e.Name)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Department> ()
+                .Property (e => e.Operation)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Department> ()
+                .Property (e => e.DateTime)
+                .IsFixedLength ();
+
+            modelBuilder.Entity<C_temp_Issue> ()
+                .Property (e => e.Operation)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Issue> ()
+                .Property (e => e.DateTime)
+                .IsFixedLength ();
+
+            modelBuilder.Entity<C_temp_Librarian> ()
+                .Property (e => e.Surname)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Librarian> ()
+                .Property (e => e.Name)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Librarian> ()
+                .Property (e => e.Patronymic)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Librarian> ()
+                .Property (e => e.Address)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Librarian> ()
+                .Property (e => e.Phone)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Librarian> ()
+                .Property (e => e.Operation)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Librarian> ()
+                .Property (e => e.DateTime)
+                .IsFixedLength ();
+
+            modelBuilder.Entity<C_temp_Library> ()
+                .Property (e => e.Name)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Library> ()
+                .Property (e => e.Address)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Library> ()
+                .Property (e => e.Phone)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Library> ()
+                .Property (e => e.Operation)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Library> ()
+                .Property (e => e.DateTime)
+                .IsFixedLength ();
+
+            modelBuilder.Entity<C_temp_Provider> ()
+                .Property (e => e.Surname)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Provider> ()
+                .Property (e => e.Name)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Provider> ()
+                .Property (e => e.Patronymic)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Provider> ()
+                .Property (e => e.Address)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Provider> ()
+                .Property (e => e.Operation)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Provider> ()
+                .Property (e => e.DateTime)
+                .IsFixedLength ();
+
+            modelBuilder.Entity<C_temp_Reader> ()
+                .Property (e => e.Surname)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Reader> ()
+                .Property (e => e.Name)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Reader> ()
+                .Property (e => e.Patronymic)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Reader> ()
+                .Property (e => e.PassSeria)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Reader> ()
+                .Property (e => e.PassNumber)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Reader> ()
+                .Property (e => e.Address)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Reader> ()
+                .Property (e => e.Phone)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Reader> ()
+                .Property (e => e.Operation)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Reader> ()
+                .Property (e => e.DateTime)
+                .IsFixedLength ();
+
+            modelBuilder.Entity<C_temp_Shop> ()
+                .Property (e => e.Name)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Shop> ()
+                .Property (e => e.Address)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Shop> ()
+                .Property (e => e.Phone)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Shop> ()
+                .Property (e => e.Operation)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Shop> ()
+                .Property (e => e.DateTime)
+                .IsFixedLength ();
+
+            modelBuilder.Entity<C_temp_Supply> ()
+                .Property (e => e.Summ)
+                .HasPrecision (10, 10);
+
+            modelBuilder.Entity<C_temp_Supply> ()
+                .Property (e => e.Operation)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Supply> ()
+                .Property (e => e.DateTime)
+                .IsFixedLength ();
+
+            modelBuilder.Entity<C_temp_Users> ()
+                .Property (e => e.Name)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Users> ()
+                .Property (e => e.Operation)
+                .IsUnicode (false);
+
+            modelBuilder.Entity<C_temp_Users> ()
+                .Property (e => e.DateTime)
+                .IsFixedLength ();
+
         }
     }
 }

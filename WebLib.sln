@@ -5,10 +5,16 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebLib", "WebLib\WebLib.csproj", "{5355ACC6-7B91-4997-80AD-03A6F7413279}"
 	ProjectSection(ProjectDependencies) = postProject
+		{5E932989-183B-4D7A-934F-0EF96A9DDEA9} = {5E932989-183B-4D7A-934F-0EF96A9DDEA9}
 		{AEB9C2B4-7BCE-4AD6-A3AB-9585B944B93D} = {AEB9C2B4-7BCE-4AD6-A3AB-9585B944B93D}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebLib.DataLayer", "WebLib.DataLayer\WebLib.DataLayer.csproj", "{AEB9C2B4-7BCE-4AD6-A3AB-9585B944B93D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebLib.BusinessLayer", "WebLib.BusinessLayer\WebLib.BusinessLayer.csproj", "{5E932989-183B-4D7A-934F-0EF96A9DDEA9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AEB9C2B4-7BCE-4AD6-A3AB-9585B944B93D} = {AEB9C2B4-7BCE-4AD6-A3AB-9585B944B93D}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +30,10 @@ Global
 		{AEB9C2B4-7BCE-4AD6-A3AB-9585B944B93D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEB9C2B4-7BCE-4AD6-A3AB-9585B944B93D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEB9C2B4-7BCE-4AD6-A3AB-9585B944B93D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E932989-183B-4D7A-934F-0EF96A9DDEA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E932989-183B-4D7A-934F-0EF96A9DDEA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E932989-183B-4D7A-934F-0EF96A9DDEA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E932989-183B-4D7A-934F-0EF96A9DDEA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

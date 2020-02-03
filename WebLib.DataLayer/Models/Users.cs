@@ -17,6 +17,7 @@ namespace WebLib.DataLayer
             C_temp_Librarian = new HashSet<C_temp_Librarian>();
             C_temp_Provider = new HashSet<C_temp_Provider>();
             C_temp_Reader = new HashSet<C_temp_Reader>();
+            webpages_Roles = new HashSet<webpages_Roles> ();
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -42,5 +43,8 @@ namespace WebLib.DataLayer
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<C_temp_Reader> C_temp_Reader { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage ("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<webpages_Roles> webpages_Roles { get; set; }
     }
 }

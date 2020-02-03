@@ -29,7 +29,7 @@ namespace WebLib.DataLayer
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Library { get; set; }
+        public int LibraryId { get; set; }
 
         public int? UserId { get; set; }
 
@@ -42,7 +42,7 @@ namespace WebLib.DataLayer
         [Timestamp]
         public byte[] DateTime { get; set; }
 
-        public virtual Library Library1 { get; set; }
+        public virtual Library Library { get; set; }
 
         public virtual Users Users { get; set; }
     }
