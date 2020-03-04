@@ -45,6 +45,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,12 +54,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\AuthorDTO.cs" />
+    <Compile Include="DTO\BookDTO.cs" />
+    <Compile Include="DTO\Composite\AbonentInLibraryDTO.cs" />
+    <Compile Include="DTO\Composite\BookDetailedDTO.cs" />
+    <Compile Include="DTO\Composite\IssueDetailedDTO.cs" />
+    <Compile Include="DTO\Composite\LibraryShortDTO.cs" />
+    <Compile Include="DTO\Composite\ReaderShortDataDTO.cs" />
+    <Compile Include="DTO\DepartmentDTO.cs" />
+    <Compile Include="DTO\IssueDTO.cs" />
+    <Compile Include="DTO\LibraryDTO.cs" />
+    <Compile Include="DTO\ReaderDataDTO.cs" />
+    <Compile Include="DTO\SupplyDTO.cs" />
+    <Compile Include="GeneralMethods\Generic\GenericRepository.cs" />
+    <Compile Include="GeneralMethods\Generic\IGenericRepository.cs" />
+    <Compile Include="GeneralMethods\ReaderPage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebLib.DataLayer\WebLib.DataLayer.csproj">
+      <Project>{AEB9C2B4-7BCE-4AD6-A3AB-9585B944B93D}</Project>
+      <Name>WebLib.DataLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GeneralMethods\ReaderRepository\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -16,7 +16,7 @@ namespace WebLib.DataLayer
             C_temp_Book = new HashSet<C_temp_Book>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated (DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]

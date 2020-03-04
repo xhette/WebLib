@@ -9,7 +9,7 @@ namespace WebLib.DataLayer
     [Table("Issue")]
     public partial class Issue
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated (DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         public DateTime? IssueDate { get; set; }

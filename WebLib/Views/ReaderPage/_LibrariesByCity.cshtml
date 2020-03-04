@@ -1,0 +1,42 @@
+﻿
+@model IEnumerable<WebLib.Models.LibraryModel>
+
+<div id="LibraryListTable">
+    <table class="table" id="LibraryListTable">
+        <thead>
+            <tr>
+                <td>
+                    Название
+                </td>
+                <td>
+                    Адрес
+                </td>
+                <td>
+                    Телефон
+                </td>
+                <td>
+                    Город
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var lib in Model)
+            {
+                <tr>
+                    <td>
+                        @lib.Name
+                    </td>
+                    <td>
+                        @lib.Address
+                    </td>
+                    <td>
+                        @lib.Phone
+                    </td>
+                    <td>
+                        @lib.CityName
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>

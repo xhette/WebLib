@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "Главная";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model WebLib.Models.ReaderPages.ReaderPageModel
+<div class="page-wrapper">
+    <div class=" container">
+        <div class="row">
+            <!--Информация о пользователе-->
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                        <strong>
+                            @Model.Reader.FullName
+                        </strong>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <strong>Дата рождения: </strong>@Model.Reader.BirthDateString
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Паспорт: </strong>@Model.Reader.PassSeria @Model.Reader.PassNumber
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Адрес: </strong>@Model.Reader.Address
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Телефон: </strong>@Model.Reader.Phone
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!--Список библиотек-->
+            <div class="col-md-4 col-md-offset-2">
+                <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <strong>
+                        Мои библиотеки
+                    </strong>
+                </div>
+                <table class="table">
+                    <tbody>
+                        @foreach (var lib in Model.Libraries)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    @lib.Name
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!--Выдачи-->
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>
+                                Книга
+                            </td>
+                            <td>
+                                Дата выдачи
+                            </td>
+                            <td>
+                                Дата возврата
+                            </td>
+                            <td>
+                                Статус
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var issue in Model.Issues)
+                        {
+                        <tr>
+                            <td>
+                                @issue.Book.AuthorFullName "@issue.Book.Title"
+                            </td>
+                            <td>
+                                @(issue.IssueDate.HasValue?issue.IssueDate.Value.ToShortDateString():String.Empty)
+                            </td>
+                            <td>
+                                @(issue.ReturnDate.HasValue ? issue.ReturnDate.Value.ToShortDateString() : String.Empty)
+                            </td>
+                            <td>
+                                @(WebLib.Utils.Enums.GetDescription(issue.Status))
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

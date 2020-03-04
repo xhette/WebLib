@@ -55,11 +55,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AbonentList.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\City.cs" />
+    <Compile Include="Procedures\AbonentInLibrary.cs" />
+    <Compile Include="Procedures\IssueDetailed.cs" />
+    <Compile Include="Procedures\LibraryDetailed.cs" />
+    <Compile Include="Procedures\Order.cs" />
+    <Compile Include="StoredProcedure.cs" />
     <Compile Include="TemporalTables\C_temp_Author.cs" />
     <Compile Include="TemporalTables\C_temp_Book.cs" />
     <Compile Include="TemporalTables\C_temp_City.cs" />
@@ -92,6 +96,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Base\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

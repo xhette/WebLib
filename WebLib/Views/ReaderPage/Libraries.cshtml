@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<WebLib.Models.LibraryModel>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <div class="row">
+                @using (Ajax.BeginForm("LibrariesByCity", "ReaderPage", new AjaxOptions { UpdateTargetId = "LibraryListTable" }, new { @class = "form-inline ml-auto pull-right" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="text" class="form-control search-input" name="cityId" />
+                    <input type="submit" class="btn btn-default" value="Поиск" />
+                }
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="LibraryListTable">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td>
+                                        Название
+                                    </td>
+                                    <td>
+                                        Адрес
+                                    </td>
+                                    <td>
+                                        Телефон
+                                    </td>
+                                    <td>
+                                        Город
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var lib in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @lib.Name
+                                        </td>
+                                        <td>
+                                            @lib.Address
+                                        </td>
+                                        <td>
+                                            @lib.Phone
+                                        </td>
+                                        <td>
+                                            @lib.CityName
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+

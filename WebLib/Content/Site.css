@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    min-height: 100vh;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,4 +22,58 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+a {
+    cursor: pointer;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+#navbar {
+    /* don't forget to add all the previously mentioned styles here too */
+    background: #f6f6f6;
+    border-right: 1px solid #e7e7e7;
+    transition: all 0.3s;
+    min-width: 250px;
+    max-width: 250px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    min-height: 100vh;
+}
+
+.navbar-list {
+    margin: 100px 20px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+label {
+    font-weight: 500;
+}
+
+.page-wrapper {
+    margin-left: 250px;
+    margin-top: 50px;
+}
+
+.form-signin {
+    min-height: 300px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.search-input {
+    margin: 0 10px;
+}
+
+.row {
+    margin: 0 0 100px 0;
 }

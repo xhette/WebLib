@@ -137,10 +137,21 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ReaderPageController.cs" />
+    <Compile Include="Enums\IssueStatusEnum.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\LibraryModel.cs" />
+    <Compile Include="Models\LibraryShortModel.cs" />
+    <Compile Include="Models\ReaderPages\BookViewModel.cs" />
+    <Compile Include="Models\ReaderPages\ReaderDataModel.cs" />
+    <Compile Include="Models\ReaderPages\ReaderIssueModel.cs" />
+    <Compile Include="Models\ReaderPages\ReaderPageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\CreateAccounts.cs" />
+    <Compile Include="Utils\Enums.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -159,6 +170,8 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -176,10 +189,13 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\ReaderPage\Index.cshtml" />
+    <Content Include="Views\ReaderPage\Libraries.cshtml" />
+    <Content Include="Views\ReaderPage\_LibrariesByCity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -195,6 +211,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WebLib.BusinessLayer\WebLib.BusinessLayer.csproj">
+      <Project>{5E932989-183B-4D7A-934F-0EF96A9DDEA9}</Project>
+      <Name>WebLib.BusinessLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebLib.DataLayer\WebLib.DataLayer.csproj">
       <Project>{AEB9C2B4-7BCE-4AD6-A3AB-9585B944B93D}</Project>
       <Name>WebLib.DataLayer</Name>

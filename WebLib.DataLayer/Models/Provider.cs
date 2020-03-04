@@ -9,7 +9,7 @@ namespace WebLib.DataLayer
     [Table("Provider")]
     public partial class Provider
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated (DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [StringLength(50)]

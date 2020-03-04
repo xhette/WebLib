@@ -17,7 +17,7 @@ namespace WebLib.DataLayer
             AbonentList = new HashSet<AbonentList>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated (DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [StringLength(50)]
