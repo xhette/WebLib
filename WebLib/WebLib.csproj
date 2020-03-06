@@ -143,8 +143,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BookModel.cs" />
+    <Compile Include="Models\DepartmentModel.cs" />
     <Compile Include="Models\LibraryModel.cs" />
     <Compile Include="Models\LibraryShortModel.cs" />
+    <Compile Include="Models\ProviderPages\OrderViewModel.cs" />
+    <Compile Include="Models\ReaderPages\DepartmentListModel.cs" />
+    <Compile Include="Models\SupplyModel.cs" />
     <Compile Include="Models\ReaderPages\BookViewModel.cs" />
     <Compile Include="Models\ReaderPages\ReaderDataModel.cs" />
     <Compile Include="Models\ReaderPages\ReaderIssueModel.cs" />
@@ -152,6 +157,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\CreateAccounts.cs" />
     <Compile Include="Utils\Enums.cs" />
+    <Compile Include="Models\CityModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -193,6 +199,7 @@
     <Content Include="Views\ReaderPage\Index.cshtml" />
     <Content Include="Views\ReaderPage\Libraries.cshtml" />
     <Content Include="Views\ReaderPage\_LibrariesByCity.cshtml" />
+    <Content Include="Views\ReaderPage\Issues.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

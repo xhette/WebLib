@@ -56,5 +56,13 @@ namespace WebLib.BusinessLayer.GeneralMethods
 			return result;
 
 		}
+
+		public List<CityDTO> CityList ()
+		{
+			GenericRepository<City> repository = new GenericRepository<City>(_context);
+			List<CityDTO> cities = repository.Get().Select(c => (CityDTO)c).ToList();
+
+			return cities;
+		}
 	}
 }

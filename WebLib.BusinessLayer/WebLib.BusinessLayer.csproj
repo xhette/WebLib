@@ -56,11 +56,14 @@
   <ItemGroup>
     <Compile Include="DTO\AuthorDTO.cs" />
     <Compile Include="DTO\BookDTO.cs" />
+    <Compile Include="DTO\CityDTO.cs" />
     <Compile Include="DTO\Composite\AbonentInLibraryDTO.cs" />
     <Compile Include="DTO\Composite\BookDetailedDTO.cs" />
     <Compile Include="DTO\Composite\IssueDetailedDTO.cs" />
     <Compile Include="DTO\Composite\LibraryShortDTO.cs" />
+    <Compile Include="DTO\Composite\OrderDTO.cs" />
     <Compile Include="DTO\Composite\ReaderShortDataDTO.cs" />
+    <Compile Include="DTO\ShopDTO.cs" />
     <Compile Include="DTO\DepartmentDTO.cs" />
     <Compile Include="DTO\IssueDTO.cs" />
     <Compile Include="DTO\LibraryDTO.cs" />

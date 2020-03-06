@@ -7,25 +7,25 @@ using WebLib.DataLayer;
 
 namespace WebLib.BusinessLayer.DTO
 {
-	public class SupplyDTO
+	public class ShopDTO
 	{
 		public int Id { get; set; }
 
-		public DateTime? Date { get; set; }
+		public string Name { get; set; }
 
-		public decimal? Summ { get; set; }
+		public string Address { get; set; }
 
-		public int ShopId { get; set; }
+		public string Phone { get; set; }
 
-		public static explicit operator SupplyDTO (Supply db)
+		public static explicit operator ShopDTO (Shop db)
 		{
 			if (db == null) return null;
-			else return new SupplyDTO
+			else return new ShopDTO
 			{
 				Id = db.Id,
-				ShopId = db.ShopId,
-				Date = db.Date,
-				Summ = db.Summ
+				Name = db.Name,
+				Address = db.Address,
+				Phone = db.Phone
 			};
 		}
 	}

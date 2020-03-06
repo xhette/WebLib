@@ -4,7 +4,6 @@
 @model IEnumerable<WebLib.Models.LibraryModel>
 
     <div class="page-wrapper">
-        <div class="container">
             <div class="row">
                 @using (Ajax.BeginForm("LibrariesByCity", "ReaderPage", new AjaxOptions { UpdateTargetId = "LibraryListTable" }, new { @class = "form-inline ml-auto pull-right" }))
                 {
@@ -57,6 +56,4 @@
                 </div>
             </div>
         </div>
-    </div>
-
 

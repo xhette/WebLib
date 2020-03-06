@@ -14,14 +14,16 @@ namespace WebLib.Controllers
     {
         private ReaderPage readerContext;
         private LibDbContext context;
+		private int userId = 28;
 
-        public ActionResult Index()
+
+		public ActionResult Index()
         {
             ReaderPageModel model = new ReaderPageModel();
             using (context = new LibDbContext())
             {
                 readerContext = new ReaderPage(context);
-                model.Reader = (ReaderDataModel)readerContext.ReaderData(28);
+                model.Reader = (ReaderDataModel)readerContext.ReaderData(userId);
                 model.Libraries = readerContext.AbonentList(model.Reader.Id).Select(c => (LibraryShortModel)c).ToList();
                 var dbIssues = readerContext.ReaderIssuesList(model.Reader.Id).ToList();
                 if (dbIssues.Count > 5)
@@ -34,10 +36,10 @@ namespace WebLib.Controllers
 
         public ActionResult Libraries()
         {
-            List<LibraryModel> model = new List<LibraryModel>();
+            List<LibraryModel> model;
+			List<CityModel> cities;
             using (context = new LibDbContext())
             {
-
                 readerContext = new ReaderPage(context);
                 model = readerContext.LibraryList().Select(c => (LibraryModel)c).ToList();
             }
@@ -66,5 +68,19 @@ namespace WebLib.Controllers
 
             return PartialView("~/Views/ReaderPage/_LibrariesByCity.cshtml", model);
         }
-    }
+
+		public ActionResult Issues ()
+		{
+			List<ReaderIssueModel> model;
+			using (context = new LibDbContext())
+			{
+				int readerId = context.Reader.FirstOrDefault(c => c.UserId == userId).Id;
+				readerContext = new ReaderPage(context);
+				var dbIssues = readerContext.ReaderIssuesList(readerId).ToList();
+
+				model = dbIssues.Select(c => (ReaderIssueModel)c).ToList();
+			}
+			return View(model);
+		}
+	}
 }

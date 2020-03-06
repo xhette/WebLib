@@ -8,13 +8,13 @@ namespace WebLib.Enums
 {
 	public enum IssueStatusEnum
 	{
-		[Description("Выдано")]
+		[Description("выдано")]
 		Processed = 1,
 
-		[Description("Возвращено")]
+		[Description("возвращено")]
 		Returned = 2,
 
-		[Description("Просрочено")]
+		[Description("просрочено")]
 		Spoiled = 3
 	}
 }

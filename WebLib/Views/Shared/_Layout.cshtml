@@ -11,48 +11,46 @@
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 </head>
 <body>
-        <div class="navbar navbar-default navbar-fixed-top" style="margin-left: 250px; background-color: #fff">
-            <div class="container">
+    <div class="body-content">
+        <div class="navbar navbar-default navbar-fixed-top" style="background-color: #fff; z-index: 0">
+            <ul class="nav navbar-nav navbar-right">
                 @Html.ActionLink("WebLib", "Index", "Home", new { @class = "navbar-brand" })
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="../navbar-static-top/">Выход</a></li>
-                </ul>
+                <li><a href="../navbar-static-top/">Выход</a></li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-2" id="navbar">
+                <nav class="sidebar">
+                    <ul class="list-unstyled navbar-list">
+                        <li>
+                            <a href="#">Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="#">Shortcuts</a>
+                        </li>
+                        <li>
+                            <a href="#">Overview</a>
+                        </li>
+                        <li>
+                            <a href="#">Events</a>
+                        </li>
+                        <li>
+                            <a href="#">About</a>
+                        </li>
+                        <li>
+                            <a href="#">Services</a>
+                        </li>
+                        <li>
+                            <a href="#">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-md-10 col-md-offset-2">
+                @RenderBody()
             </div>
         </div>
-<div class="body-content">
-    <div class="row">
-        <div class="col-md-2" id="navbar">
-            <nav class="sidebar">
-                <ul class="list-unstyled navbar-list">
-                    <li>
-                        <a href="#">Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="#">Shortcuts</a>
-                    </li>
-                    <li>
-                        <a href="#">Overview</a>
-                    </li>
-                    <li>
-                        <a href="#">Events</a>
-                    </li>
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-        <div class="col-md-12">
-            @RenderBody()
-        </div>
     </div>
-</div>
 
             @Scripts.Render("~/bundles/jquery")
             @Scripts.Render("~/bundles/bootstrap")

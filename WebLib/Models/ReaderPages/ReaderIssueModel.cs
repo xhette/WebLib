@@ -14,7 +14,24 @@ namespace WebLib.Models.ReaderPages
 
 		public DateTime? IssueDate { get; set; }
 
+		public string IssueDateString
+		{
+			get
+			{
+				return IssueDate.HasValue ? IssueDate.Value.ToShortDateString() : String.Empty;
+			}
+		}
+
 		public DateTime? ReturnDate { get; set; }
+
+		public string ReturnDateString
+		{
+			get
+			{
+				return ReturnDate.HasValue ? ReturnDate.Value.ToShortDateString() : String.Empty;
+			}
+		}
+
 
 		public BookViewModel Book { get; set; }
 

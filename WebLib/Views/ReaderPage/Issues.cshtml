@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Issues";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<WebLib.Models.ReaderPages.ReaderIssueModel>
+
+<div class="page-wrapper">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="LibraryListTable">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td>
+                                    Книга
+                                </td>
+                                <td>
+                                    Дата выдачи
+                                </td>
+                                <td>
+                                    Дата возврата
+                                </td>
+                                <td>
+                                    Статус
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var issue in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @issue.Book.AuthorFullName "@issue.Book.Title"
+                                    </td>
+                                    <td>
+                                        @issue.IssueDateString
+                                    </td>
+                                    <td>
+                                        @issue.ReturnDateString
+                                    </td>
+                                    <td>
+                                        @WebLib.Utils.Enums.GetDescription(issue.Status)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
