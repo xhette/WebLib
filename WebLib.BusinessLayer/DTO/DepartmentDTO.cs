@@ -22,7 +22,7 @@ namespace WebLib.BusinessLayer.DTO
 			{
 				Id = dbDepartment.Id,
 				Name = dbDepartment.Name,
-				LibraryId = dbDepartment.LibraryId
+				LibraryId = dbDepartment.Library
 			};
 		}
 	}

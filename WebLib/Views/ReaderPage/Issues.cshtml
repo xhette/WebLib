@@ -6,48 +6,75 @@
 
 @model IEnumerable<WebLib.Models.ReaderPages.ReaderIssueModel>
 
-<div class="page-wrapper">
-        <div class="row">
+@section Sidebar {
+    <div class="col-md-2" id="navbar">
+        <nav class="sidebar">
+            <ul class="list-unstyled navbar-list">
+                <li class="navbar-list-item active-nav-item">
+                    @Html.ActionLink("Личные данные", "Index", "ReaderPage")
+                </li>
+                <li class="navbar-list-item">
+                    @Html.ActionLink("Библиотеки", "Libraries", "ReaderPage")
+                </li>
+                <li class="navbar-list-item">
+                    @Html.ActionLink("Поиск книг", "Books", "ReaderPage")
+                </li>
+            </ul>
+        </nav>
+    </div>
+}
+
+<div class="col-md-10 col-md-offset-2">
+    <div class="page-wrapper">
+
+        <div class="row row-default">
             <div class="col-md-12">
-                <div id="LibraryListTable">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <td>
-                                    Книга
-                                </td>
-                                <td>
-                                    Дата выдачи
-                                </td>
-                                <td>
-                                    Дата возврата
-                                </td>
-                                <td>
-                                    Статус
-                                </td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var issue in Model)
-                            {
+                @Html.ActionLink("Назад", "Index", "ReaderPage")
+            </div>
+        </div>
+
+            <div class="row row-default">
+                <div class="col-md-12">
+                    <div id="LibraryListTable">
+                        <table class="table">
+                            <thead>
                                 <tr>
                                     <td>
-                                        @issue.Book.AuthorFullName "@issue.Book.Title"
+                                        Книга
                                     </td>
                                     <td>
-                                        @issue.IssueDateString
+                                        Дата выдачи
                                     </td>
                                     <td>
-                                        @issue.ReturnDateString
+                                        Дата возврата
                                     </td>
                                     <td>
-                                        @WebLib.Utils.Enums.GetDescription(issue.Status)
+                                        Статус
                                     </td>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach (var issue in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @issue.Book.AuthorFullName "@issue.Book.Title"
+                                        </td>
+                                        <td>
+                                            @issue.IssueDateString
+                                        </td>
+                                        <td>
+                                            @issue.ReturnDateString
+                                        </td>
+                                        <td>
+                                            @WebLib.Utils.Enums.GetDescription(issue.Status)
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+</div>

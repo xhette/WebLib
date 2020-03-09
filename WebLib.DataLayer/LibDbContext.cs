@@ -104,8 +104,8 @@ namespace WebLib.DataLayer
 
             modelBuilder.Entity<City>()
                 .HasMany(e => e.Library)
-                .WithRequired(e => e.City)
-                .HasForeignKey(e => e.CityId)
+                .WithRequired(e => e._City)
+                .HasForeignKey(e => e.City)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Department>()
@@ -156,8 +156,8 @@ namespace WebLib.DataLayer
 
             modelBuilder.Entity<Library>()
                 .HasMany(e => e.Department)
-                .WithRequired(e => e.Library)
-                .HasForeignKey(e => e.LibraryId)
+                .WithRequired(e => e._Library)
+                .HasForeignKey(e => e.Library)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Library>()

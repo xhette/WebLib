@@ -1,0 +1,56 @@
+﻿
+@model IEnumerable<WebLib.Models.ReaderPages.BookViewModel>
+
+<div class="row row-default">
+    @using (Ajax.BeginForm("BookSearch", "ReaderPage", new AjaxOptions { UpdateTargetId = "ByTitleSearch" }, new { @class = "form-inline ml-auto pull-right" }))
+    {
+        @Html.AntiForgeryToken()
+        <input type="text" class="form-control search-input" name="symbols" />
+        <input type="submit" class="btn btn-default" value="Поиск" />
+    }
+</div>
+
+<div id="ByTitleSearch">
+
+    <div class="row row-default">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Автор
+                        </th>
+                        <th>
+                            Название
+                        </th>
+                        <th>
+                            Отдел
+                        </th>
+                        <th>
+                            Библиотека
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var book in Model)
+                    {
+                        <tr>
+                            <td>
+                                @book.AuthorFullName
+                            </td>
+                            <td>
+                                "@book.Title"
+                            </td>
+                            <td>
+                                @book.DepartmentName
+                            </td>
+                            <td>
+                                @book.LibraryName
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

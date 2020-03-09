@@ -59,6 +59,7 @@
     <Compile Include="DTO\CityDTO.cs" />
     <Compile Include="DTO\Composite\AbonentInLibraryDTO.cs" />
     <Compile Include="DTO\Composite\BookDetailedDTO.cs" />
+    <Compile Include="DTO\Composite\DepartmentsGroupedDTO.cs" />
     <Compile Include="DTO\Composite\IssueDetailedDTO.cs" />
     <Compile Include="DTO\Composite\LibraryShortDTO.cs" />
     <Compile Include="DTO\Composite\OrderDTO.cs" />

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebLib.DataLayer;
+using WebLib.DataLayer.Procedures;
 
 namespace WebLib.BusinessLayer.DTO.Composite
 {
@@ -27,5 +29,26 @@ namespace WebLib.BusinessLayer.DTO.Composite
 		public int LibraryId { get; set; }
 
 		public string LibraryName { get; set; }
+
+		public static explicit operator BookDetailedDTO (BookDetailed db)
+		{
+			if (db == null) return null;
+			else return new BookDetailedDTO
+			{
+				AuthorId = db.AuthorId,
+				AuthorSurname = db.AuthorSurname,
+				AuthorName = db.AuthorName,
+				AuthorPatronymic = db.AuthorPatronymic,
+
+				BookId = db.BookId,
+				Title = db.Title,
+
+				DepartmentId = db.DepartmentId,
+				DepartmentName = db.DepartmentName,
+
+				LibraryId = db.LibraryId,
+				LibraryName = db.LibraryName
+			};
+		}
 	}
 }

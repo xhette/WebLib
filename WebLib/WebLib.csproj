@@ -143,6 +143,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AuthorModel.cs" />
     <Compile Include="Models\BookModel.cs" />
     <Compile Include="Models\DepartmentModel.cs" />
     <Compile Include="Models\LibraryModel.cs" />
@@ -200,6 +201,11 @@
     <Content Include="Views\ReaderPage\Libraries.cshtml" />
     <Content Include="Views\ReaderPage\_LibrariesByCity.cshtml" />
     <Content Include="Views\ReaderPage\Issues.cshtml" />
+    <Content Include="Views\ReaderPage\Books.cshtml" />
+    <Content Include="Views\ReaderPage\_BooksByTitle.cshtml" />
+    <Content Include="Views\ReaderPage\_BookSearch.cshtml" />
+    <Content Include="Views\ReaderPage\_BooksByAuthor.cshtml" />
+    <Content Include="Views\ReaderPage\_BooksByDepartment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -31,9 +31,9 @@ namespace WebLib.DataLayer
         [StringLength(22)]
         public string Phone { get; set; }
 
-        public int CityId { get; set; }
+        public int City { get; set; }
 
-        public virtual City City { get; set; }
+        public virtual City _City { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Department> Department { get; set; }

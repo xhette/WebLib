@@ -1,59 +1,80 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    List<SelectListItem> cities = ViewBag.CitySelectList;
 }
 @model IEnumerable<WebLib.Models.LibraryModel>
 
+@section Sidebar {
+    <div class="col-md-2" id="navbar">
+        <nav class="sidebar">
+            <ul class="list-unstyled navbar-list">
+                <li class="navbar-list-item">
+                    @Html.ActionLink("Личные данные", "Index", "ReaderPage")
+                </li>
+                <li class="navbar-list-item active-nav-item">
+                    @Html.ActionLink("Библиотеки", "Libraries", "ReaderPage")
+                </li>
+                <li class="navbar-list-item">
+                    @Html.ActionLink("Поиск книг", "Books", "ReaderPage")
+                </li>
+            </ul>
+        </nav>
+    </div>
+}
+
+<div class="col-md-10 col-md-offset-2">
     <div class="page-wrapper">
-            <div class="row">
-                @using (Ajax.BeginForm("LibrariesByCity", "ReaderPage", new AjaxOptions { UpdateTargetId = "LibraryListTable" }, new { @class = "form-inline ml-auto pull-right" }))
-                {
-                    @Html.AntiForgeryToken()
-                    <input type="text" class="form-control search-input" name="cityId" />
-                    <input type="submit" class="btn btn-default" value="Поиск" />
-                }
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="LibraryListTable">
-                        <table class="table">
-                            <thead>
+        <div class="row row-default">
+            @using (Ajax.BeginForm("LibrariesByCity", "ReaderPage", new AjaxOptions { UpdateTargetId = "LibraryListTable" }, new { @class = "form-inline ml-auto pull-right" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.DropDownList("cityId", cities, new { @class = "form-control search-input" })
+                @*<input type="text" class="form-control search-input" name="cityId" />*@
+                <input type="submit" class="btn btn-default" value="Поиск" />
+            }
+        </div>
+        <div class="row row-default">
+            <div class="col-md-12">
+                <div id="LibraryListTable">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td>
+                                    Название
+                                </td>
+                                <td>
+                                    Адрес
+                                </td>
+                                <td>
+                                    Телефон
+                                </td>
+                                <td>
+                                    Город
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var lib in Model)
+                            {
                                 <tr>
                                     <td>
-                                        Название
+                                        @lib.Name
                                     </td>
                                     <td>
-                                        Адрес
+                                        @lib.Address
                                     </td>
                                     <td>
-                                        Телефон
+                                        @lib.Phone
                                     </td>
                                     <td>
-                                        Город
+                                        @lib.CityName
                                     </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var lib in Model)
-                                {
-                                    <tr>
-                                        <td>
-                                            @lib.Name
-                                        </td>
-                                        <td>
-                                            @lib.Address
-                                        </td>
-                                        <td>
-                                            @lib.Phone
-                                        </td>
-                                        <td>
-                                            @lib.CityName
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-
+    </div>
+</div>

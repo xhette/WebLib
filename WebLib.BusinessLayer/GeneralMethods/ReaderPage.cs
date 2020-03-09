@@ -64,5 +64,29 @@ namespace WebLib.BusinessLayer.GeneralMethods
 
 			return cities;
 		}
+
+		public List<BookDetailedDTO> Books ()
+		{
+			StoredProcedure procedure = new StoredProcedure(_context);
+			List<BookDetailedDTO> books = procedure.BookList().Select(c => (BookDetailedDTO)c).ToList();
+
+			return books;
+		}
+
+		public List<AuthorDTO> Authors ()
+		{
+			GenericRepository<Author> repository = new GenericRepository<Author>(_context);
+			List<AuthorDTO> authors = repository.Get().Select(c => (AuthorDTO)c).ToList();
+
+			return authors;
+		}
+
+		public List<DepartmentsGroupedDTO> Departments ()
+		{
+			StoredProcedure procedure = new StoredProcedure(_context);
+			List<DepartmentsGroupedDTO> departments = procedure.DepartmentList().Select(c => (DepartmentsGroupedDTO)c).ToList();
+
+			return departments;
+		}
 	}
 }

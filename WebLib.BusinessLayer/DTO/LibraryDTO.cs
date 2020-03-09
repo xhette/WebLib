@@ -31,7 +31,7 @@ namespace WebLib.BusinessLayer.DTO
                 Name = dbLibrary.Name,
                 Address = dbLibrary.Address,
                 Phone = dbLibrary.Phone,
-                CityId = dbLibrary.CityId,
+                CityId = dbLibrary.City,
                 CityName = String.Empty
             };
         }

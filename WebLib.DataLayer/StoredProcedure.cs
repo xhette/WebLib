@@ -48,24 +48,11 @@ namespace WebLib.DataLayer
 
 		public List <DepartmentGrouped> DepartmentList ()
 		{
-			var departments = context.Library.GroupJoin(context.Department, lib => lib.Id, dept => dept.LibraryId, (lib, dept) => new DepartmentGrouped
+			var departments = context.Library.GroupJoin(context.Department, lib => lib.Id, dept => dept.Library, (lib, dept) => new DepartmentGrouped
 			{
 				Library = lib,
 				Departments = dept.ToList()
 			}).ToList();
-
-			return departments;
-		}
-
-		public List<DepartmentDetailed> DepartmentsByLibrary (int libId)
-		{
-			var departments = context.Department.Join(context.Library, dept => dept.LibraryId, lib => lib.Id, (dept, lib) => new DepartmentDetailed
-			{
-				DepartId = dept.Id,
-				DepartName = dept.Name,
-				LibId = lib.Id,
-				LibName = lib.Name
-			}).Where(c => c.LibId == libId).ToList();
 
 			return departments;
 		}

@@ -1,0 +1,50 @@
+﻿
+@model IEnumerable<WebLib.Models.ReaderPages.BookViewModel>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            @if (ViewBag.TableHead != null && ViewBag.TableHead)
+            {
+            <thead>
+                <tr>
+                    <th>
+                        Автор
+                    </th>
+                    <th>
+                        Название
+                    </th>
+                    <th>
+                        Отдел
+                    </th>
+                    <th>
+                        Библиотека
+                    </th>
+                </tr>
+            </thead>
+            }
+            <tbody>
+                @foreach (var book in Model)
+                {
+                    <tr>
+                        <td>
+                            @book.AuthorFullName
+                        </td>
+                        <td>
+                            "@book.Title"
+                        </td>
+                        <td>
+                            @book.DepartmentName
+                        </td>
+                        <td>
+                            @book.LibraryName
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+

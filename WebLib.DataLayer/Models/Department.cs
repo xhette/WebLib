@@ -23,7 +23,7 @@ namespace WebLib.DataLayer
         [StringLength(50)]
         public string Name { get; set; }
 
-        public int LibraryId { get; set; }
+        public int Library { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Book> Book { get; set; }
@@ -31,6 +31,6 @@ namespace WebLib.DataLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<C_temp_Book> C_temp_Book { get; set; }
 
-        public virtual Library Library { get; set; }
+        public virtual Library _Library { get; set; }
     }
 }
