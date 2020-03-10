@@ -23,8 +23,10 @@
                 </tr>
             </thead>
             }
-            <tbody>
-                @foreach (var book in Model)
+        <tbody>
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var book in Model)
                 {
                     <tr>
                         <td>
@@ -41,7 +43,16 @@
                         </td>
                     </tr>
                 }
-            </tbody>
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4" class="text-center">
+                        Нет данных
+                    </td>
+                </tr>
+            }
+        </tbody>
         </table>
     </div>
 </div>

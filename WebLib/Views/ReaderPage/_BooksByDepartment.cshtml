@@ -1,31 +1,51 @@
 ﻿
 @model IEnumerable<WebLib.Models.ReaderPages.DepartmentListModel>
+<div class="row row-default">
+    @using (Ajax.BeginForm("DepartmentSearch", "ReaderPage", new AjaxOptions { UpdateTargetId = "ByDepartmentSearch" }, new { @class = "form-inline ml-auto pull-right" }))
+    {
+        @Html.AntiForgeryToken()
+        <input type="text" class="form-control search-input" name="symbols" />
+        <input type="submit" class="btn btn-default" value="Поиск" />
+    }
+</div>
 
-    <div class="row row-default">
+<div class="row row-default">
+    <div id="ByDepartmentSearch">
         <div class="col-md-12">
-            @foreach (var lib in Model)
+            @if (Model != null && Model.Count() > 0)
             {
-                <div class="panel panel-default" style="margin: 25px 100px">
-                    <div class="panel-heading">
-                        <strong>@lib.Library.Name</strong>
-                    </div>
-                    <div class="panel-body">
-                        @foreach (var dept in lib.DepartmentsIn)
-                        {
-                            <ul class="accordion list-group" id="deptsAccordion">
-                                <li class="list-group-item">
-                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="@("#collapse-book-" + dept.Id)" aria-expanded="true" aria-controls="@("collapse-book-" + dept.Id)">
-                                        @dept.Name
-                                    </button>
+                foreach (var lib in Model)
+                {
+                    <div class="panel panel-default" style="margin: 25px 100px">
+                        <div class="panel-heading">
+                            <strong>@lib.Library.Name</strong>
+                        </div>
+                        <div class="panel-body">
+                            @if (lib.DepartmentsIn != null && lib.DepartmentsIn.Count() > 0)
+                            {
+                                foreach (var dept in lib.DepartmentsIn)
+                                {
+                                    <ul class="accordion list-group" id="deptsAccordion">
+                                        <li class="list-group-item">
+                                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="@("#collapse-book-" + dept.Id)" aria-expanded="true" aria-controls="@("collapse-book-" + dept.Id)">
+                                                @dept.Name
+                                            </button>
 
-                                    <div id="@("collapse-book-" + dept.Id)" class="collapse" data-parent="#deptsAccordion" style="margin-top: 20px">
-                                        @{ Html.RenderAction("BookSearchByDepartment", "ReaderPage", new { deptId = dept.Id }); }
-                                    </div>
-                                </li>
-                            </ul>
-                        }
+                                            <div id="@("collapse-book-" + dept.Id)" class="collapse" data-parent="#deptsAccordion" style="margin-top: 20px">
+                                                @{ Html.RenderAction("BookSearchByDepartment", "ReaderPage", new { deptId = dept.Id }); }
+                                            </div>
+                                        </li>
+                                    </ul>
+                                }
+                            }
+                            else
+                            {
+                                <span>Нет данных</span>
+                            }
+                        </div>
                     </div>
-                </div>
+                }
             }
         </div>
     </div>
+</div>

@@ -180,8 +180,8 @@ namespace WebLib.DataLayer
 
             modelBuilder.Entity<Library>()
                 .HasMany(e => e.AbonentList)
-                .WithRequired(e => e.Library)
-                .HasForeignKey(e => e.LibraryId)
+                .WithRequired(e => e._Library)
+                .HasForeignKey(e => e.Library)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Provider>()
@@ -242,8 +242,8 @@ namespace WebLib.DataLayer
 
             modelBuilder.Entity<Reader>()
                 .HasMany(e => e.AbonentList)
-                .WithRequired(e => e.Reader)
-                .HasForeignKey(e => e.ReaderId)
+                .WithRequired(e => e._Reader)
+                .HasForeignKey(e => e.Reader)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Shop>()

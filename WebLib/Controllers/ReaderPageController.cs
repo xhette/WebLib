@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebLib.BusinessLayer.DTO;
 using WebLib.BusinessLayer.GeneralMethods;
 using WebLib.DataLayer;
 using WebLib.Models;
@@ -36,39 +37,55 @@ namespace WebLib.Controllers
 
         public ActionResult Libraries()
         {
-            List<LibraryModel> model;
 			List<SelectListItem> cities;
+            List<LibraryReaderModel> model;
+
             using (context = new LibDbContext())
             {
                 readerContext = new ReaderPage(context);
+                int readerId = context.Reader.FirstOrDefault(c => c.UserId == userId).Id;
+                model = readerContext.LibraryInfoAbonent(readerId).Select(c => (LibraryReaderModel)c).ToList();
                 cities = readerContext.CityList().Select(c => new SelectListItem
-                {
-                    Value = c.Id.ToString(),
-                    Text = c.Name
-                }).ToList();
-                model = readerContext.LibraryList().Select(c => (LibraryModel)c).ToList();
+                    {
+                        Value = c.Id.ToString(),
+                        Text = c.Name
+                    }).ToList();
             }
             ViewBag.CitySelectList = cities;
             
             return View(model);
         }
 
+        public ActionResult LibraryInfo(int libId)
+        {
+            LibraryModel model;
+
+            using (context = new LibDbContext())
+            {
+                readerContext = new ReaderPage(context);
+                model = (LibraryModel)readerContext.LibraryInfo(libId);
+            }
+
+            return PartialView("~/Views/ReaderPage/_LibraryInfo.cshtml", model);
+        }
+
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         [ValidateAntiForgeryToken]
         public ActionResult LibrariesByCity (int? cityId)
         {
-            List<LibraryModel> model;
+            List<LibraryReaderModel> model;
             using (context = new LibDbContext())
             {
-
                 readerContext = new ReaderPage(context);
+                int readerId = context.Reader.FirstOrDefault(c => c.UserId == userId).Id;
+
                 if (cityId.HasValue)
                 {
-                    model = readerContext.LibraryList(cityId.Value).Select(c => (LibraryModel)c).ToList();
+                    model = readerContext.LibraryInfoAbonent(readerId).Where(c => c.City.Id == cityId.Value).Select(c => (LibraryReaderModel)c).ToList(); ;
                 }
                 else
                 {
-                    model = readerContext.LibraryList().Select(c => (LibraryModel)c).ToList();
+                    model = readerContext.LibraryInfoAbonent(readerId).Select(c => (LibraryReaderModel)c).ToList();
                 }
             }
 
@@ -96,7 +113,8 @@ namespace WebLib.Controllers
             return View();
         }
 
-        public ActionResult BooksByTitle ()
+		#region BookSearch
+		public ActionResult BooksByTitle ()
         {
             List<BookViewModel> model;
 
@@ -147,6 +165,21 @@ namespace WebLib.Controllers
 
         }
 
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+        [ValidateAntiForgeryToken]
+        public ActionResult AuthorSearch (string symbols)
+        {
+            List<AuthorModel> model;
+
+            using (context = new LibDbContext())
+            {
+                readerContext = new ReaderPage(context);
+                model = readerContext.Authors().Where(c => c.Surname.Contains(symbols) || c.Name.Contains(symbols) || c.Patronymic.Contains(symbols))
+                    .Select(c => (AuthorModel)c).ToList();
+            }
+            return PartialView("~/Views/ReaderPage/_AuthorSearch.cshtml", model);
+
+        }
         public ActionResult BookSearchByAuthor (int authorId)
         {
             List<BookViewModel> model = new List<BookViewModel>();
@@ -179,6 +212,21 @@ namespace WebLib.Controllers
             return PartialView("~/Views/ReaderPage/_BooksByDepartment.cshtml", model);
         }
 
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+        [ValidateAntiForgeryToken]
+        public ActionResult DepartmentSearch(string symbols)
+        {
+            List<DepartmentListModel> model = new List<DepartmentListModel>();
+
+            using (context = new LibDbContext())
+            {
+                readerContext = new ReaderPage(context);
+                model = readerContext.Departments(symbols).Select(c => (DepartmentListModel)c).ToList();
+            }
+
+            return PartialView("~/Views/ReaderPage/_DepartmentSearch.cshtml", model);
+        }
+
         public ActionResult BookSearchByDepartment (int deptId)
         {
             List<BookViewModel> model = new List<BookViewModel>();
@@ -195,6 +243,53 @@ namespace WebLib.Controllers
             }
             ViewBag.TableHead = false;
             return PartialView("~/Views/ReaderPage/_BookSearch.cshtml", model);
+        }
+
+		#endregion
+
+        public ActionResult AddAbonent (int libId)
+        {
+            ViewBag.OperationStatus = false;
+            using (context = new LibDbContext())
+            {
+                readerContext = new ReaderPage(context);
+                int readerId = context.Reader.FirstOrDefault(c => c.UserId == userId).Id;
+
+                ViewBag.OperationStatus = readerContext.AddAbonentClaim(readerId, libId);
+
+            }
+
+            return RedirectToAction("Libraries", "ReaderPage");
+        }
+
+        [HttpGet]
+        public ActionResult Settings ()
+        {
+            ReaderDataModel model;
+
+            using (context = new LibDbContext())
+            {
+                readerContext = new ReaderPage(context);
+                model = (ReaderDataModel)readerContext.ReaderData(userId);
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Settings (ReaderDataModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (context = new LibDbContext())
+                {
+                    readerContext = new ReaderPage(context);
+                    ReaderDataDTO reader = (ReaderDataDTO)model;
+
+                    bool status = readerContext.UpdateReader(reader);
+                }
+            }
+            return View(model);
         }
     }
 }

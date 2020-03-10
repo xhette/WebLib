@@ -32,20 +32,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var book in Model)
+                    @if (Model != null && Model.Count() > 0)
+                    {
+                        foreach (var book in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @book.AuthorFullName
+                                </td>
+                                <td>
+                                    "@book.Title"
+                                </td>
+                                <td>
+                                    @book.DepartmentName
+                                </td>
+                                <td>
+                                    @book.LibraryName
+                                </td>
+                            </tr>
+                        } }
+                    else
                     {
                         <tr>
-                            <td>
-                                @book.AuthorFullName
-                            </td>
-                            <td>
-                                "@book.Title"
-                            </td>
-                            <td>
-                                @book.DepartmentName
-                            </td>
-                            <td>
-                                @book.LibraryName
+                            <td colspan="4" class="text-center">
+                                Нет данных
                             </td>
                         </tr>
                     }

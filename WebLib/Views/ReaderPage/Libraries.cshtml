@@ -2,7 +2,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     List<SelectListItem> cities = ViewBag.CitySelectList;
 }
-@model IEnumerable<WebLib.Models.LibraryModel>
+@model IEnumerable<WebLib.Models.ReaderPages.LibraryReaderModel>
 
 @section Sidebar {
     <div class="col-md-2" id="navbar">
@@ -17,6 +17,9 @@
                 <li class="navbar-list-item">
                     @Html.ActionLink("Поиск книг", "Books", "ReaderPage")
                 </li>
+                <li class="navbar-list-item">
+                    @Html.ActionLink("Настройки", "Settings", "ReaderPage")
+                </li>
             </ul>
         </nav>
     </div>
@@ -24,11 +27,32 @@
 
 <div class="col-md-10 col-md-offset-2">
     <div class="page-wrapper">
+        @if (ViewBag.OperationStatus != null)
+        {
+            <div class="row row-default">
+                <div class="col-md-12">
+                    @if (ViewBag.OperationStatus)
+                    {
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        Ваша заявка подана!
+                    </div>
+                    }
+                    else
+                    {
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    Ошибка при подаче заявки!
+                </div>
+                    }
+                </div>
+            </div>
+        }
         <div class="row row-default">
             @using (Ajax.BeginForm("LibrariesByCity", "ReaderPage", new AjaxOptions { UpdateTargetId = "LibraryListTable" }, new { @class = "form-inline ml-auto pull-right" }))
             {
                 @Html.AntiForgeryToken()
-                @Html.DropDownList("cityId", cities, new { @class = "form-control search-input" })
+                @Html.DropDownList("cityId", cities, "-- Выбрать город --", new { @class = "form-control search-input" })
                 @*<input type="text" class="form-control search-input" name="cityId" />*@
                 <input type="submit" class="btn btn-default" value="Поиск" />
             }
@@ -39,35 +63,61 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <td>
+                                <th>
                                     Название
-                                </td>
-                                <td>
+                                </th>
+                                <th>
                                     Адрес
-                                </td>
-                                <td>
+                                </th>
+                                <th>
                                     Телефон
-                                </td>
-                                <td>
+                                </th>
+                                <th>
                                     Город
-                                </td>
+                                </th>
+                                <th>
+
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var lib in Model)
+                            @if (Model != null && Model.Count() > 0)
+                            {
+                                foreach (var lib in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @lib.Library.Name
+                                        </td>
+                                        <td>
+                                            @lib.Library.Address
+                                        </td>
+                                        <td>
+                                            @lib.Library.Phone
+                                        </td>
+                                        <td>
+                                            @lib.City.Name
+                                        </td>
+                                        @if (lib.AbonentStatus == WebLib.Enums.AbonentStatusEnum.Null)
+                                        {
+                                            <td>
+                                                @Html.ActionLink("Записаться", "AddAbonent", "ReaderPage", new { libId = lib.Library.Id }, new { @class = "btn btn-primary btn-xs" })
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                Ваша заявка <strong>@(WebLib.Utils.Enums.GetDescription(lib.AbonentStatus))</strong>
+                                            </td>
+                                        }
+                                    </tr>
+                                }
+                            }
+                            else
                             {
                                 <tr>
-                                    <td>
-                                        @lib.Name
-                                    </td>
-                                    <td>
-                                        @lib.Address
-                                    </td>
-                                    <td>
-                                        @lib.Phone
-                                    </td>
-                                    <td>
-                                        @lib.CityName
+                                    <td colspan="5" class="text-center">
+                                        Нет данных
                                     </td>
                                 </tr>
                             }

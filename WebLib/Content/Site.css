@@ -22,6 +22,10 @@ textarea {
     max-width: 280px;
 }
 
+.change-info-input {
+    max-width: 100%;
+}
+
 a {
     cursor: pointer;
 }
@@ -81,7 +85,6 @@ label {
     flex-direction: column;
     justify-content: space-around;
 }
-
 .search-input {
     margin: 0 10px;
 }
@@ -92,4 +95,8 @@ label {
 
 .row-default {
     margin-bottom: 50px;
+}
+
+.row-input {
+    margin: 20px 0;
 }

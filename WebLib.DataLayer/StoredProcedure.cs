@@ -32,6 +32,13 @@ namespace WebLib.DataLayer
 			return abonents;
 		}
 
+		public List<AbonentsInLibrariesDetailed> LibrariesWithAbonents ()
+		{
+			var abonents = context.Database.SqlQuery<AbonentsInLibrariesDetailed>("AbonentsInLibrariesDetailed").ToList();
+
+			return abonents;
+		}
+
 		public List<Order> OrderList ()
 		{
 			var orders = context.Database.SqlQuery<Order>("OrdersList").ToList();
@@ -52,6 +59,17 @@ namespace WebLib.DataLayer
 			{
 				Library = lib,
 				Departments = dept.ToList()
+			}).ToList();
+
+			return departments;
+		}
+
+		public List<DepartmentGrouped> DepartmentList (string symbols)
+		{
+			var departments = context.Library.GroupJoin(context.Department, lib => lib.Id, dept => dept.Library, (lib, dept) => new DepartmentGrouped
+			{
+				Library = lib,
+				Departments = dept.Where(c => c.Name.Contains(symbols)).ToList()
 			}).ToList();
 
 			return departments;

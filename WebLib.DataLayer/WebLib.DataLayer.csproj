@@ -60,6 +60,7 @@
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Procedures\AbonentInLibrary.cs" />
+    <Compile Include="Procedures\AbonentsInLibrariesDetailed.cs" />
     <Compile Include="Procedures\BookDetailed.cs" />
     <Compile Include="Procedures\DepartmentDetailed.cs" />
     <Compile Include="Procedures\DepartmentGrouped.cs" />

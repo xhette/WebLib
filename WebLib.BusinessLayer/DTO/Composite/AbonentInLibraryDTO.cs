@@ -11,8 +11,13 @@ namespace WebLib.BusinessLayer.DTO.Composite
 	{
 		public string ReaderCard { get; set; }
 
+		public int Status { get; set; }
+
 		public ReaderShortDataDTO Reader { get; set; }
-		public LibraryShortDTO Library { get; set; }
+
+		public LibraryDTO Library { get; set; }
+
+		public CityDTO City { get; set; }
 
 		public static explicit operator AbonentInLibraryDTO (AbonentInLibrary dbAbonent)
 		{
@@ -20,6 +25,7 @@ namespace WebLib.BusinessLayer.DTO.Composite
 			else return new AbonentInLibraryDTO
 			{
 				ReaderCard = dbAbonent.ReaderCard,
+				Status = dbAbonent.AbonentStatus,
 				Reader = new ReaderShortDataDTO
 				{
 					Id = dbAbonent.ReaderId,
@@ -27,10 +33,39 @@ namespace WebLib.BusinessLayer.DTO.Composite
 					Name = dbAbonent.ReaderName,
 					Patronymic = dbAbonent.ReaderPatronymic
 				},
-				Library = new LibraryShortDTO
+				Library = new LibraryDTO
 				{
 					Id = dbAbonent.LibraryId,
 					Name = dbAbonent.LibraryName
+				}
+			};
+		}
+
+		public static explicit operator AbonentInLibraryDTO (AbonentsInLibrariesDetailed dbAbonent)
+		{
+			if (dbAbonent == null) return null;
+			else return new AbonentInLibraryDTO
+			{
+				ReaderCard = dbAbonent.ReaderCard,
+				Status = dbAbonent.AbonentStatus.HasValue ? dbAbonent.AbonentStatus.Value : 0,
+				Reader = new ReaderShortDataDTO
+				{
+					Id = dbAbonent.ReaderId.HasValue ? dbAbonent.ReaderId.Value : 0,
+					Surname = dbAbonent.ReaderSurname,
+					Name = dbAbonent.ReaderName,
+					Patronymic = dbAbonent.ReaderPatronymic
+				},
+				Library = new LibraryDTO
+				{
+					Id = dbAbonent.LibraryId,
+					Name = dbAbonent.LibraryName,
+					Address = dbAbonent.LibAddress,
+					Phone = dbAbonent.LibPhone
+				},
+				City = new CityDTO
+				{
+					Id = dbAbonent.CityId,
+					Name = dbAbonent.CityName
 				}
 			};
 		}

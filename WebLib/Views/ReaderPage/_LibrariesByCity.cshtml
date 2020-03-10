@@ -1,38 +1,63 @@
 ﻿
-@model IEnumerable<WebLib.Models.LibraryModel>
+@model IEnumerable<WebLib.Models.ReaderPages.LibraryReaderModel>
 
     <table class="table" id="LibraryListTable">
         <thead>
             <tr>
-                <td>
+                <th>
                     Название
-                </td>
-                <td>
+                </th>
+                <th>
                     Адрес
-                </td>
-                <td>
+                </th>
+                <th>
                     Телефон
-                </td>
-                <td>
+                </th>
+                <th>
                     Город
-                </td>
+                </th>
+                <th>
+
+                </th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var lib in Model)
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var lib in Model)
+                {
+                    <tr>
+                        <td>
+                            @lib.Library.Name
+                        </td>
+                        <td>
+                            @lib.Library.Address
+                        </td>
+                        <td>
+                            @lib.Library.Phone
+                        </td>
+                        <td>
+                            @lib.City.Name
+                        </td>
+                        @if (lib.AbonentStatus == WebLib.Enums.AbonentStatusEnum.Null)
+                        {
+                            <td>
+                                @Html.ActionLink("Записаться", "", "ReaderPage", new { @class = "btn btn-primary btn-xs" })
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                Ваша заявка <strong>@(WebLib.Utils.Enums.GetDescription(lib.AbonentStatus))</strong>
+                            </td>
+                        }
+                    </tr>
+                }}
+            else
             {
                 <tr>
-                    <td>
-                        @lib.Name
-                    </td>
-                    <td>
-                        @lib.Address
-                    </td>
-                    <td>
-                        @lib.Phone
-                    </td>
-                    <td>
-                        @lib.CityName
+                    <td colspan="5" class="text-center">
+                        Нет библиотек
                     </td>
                 </tr>
             }

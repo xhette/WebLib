@@ -15,15 +15,17 @@ namespace WebLib.DataLayer
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ReaderId { get; set; }
+        public int Reader { get; set; }
 
         [Key]
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int LibraryId { get; set; }
+        public int Library { get; set; }
 
-        public virtual Library Library { get; set; }
+        public int AbonentStatus { get; set; }
 
-        public virtual Reader Reader { get; set; }
+        public virtual Library _Library { get; set; }
+
+        public virtual Reader _Reader { get; set; }
     }
 }

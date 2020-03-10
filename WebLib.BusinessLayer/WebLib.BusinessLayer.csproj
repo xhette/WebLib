@@ -72,6 +72,7 @@
     <Compile Include="DTO\SupplyDTO.cs" />
     <Compile Include="GeneralMethods\Generic\GenericRepository.cs" />
     <Compile Include="GeneralMethods\Generic\IGenericRepository.cs" />
+    <Compile Include="GeneralMethods\ReaderCardGenerator.cs" />
     <Compile Include="GeneralMethods\ReaderPage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

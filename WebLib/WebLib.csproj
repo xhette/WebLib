@@ -139,6 +139,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ReaderPageController.cs" />
+    <Compile Include="Enums\AbonentStatusEnum.cs" />
     <Compile Include="Enums\IssueStatusEnum.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -150,6 +151,7 @@
     <Compile Include="Models\LibraryShortModel.cs" />
     <Compile Include="Models\ProviderPages\OrderViewModel.cs" />
     <Compile Include="Models\ReaderPages\DepartmentListModel.cs" />
+    <Compile Include="Models\ReaderPages\LibraryReaderModel.cs" />
     <Compile Include="Models\SupplyModel.cs" />
     <Compile Include="Models\ReaderPages\BookViewModel.cs" />
     <Compile Include="Models\ReaderPages\ReaderDataModel.cs" />
@@ -165,12 +167,20 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -206,6 +216,10 @@
     <Content Include="Views\ReaderPage\_BookSearch.cshtml" />
     <Content Include="Views\ReaderPage\_BooksByAuthor.cshtml" />
     <Content Include="Views\ReaderPage\_BooksByDepartment.cshtml" />
+    <Content Include="Views\ReaderPage\_LibraryInfo.cshtml" />
+    <Content Include="Views\ReaderPage\_AuthorSearch.cshtml" />
+    <Content Include="Views\ReaderPage\_DepartmentSearch.cshtml" />
+    <Content Include="Views\ReaderPage\Settings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

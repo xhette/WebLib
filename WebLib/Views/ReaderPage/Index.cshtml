@@ -19,103 +19,137 @@
                 <li class="navbar-list-item">
                     @Html.ActionLink("Поиск книг", "Books", "ReaderPage")
                 </li>
+                <li class="navbar-list-item">
+                    @Html.ActionLink("Настройки", "Settings", "ReaderPage")
+                </li>
             </ul>
         </nav>
     </div>
 }
+<div class="modal fade" id="libModal" tabindex="-1" role="dialog" aria-labelledby="libModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        </div>
+    </div>
 
-<div class="col-md-10 col-md-offset-2">
-    <div class="page-wrapper">
+</div>
 
-        <div class="row row-default">
-            <!--Информация о пользователе-->
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading text-center">
-                        <strong>
-                            @Model.Reader.FullName
-                        </strong>
-                    </div>
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <strong>Дата рождения: </strong>@Model.Reader.BirthDateString
-                        </li>
-                        <li class="list-group-item">
-                            <strong>Паспорт: </strong>@Model.Reader.PassSeria @Model.Reader.PassNumber
-                        </li>
-                        <li class="list-group-item">
-                            <strong>Адрес: </strong>@Model.Reader.Address
-                        </li>
-                        <li class="list-group-item">
-                            <strong>Телефон: </strong>@Model.Reader.Phone
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        <div class="col-md-10 col-md-offset-2">
+            <div class="page-wrapper">
 
-            <div class="col-md-6">
-
-                <!--Список библиотек-->
-                <div class="row">
-                    <div class="col-md-12">
+                <div class="row row-default">
+                    <!--Информация о пользователе-->
+                    <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-heading text-center">
                                 <strong>
-                                    Мои библиотеки
+                                    @Model.Reader.FullName
                                 </strong>
                             </div>
-                            <table class="table">
-                                <tbody>
-                                    @foreach (var lib in Model.Libraries)
-                                    {
-                                        <tr>
-                                            <td>
-                                                @lib.Name
-                                            </td>
-                                            <td>
-                                                <a href="">подробнее</a>
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <strong>Дата рождения: </strong>@Model.Reader.BirthDateString
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Паспорт: </strong>@Model.Reader.PassSeria @Model.Reader.PassNumber
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Адрес: </strong>@Model.Reader.Address
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Телефон: </strong>@Model.Reader.Phone
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </div>
 
-                    <!--Выдачи-->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading text-center">
-                                    <strong>
-                                        Мои выдачи
-                                    </strong>
+                    <div class="col-md-6">
+
+                        <!--Список библиотек-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading text-center">
+                                        <strong>
+                                            Мои библиотеки
+                                        </strong>
+                                    </div>
+                                    <table class="table">
+                                        <tbody>
+                                            @if (Model.Libraries != null && Model.Libraries.Count > 0)
+                                            {
+                                                foreach (var lib in Model.Libraries)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @lib.Name
+                                                        </td>
+                                                        <td>
+                                                            <a href="@Url.Action("LibraryInfo", "ReaderPage", new { libId = lib.Id })" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#libModal">
+                                                                подробнее
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td colspan="2" class="text-center">
+                                                        Нет библиотек
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                        </table>
                                 </div>
-                                <table class="table">
-                                    <tbody>
-                                        @foreach (var issue in Model.Issues)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    @issue.Book.AuthorFullName "@issue.Book.Title"
-                                                </td>
-                                                <td>
-                                                    @(WebLib.Utils.Enums.GetDescription(issue.Status))
-                                                </td>
-                                            </tr>
-                                        }
-                                        <tr>
-                                            <td colspan="2" class="text-center">
-                                                @Html.ActionLink("Подробнее", "Issues", "ReaderPage")
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            </div>
+                        </div>
+
+                        <!--Выдачи-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading text-center">
+                                        <strong>
+                                            Мои выдачи
+                                        </strong>
+                                    </div>
+                                    <table class="table">
+                                        <tbody>
+                                            @if (Model.Issues != null && Model.Issues.Count > 0)
+                                            {
+                                                foreach (var issue in Model.Issues)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @issue.Book.AuthorFullName "@issue.Book.Title"
+                                                        </td>
+                                                        <td>
+                                                            @(WebLib.Utils.Enums.GetDescription(issue.Status))
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                <tr>
+                                                    <td colspan="2" class="text-center">
+                                                        @Html.ActionLink("Подробнее", "Issues", "ReaderPage")
+                                                    </td>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td colspan="2" class="text-center">
+                                                        Вы пока не брали книг
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
-    </div>
-</div>

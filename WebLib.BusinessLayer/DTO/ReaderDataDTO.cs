@@ -47,5 +47,22 @@ namespace WebLib.BusinessLayer.DTO
             };
         }
 
+        public static explicit operator Reader (ReaderDataDTO dbReader)
+        {
+            if (dbReader == null) return null;
+            else return new Reader
+            {
+                UserId = dbReader.UserId,
+                Id = dbReader.Id,
+                Surname = dbReader.Surname,
+                Name = dbReader.Name,
+                Patronymic = dbReader.Patronymic,
+                PassSeria = dbReader.PassSeria,
+                PassNumber = dbReader.PassNumber,
+                BirthDate = dbReader.BirthDate,
+                Address = dbReader.Address,
+                Phone = dbReader.Phone
+            };
+        }
     }
 }

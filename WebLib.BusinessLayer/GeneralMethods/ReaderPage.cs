@@ -31,7 +31,13 @@ namespace WebLib.BusinessLayer.GeneralMethods
 		public List<AbonentInLibraryDTO> AbonentList (int readerId)
 		{
 			StoredProcedure procedure = new StoredProcedure(_context);
-			return procedure.Abonents().Where(c => c.ReaderId == readerId).Select(c => (AbonentInLibraryDTO)c).ToList();
+			return procedure.Abonents().Where(c => c.ReaderId == readerId && c.AbonentStatus == 3).Select(c => (AbonentInLibraryDTO)c).ToList();
+		}
+
+		public List<AbonentInLibraryDTO> LibraryInfoAbonent (int readerId)
+		{
+			StoredProcedure procedure = new StoredProcedure(_context);
+			return procedure.LibrariesWithAbonents().Select(c => (AbonentInLibraryDTO)c).ToList();
 		}
 
 		public List<LibraryDTO> LibraryList ()
@@ -87,6 +93,64 @@ namespace WebLib.BusinessLayer.GeneralMethods
 			List<DepartmentsGroupedDTO> departments = procedure.DepartmentList().Select(c => (DepartmentsGroupedDTO)c).ToList();
 
 			return departments;
+		}
+
+		public List<DepartmentsGroupedDTO> Departments (string symbols)
+		{
+			StoredProcedure procedure = new StoredProcedure(_context);
+			List<DepartmentsGroupedDTO> departments = procedure.DepartmentList(symbols).Select(c => (DepartmentsGroupedDTO)c).ToList();
+
+			return departments;
+		}
+
+		public LibraryDTO LibraryInfo (int libId)
+		{
+			GenericRepository<Library> generic = new GenericRepository<Library>(_context);
+
+			LibraryDTO library = (LibraryDTO)generic.FindById(libId);
+
+			return library;
+		}
+
+		public bool AddAbonentClaim (int readerId, int libId)
+		{
+			try
+			{
+				GenericRepository<AbonentList> generic = new GenericRepository<AbonentList>(_context);
+
+				AbonentList abonent = new AbonentList
+				{
+					AbonentStatus = 1,
+					Library = libId,
+					Reader = readerId,
+					ReaderCard = ReaderCardGenerator.Generate(readerId, libId)
+				};
+
+				generic.Create(abonent);
+
+				return true;
+			}
+			catch
+			{
+				return false;
+			}
+		}
+
+		public bool UpdateReader(ReaderDataDTO reader)
+		{
+			try
+			{
+				GenericRepository<Reader> generic = new GenericRepository<Reader>(_context);
+
+				Reader dbReader = (Reader)reader;
+				generic.Update(dbReader);
+
+				return true;
+			}
+			catch
+			{
+				return false;
+			}
 		}
 	}
 }
