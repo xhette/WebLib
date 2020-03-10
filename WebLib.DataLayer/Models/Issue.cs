@@ -16,12 +16,12 @@ namespace WebLib.DataLayer
 
         public DateTime? ReturnDate { get; set; }
 
-        public int BookId { get; set; }
+        public int Book { get; set; }
 
-        public int ReaderId { get; set; }
+        public int Reader { get; set; }
 
-        public virtual Book Book { get; set; }
+        public virtual Book _Book { get; set; }
 
-        public virtual Reader Reader { get; set; }
+        public virtual Reader _Reader { get; set; }
     }
 }

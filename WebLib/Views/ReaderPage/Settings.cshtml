@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Settings";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int page = ViewBag.Page;
 }
 
 @model WebLib.Models.ReaderPages.ReaderDataModel
@@ -30,69 +31,48 @@
 <div class="col-md-10 col-md-offset-2">
     <div class="page-wrapper">
 
-        @using (Html.BeginForm("Settings", "ReaderPage", null, FormMethod.Post, new { @style = "padding: 0 100px" }))
+        <div class="row row-default">
+            <div class="col-md-12">
+                <ul class="nav nav-tabs">
+                    <li class="" id="ReaderData">
+                        @Html.ActionLink("Основная информация", "Settings", "ReaderPage", new { page = 1 }, null)
+                    </li>
+                    <li class="" id="Password">
+                        @Html.ActionLink("Смена пароля", "Settings", "ReaderPage", new { page = 2 }, null)
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        @switch (page)
         {
-            @Html.HiddenFor(m => m.Id)
-            @Html.HiddenFor(m => m.UserId)
-            <div class="row row-input text-center">
-                <div class="input-group col-md-12">
-                    @Html.LabelFor(m => m.Surname)
-                    @Html.TextBoxFor(m => m.Surname, new { @class = "form-control change-info-input", @placeholder = "Фамилия", @id = "Surname" })
-                    @Html.ValidationMessageFor(m => m.Surname, null, new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="row row-input text-center">
-                <div class="input-group col-md-12">
-                    @Html.LabelFor(m => m.Name)
-                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control change-info-input", @placeholder = "Имя", @id = "Name" })
-                    @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="row row-input text-center">
-                <div class="input-group col-md-12">
-                    @Html.LabelFor(m => m.Patronymic)
-                    @Html.TextBoxFor(m => m.Patronymic, new { @class = "form-control change-info-input", @placeholder = "Отчество", @id = "Patronymic" })
-                    @Html.ValidationMessageFor(m => m.Patronymic, null, new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="row row-input text-center">
-                <div class="input-group col-md-12">
-                    @Html.LabelFor(m => m.BirthDate)
-                    @Html.TextBoxFor(m => m.BirthDate, new { @class = "form-control change-info-input", @placeholder = "Дата рождения", @value = Model.BirthDateString, @id = "BirthDate", @type = "date" })
-                    @Html.ValidationMessageFor(m => m.BirthDate, null, new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="row row-input text-center">
-                <div class="input-group col-md-6" style="float: left">
-                    @Html.LabelFor(m => m.PassSeria)
-                    @Html.TextBoxFor(m => m.PassSeria, new { @class = "form-control change-info-input", @placeholder = "Серия парпорта", @id = "PassSeria" })
-                    @Html.ValidationMessageFor(m => m.PassSeria, null, new { @class = "text-danger" })
-                </div>
-                <div class="input-group col-md-6" style="float: left">
-                    @Html.LabelFor(m => m.PassNumber)
-                    @Html.TextBoxFor(m => m.PassNumber, new { @class = "form-control change-info-input", @placeholder = "Номер паспорта", @id = "PassNumber" })
-                    @Html.ValidationMessageFor(m => m.PassNumber, null, new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="row row-input text-center">
-                <div class="input-group col-md-12">
-                    @Html.LabelFor(m => m.Address)
-                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control change-info-input", @placeholder = "Адрес", @id = "Address" })
-                    @Html.ValidationMessageFor(m => m.Address, null, new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="row row-input text-center">
-                <div class="input-group col-md-12">
-                    @Html.LabelFor(m => m.Phone)
-                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control change-info-input", @placeholder = "Телефон", @id = "Phone" })
-                    @Html.ValidationMessageFor(m => m.Phone, null, new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="row row-input">
-                <div class="input-group col-md-12 text-center">
-                    <button type="submit" class="btn btn-block btn-lg btn-primary">Сохранить</button>
-                </div>
-            </div>
+            case 1:
+                Html.RenderAction("ChangeInfo", "ReaderPage");
+                break;
+            case 2:
+                Html.RenderAction("ChangePassword", "ReaderPage");
+                break;
+            default: break;
         }
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var readerData = $("#ReaderData");
+        var passwordChange = $("#Password");
+
+        readerData.removeClass("active");
+        passwordChange.removeClass("active");
+
+        var page = @ViewBag.Page;
+
+        switch (page) {
+            case 1: readerData.addClass("active");
+                break;
+            case 2: passwordChange.addClass("active");
+                break;
+            default: break;
+        }
+    });
+</script>

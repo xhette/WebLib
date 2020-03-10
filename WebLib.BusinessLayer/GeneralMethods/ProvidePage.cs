@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using WebLib.BusinessLayer.DTO;
 using WebLib.BusinessLayer.DTO.Composite;
 using WebLib.BusinessLayer.GeneralMethods.Generic;
@@ -7,37 +11,13 @@ using WebLib.DataLayer;
 
 namespace WebLib.BusinessLayer.GeneralMethods
 {
-	public class ReaderPage
+	public class ProvidePage
 	{
 		LibDbContext _context;
 
-		public ReaderPage (LibDbContext context)
+		public ProvidePage (LibDbContext context)
 		{
 			_context = context;
-		}
-
-		public ReaderDataDTO ReaderData (int userId)
-		{
-			GenericRepository<Reader> repository = new GenericRepository<Reader>(_context);
-			return (ReaderDataDTO)repository.Get(c => c.UserId == userId).FirstOrDefault();
-		}
-
-		public List<IssueDetailedDTO> ReaderIssuesList (int readerId)
-		{
-			StoredProcedure procedure = new StoredProcedure(_context);
-			return procedure.IssueList().Where(c => c.ReaderId == readerId).Select(c => (IssueDetailedDTO)c).ToList();
-		}
-
-		public List<AbonentInLibraryDTO> AbonentList (int readerId)
-		{
-			StoredProcedure procedure = new StoredProcedure(_context);
-			return procedure.Abonents().Where(c => c.ReaderId == readerId && c.AbonentStatus == 3).Select(c => (AbonentInLibraryDTO)c).ToList();
-		}
-
-		public List<AbonentInLibraryDTO> LibraryInfoAbonent (int readerId)
-		{
-			StoredProcedure procedure = new StoredProcedure(_context);
-			return procedure.LibrariesWithAbonents().Select(c => (AbonentInLibraryDTO)c).ToList();
 		}
 
 		public List<LibraryDTO> LibraryList ()
@@ -99,45 +79,21 @@ namespace WebLib.BusinessLayer.GeneralMethods
 			return library;
 		}
 
-		public bool AddAbonentClaim (int readerId, int libId)
+
+		public List<ShopDTO> Shops ()
 		{
-			try
-			{
-				GenericRepository<AbonentList> generic = new GenericRepository<AbonentList>(_context);
+			GenericRepository<Shop> generic = new GenericRepository<Shop>(_context);
+			List<ShopDTO> shops = generic.Get().Select(c => (ShopDTO)c).ToList();
 
-				AbonentList abonent = new AbonentList
-				{
-					AbonentStatus = 1,
-					Library = libId,
-					Reader = readerId,
-					ReaderCard = ReaderCardGenerator.Generate(readerId, libId)
-				};
-
-				generic.Create(abonent);
-
-				return true;
-			}
-			catch
-			{
-				return false;
-			}
+			return shops;
 		}
 
-		public bool UpdateReader(ReaderDataDTO reader)
+		public List<OrderDTO> Orders ()
 		{
-			try
-			{
-				GenericRepository<Reader> generic = new GenericRepository<Reader>(_context);
+			StoredProcedure procedure = new StoredProcedure(_context);
+			List<OrderDTO> orders = procedure.OrderList().Select(c => (OrderDTO)c).ToList();
 
-				Reader dbReader = (Reader)reader;
-				generic.Update(dbReader);
-
-				return true;
-			}
-			catch
-			{
-				return false;
-			}
+			return orders;
 		}
 	}
 }

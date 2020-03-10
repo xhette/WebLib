@@ -64,6 +64,7 @@
     <Compile Include="DTO\Composite\LibraryShortDTO.cs" />
     <Compile Include="DTO\Composite\OrderDTO.cs" />
     <Compile Include="DTO\Composite\ReaderShortDataDTO.cs" />
+    <Compile Include="DTO\LibrarianDataDTO.cs" />
     <Compile Include="DTO\ShopDTO.cs" />
     <Compile Include="DTO\DepartmentDTO.cs" />
     <Compile Include="DTO\IssueDTO.cs" />
@@ -72,6 +73,8 @@
     <Compile Include="DTO\SupplyDTO.cs" />
     <Compile Include="GeneralMethods\Generic\GenericRepository.cs" />
     <Compile Include="GeneralMethods\Generic\IGenericRepository.cs" />
+    <Compile Include="GeneralMethods\LibrarianPage.cs" />
+    <Compile Include="GeneralMethods\ProvidePage.cs" />
     <Compile Include="GeneralMethods\ReaderCardGenerator.cs" />
     <Compile Include="GeneralMethods\ReaderPage.cs" />
     <Compile Include="Program.cs" />

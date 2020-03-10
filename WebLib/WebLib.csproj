@@ -161,6 +161,7 @@
     <Compile Include="Utils\CreateAccounts.cs" />
     <Compile Include="Utils\Enums.cs" />
     <Compile Include="Models\CityModel.cs" />
+    <Compile Include="Models\ReaderPages\ChangePasswordModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -220,6 +221,8 @@
     <Content Include="Views\ReaderPage\_AuthorSearch.cshtml" />
     <Content Include="Views\ReaderPage\_DepartmentSearch.cshtml" />
     <Content Include="Views\ReaderPage\Settings.cshtml" />
+    <Content Include="Views\ReaderPage\_ChangeInfo.cshtml" />
+    <Content Include="Views\ReaderPage\_ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

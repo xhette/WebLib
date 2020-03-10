@@ -26,13 +26,14 @@
 
         <div class="body-content">
             <div class="row">
-               @RenderSection("Sidebar", required: false)
+                @RenderSection("Sidebar", required: false)
 
-                @Scripts.Render("~/bundles/jquery")
-                @Scripts.Render("~/bundles/bootstrap")
-                @RenderSection("scripts", required: false)
 
                 @RenderBody()
+
+                @RenderSection("scripts", required: false)
+                @Scripts.Render("~/bundles/jquery")
+                @Scripts.Render("~/bundles/bootstrap")
             </div>
         </div>
 </body>

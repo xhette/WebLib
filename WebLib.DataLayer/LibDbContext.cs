@@ -82,8 +82,8 @@ namespace WebLib.DataLayer
 
             modelBuilder.Entity<Book>()
                 .HasMany(e => e.Issue)
-                .WithRequired(e => e.Book)
-                .HasForeignKey(e => e.BookId)
+                .WithRequired(e => e._Book)
+                .HasForeignKey(e => e.Book)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Book>()
@@ -230,8 +230,8 @@ namespace WebLib.DataLayer
 
             modelBuilder.Entity<Reader>()
                 .HasMany(e => e.Issue)
-                .WithRequired(e => e.Reader)
-                .HasForeignKey(e => e.ReaderId)
+                .WithRequired(e => e._Reader)
+                .HasForeignKey(e => e.Reader)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Reader>()

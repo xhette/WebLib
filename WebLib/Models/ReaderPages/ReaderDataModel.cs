@@ -32,29 +32,30 @@ namespace WebLib.Models.ReaderPages
 
         [Required(ErrorMessage = "Введите дату рождения")]
         [DataType(DataType.Date)]
-        public DateTime? BirthDate { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
+        public DateTime BirthDate { get; set; }
 
         public string BirthDateString
         {
             get
             {
-                return BirthDate.HasValue ? BirthDate.Value.ToString("dd.MM.yyyy") : String.Empty;
+                return BirthDate.ToShortDateString();
             }
         }
 
         [Required(ErrorMessage = "Введите серию паспорта")]
-        [RegularExpression(@"^\d{4}$", ErrorMessage = "Invalid")]
+        [RegularExpression(@"^\d{4}$", ErrorMessage = "Неверный формат")]
         public string PassSeria { get; set; }
 
         [Required(ErrorMessage = "Введите номер паспорта")]
-        [RegularExpression(@"^\d{6}$", ErrorMessage = "Invalid")]
+        [RegularExpression(@"^\d{6}$", ErrorMessage = "Неверный формат")]
         public string PassNumber { get; set; }
 
         [Required(ErrorMessage = "Введите адрес")]
         public string Address { get; set; }
 
         [Required(ErrorMessage = "Введите номер телефона")]
-        [RegularExpression(@"^\+7 \(\d{3}\) \d{3} - \d{2} - \d{2}$", ErrorMessage = "Invalid Phone Number")]
+        [RegularExpression(@"^\+7 \(\d{3}\) \d{3} - \d{2} - \d{2}$", ErrorMessage = "Требуемый формат: \"+7 (XXX) XXX - XX - XX\"")]
         public string Phone { get; set; }
 
 
@@ -70,7 +71,7 @@ namespace WebLib.Models.ReaderPages
                 Patronymic = dbReader.Patronymic,
                 PassSeria = dbReader.PassSeria,
                 PassNumber = dbReader.PassNumber,
-                BirthDate = dbReader.BirthDate,
+                BirthDate = dbReader.BirthDate.HasValue ? dbReader.BirthDate.Value : DateTime.MinValue,
                 Address = dbReader.Address,
                 Phone = dbReader.Phone
             };

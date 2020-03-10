@@ -29,8 +29,21 @@ namespace WebLib.BusinessLayer.DTO
 				Id = dbIssue.Id,
 				IssueDate = dbIssue.IssueDate,
 				ReturnDate = dbIssue.ReturnDate,
-				BookId = dbIssue.BookId,
-				ReaderId = dbIssue.ReaderId
+				BookId = dbIssue.Book,
+				ReaderId = dbIssue.Reader
+			};
+		}
+
+		public static explicit operator Issue (IssueDTO dbIssue)
+		{
+			if (dbIssue == null) return null;
+			else return new Issue
+			{
+				Id = dbIssue.Id,
+				IssueDate = dbIssue.IssueDate,
+				ReturnDate = dbIssue.ReturnDate,
+				Book = dbIssue.BookId,
+				Reader = dbIssue.ReaderId
 			};
 		}
 	}

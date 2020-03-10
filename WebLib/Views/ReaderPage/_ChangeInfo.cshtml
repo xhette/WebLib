@@ -1,0 +1,76 @@
+﻿
+@model WebLib.Models.ReaderPages.ReaderDataModel
+
+@using (Html.BeginForm("ChangeInfo", "ReaderPage", null, FormMethod.Post, new { @style = "padding: 0 15em" }))
+{
+    @Html.HiddenFor(m => m.UserId)
+    @Html.HiddenFor(m => m.Id)
+    <div class="control-group col-md-12", style="min-height: 100px;">
+        <!-- Surname -->
+        <label class="control-label" for="Surname">Фамилия</label>
+        <div class="controls">
+            @Html.TextBoxFor(m => m.Surname, new { @class = "form-control", @id = "Surname", @style = "min-width: 100%" })
+            <p class="help-block">@Html.ValidationMessageFor(m => m.Surname, null, new { @class = "text-danger" })</p>
+        </div>
+    </div>
+
+    <div class="control-group col-md-12", style="min-height: 100px;">
+        <!-- Name -->
+        <label class="control-label" for="Name">Имя</label>
+        <div class="controls">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @id = "Name", @style = "min-width: 100%" })
+            <p class="help-block">@Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })</p>
+        </div>
+    </div>
+    <div class="control-group col-md-12", style="min-height: 100px;">
+        <!-- Patronymic -->
+        <label class="control-label" for="Patronymic">Отчество</label>
+        <div class="controls">
+            @Html.TextBoxFor(m => m.Patronymic, new { @class = "form-control", @id = "Patronymic", @style = "min-width: 100%" })
+            <p class="help-block">@Html.ValidationMessageFor(m => m.Patronymic, null, new { @class = "text-danger" })</p>
+        </div>
+    </div>
+    <div class="control-group col-md-12", style="min-height: 100px;">
+        <!-- BirthDate -->
+        <label class="control-label" for="BirthDate">Дата рождения</label>
+        <div class="controls">
+            @Html.TextBoxFor(m => m.BirthDate, "{0:dd.MM.yyyy}", new { @class = "form-control", @id = "BirthDate", @style = "min-width: 100%"})
+            <p class="help-block">@Html.ValidationMessageFor(m => m.BirthDate, null, new { @class = "text-danger" })</p>
+        </div>
+    </div>
+    <div class="control-group col-md-6", style="min-height: 100px;">
+        <!-- PassSeria -->
+        <label class="control-label" for="PassSeria">Серия паспорта</label>
+        <div class="controls">
+            @Html.TextBoxFor(m => m.PassSeria, new { @class = "form-control", @id = "PassSeria", @style = "min-width: 100%" })
+            <p class="help-block">@Html.ValidationMessageFor(m => m.PassSeria, null, new { @class = "text-danger" })</p>
+        </div>
+    </div>
+    <div class="control-group col-md-6", style="min-height: 100px;">
+        <!-- PassNumber -->
+        <label class="control-label" for="PassNumber">Номер паспорта</label>
+        <div class="controls">
+            @Html.TextBoxFor(m => m.PassNumber, new { @class = "form-control", @id = "PassNumber", @style = "min-width: 100%" })
+            <p class="help-block">@Html.ValidationMessageFor(m => m.PassNumber, null, new { @class = "text-danger" })</p>
+        </div>
+    </div>
+    <div class="control-group col-md-12", style="min-height: 100px;">
+        <!-- Address -->
+        <label class="control-label" for="Address">Адрес</label>
+        <div class="controls">
+            @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @id = "Address", @style = "min-width: 100%" })
+            <p class="help-block">@Html.ValidationMessageFor(m => m.Address, null, new { @class = "text-danger" })</p>
+        </div>
+    </div>
+    <div class="control-group col-md-12", style="min-height: 100px;">
+        <!-- Phone -->
+        <label class="control-label" for="Phone">Телефон</label>
+        <div class="controls">
+            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @id = "Phone", @style = "min-width: 100%" })
+            <p class="help-block">@Html.ValidationMessageFor(m => m.Phone, null, new { @class = "text-danger" })</p>
+        </div>
+    </div>
+    <div class="col-md-12", style="min-height: 100px; margin-top: 10px">
+        <button type="submit" class="btn btn-success btn-block btn-lg">Сохранить изменения</button>
+    </div>
+}
