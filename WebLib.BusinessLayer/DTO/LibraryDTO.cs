@@ -36,6 +36,19 @@ namespace WebLib.BusinessLayer.DTO
             };
         }
 
+        public static explicit operator Library (LibraryDTO dbLibrary)
+        {
+            if (dbLibrary == null) return null;
+            else return new Library
+            {
+                Id = dbLibrary.Id,
+                Name = dbLibrary.Name,
+                Address = dbLibrary.Address,
+                Phone = dbLibrary.Phone,
+                City = dbLibrary.CityId
+            };
+        }
+
         public static explicit operator LibraryDTO (LibraryDetailed dbLibrary)
         {
             if (dbLibrary == null) return null;

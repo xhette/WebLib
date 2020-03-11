@@ -25,5 +25,18 @@ namespace WebLib.BusinessLayer.DTO
 				};
 			}
 		}
+
+		public static explicit operator City (CityDTO db)
+		{
+			if (db == null) return null;
+			else
+			{
+				return new City
+				{
+					Id = db.Id,
+					Name = db.Name
+				};
+			}
+		}
 	}
 }

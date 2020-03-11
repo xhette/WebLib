@@ -7,8 +7,8 @@ using WebLib.DataLayer;
 
 namespace WebLib.BusinessLayer.DTO
 {
-	public class LibrarianDataDTO
-	{
+	public class ProviderDataDTO
+    {
         public int Id { get; set; }
 
         public string Surname { get; set; }
@@ -19,41 +19,33 @@ namespace WebLib.BusinessLayer.DTO
 
         public string Address { get; set; }
 
-        public string Phone { get; set; }
-
-        public int LibraryId { get; set; }
-
         public int? UserId { get; set; }
 
-        public static explicit operator LibrarianDataDTO (Librarian db)
+        public static explicit operator ProviderDataDTO (Provider db)
         {
             if (db == null) return null;
-            else return new LibrarianDataDTO
+            else return new ProviderDataDTO
             {
                 Id = db.Id,
                 UserId = db.UserId,
                 Surname = db.Surname,
                 Name = db.Name,
                 Patronymic = db.Patronymic,
-                Address = db.Address,
-                Phone = db.Phone,
-                LibraryId = db.LibraryId
+                Address = db.Address
             };
         }
 
-        public static explicit operator Librarian (LibrarianDataDTO db)
+        public static explicit operator Provider (ProviderDataDTO db)
         {
             if (db == null) return null;
-            else return new Librarian
+            else return new Provider
             {
                 Id = db.Id,
                 UserId = db.UserId,
                 Surname = db.Surname,
                 Name = db.Name,
                 Patronymic = db.Patronymic,
-                Address = db.Address,
-                Phone = db.Phone,
-                LibraryId = db.LibraryId
+                Address = db.Address
             };
         }
     }

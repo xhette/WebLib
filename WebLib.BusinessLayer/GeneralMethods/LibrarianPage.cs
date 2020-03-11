@@ -96,6 +96,31 @@ namespace WebLib.BusinessLayer.GeneralMethods
 			}
 		}
 
+		public bool ChangeStatusAbonent (int libId, int readerId, int status)
+		{
+			try
+			{
+				GenericRepository<AbonentList> generic = new GenericRepository<AbonentList>(_context);
+				var abonent = generic.Get(c => c.Reader == readerId && c.Library == libId).FirstOrDefault();
+
+				if (abonent != null)
+				{
+					abonent.AbonentStatus = status;
+					generic.Update(abonent);
+
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			catch
+			{
+				return false;
+			}
+		}
+
 		public bool AddIssue (int bookId, int readerId)
 		{
 			try

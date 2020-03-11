@@ -28,5 +28,17 @@ namespace WebLib.BusinessLayer.DTO
 				Phone = db.Phone
 			};
 		}
+
+		public static explicit operator Shop (ShopDTO db)
+		{
+			if (db == null) return null;
+			else return new Shop
+			{
+				Id = db.Id,
+				Name = db.Name,
+				Address = db.Address,
+				Phone = db.Phone
+			};
+		}
 	}
 }

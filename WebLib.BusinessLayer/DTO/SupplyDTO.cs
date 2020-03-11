@@ -28,5 +28,17 @@ namespace WebLib.BusinessLayer.DTO
 				Summ = db.Summ
 			};
 		}
+
+		public static explicit operator Supply (SupplyDTO db)
+		{
+			if (db == null) return null;
+			else return new Supply
+			{
+				Id = db.Id,
+				ShopId = db.ShopId,
+				Date = db.Date,
+				Summ = db.Summ
+			};
+		}
 	}
 }

@@ -28,5 +28,17 @@ namespace WebLib.BusinessLayer.DTO
 				Title = dbBook.Title
 			};
 		}
+
+		public static explicit operator Book (BookDTO dbBook)
+		{
+			if (dbBook == null) return null;
+			else return new Book
+			{
+				Id = dbBook.Id,
+				AuthorId = dbBook.AuthorId,
+				DepartmentId = dbBook.DepartmentId,
+				Title = dbBook.Title
+			};
+		}
 	}
 }

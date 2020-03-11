@@ -28,5 +28,17 @@ namespace WebLib.BusinessLayer.DTO
                 Patronymic = dbAuthor.Patronymic
             };
         }
+
+        public static explicit operator Author (AuthorDTO dbAuthor)
+        {
+            if (dbAuthor == null) return null;
+            else return new Author
+            {
+                Id = dbAuthor.Id,
+                Surname = dbAuthor.Surname,
+                Name = dbAuthor.Name,
+                Patronymic = dbAuthor.Patronymic
+            };
+        }
     }
 }

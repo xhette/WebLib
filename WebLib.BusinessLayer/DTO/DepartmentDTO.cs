@@ -25,5 +25,16 @@ namespace WebLib.BusinessLayer.DTO
 				LibraryId = dbDepartment.Library
 			};
 		}
+
+		public static explicit operator Department(DepartmentDTO dbDepartment)
+		{
+			if (dbDepartment == null) return null;
+			else return new Department
+			{
+				Id = dbDepartment.Id,
+				Name = dbDepartment.Name,
+				Library = dbDepartment.LibraryId
+			};
+		}
 	}
 }
