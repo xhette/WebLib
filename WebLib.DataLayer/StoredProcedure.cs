@@ -10,10 +10,10 @@ namespace WebLib.DataLayer
 {
 	public class StoredProcedure
 	{
-		private LibDbContext context;
+		private LibContext context;
 
 		#region Get
-		public StoredProcedure (LibDbContext dbContext)
+		public StoredProcedure (LibContext dbContext)
 		{
 			context = dbContext;
 		}
@@ -39,9 +39,9 @@ namespace WebLib.DataLayer
 			return abonents;
 		}
 
-		public List<Order> OrderList ()
+		public List<Orders> OrderList ()
 		{
-			var orders = context.Database.SqlQuery<Order>("OrdersList").ToList();
+			var orders = context.Database.SqlQuery<Orders>("OrdersList").ToList();
 
 			return orders;
 		}
@@ -55,7 +55,7 @@ namespace WebLib.DataLayer
 
 		public List <DepartmentGrouped> DepartmentList ()
 		{
-			var departments = context.Library.GroupJoin(context.Department, lib => lib.Id, dept => dept.Library, (lib, dept) => new DepartmentGrouped
+			var departments = context.Libraries.GroupJoin(context.Departments, lib => lib.Id, dept => dept.Library, (lib, dept) => new DepartmentGrouped
 			{
 				Library = lib,
 				Departments = dept.ToList()
@@ -66,7 +66,7 @@ namespace WebLib.DataLayer
 
 		public List<DepartmentGrouped> DepartmentList (string symbols)
 		{
-			var departments = context.Library.GroupJoin(context.Department, lib => lib.Id, dept => dept.Library, (lib, dept) => new DepartmentGrouped
+			var departments = context.Libraries.GroupJoin(context.Departments, lib => lib.Id, dept => dept.Library, (lib, dept) => new DepartmentGrouped
 			{
 				Library = lib,
 				Departments = dept.Where(c => c.Name.Contains(symbols)).ToList()

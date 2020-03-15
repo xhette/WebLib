@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebLib.DataLayer;
+using WebLib.DataLayer.Base;
 
 namespace WebLib.BusinessLayer.DTO
 {
@@ -17,7 +18,7 @@ namespace WebLib.BusinessLayer.DTO
 
         public string Patronymic { get; set; }
 
-        public static explicit operator AuthorDTO (Author dbAuthor)
+        public static explicit operator AuthorDTO (Authors dbAuthor)
         {
             if (dbAuthor == null) return null;
             else return new AuthorDTO
@@ -29,10 +30,10 @@ namespace WebLib.BusinessLayer.DTO
             };
         }
 
-        public static explicit operator Author (AuthorDTO dbAuthor)
+        public static explicit operator Authors (AuthorDTO dbAuthor)
         {
             if (dbAuthor == null) return null;
-            else return new Author
+            else return new Authors
             {
                 Id = dbAuthor.Id,
                 Surname = dbAuthor.Surname,

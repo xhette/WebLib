@@ -8,10 +8,10 @@ namespace WebLib.BusinessLayer.GeneralMethods.Generic
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        LibDbContext _context;
+        LibContext _context;
         DbSet<TEntity> _dbSet;
 
-        public GenericRepository (LibDbContext context)
+        public GenericRepository (LibContext context)
         {
             _context = context;
             _dbSet = context.Set<TEntity> ();
@@ -43,7 +43,11 @@ namespace WebLib.BusinessLayer.GeneralMethods.Generic
         }
         public void Remove (TEntity item)
         {
-            _dbSet.Remove (item);
+            if (!_dbSet.Local.Contains(item))
+            {
+                _dbSet.Attach(item);
+            }
+            _dbSet.Remove(item);
             _context.SaveChanges ();
         }
     }

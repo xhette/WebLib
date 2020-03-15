@@ -4,32 +4,33 @@ using System.Linq;
 using WebLib.BusinessLayer.DTO;
 using WebLib.BusinessLayer.GeneralMethods.Generic;
 using WebLib.DataLayer;
+using WebLib.DataLayer.Base;
 
 namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 {
 	class ShopBs : IDbModel<ShopDTO>
 	{
-		private LibDbContext context;
+		private LibContext context;
 
-		private GenericRepository<Shop> repository;
+		private GenericRepository<Shops> repository;
 
 		public ShopBs ()
 		{
-			context = new LibDbContext();
-			repository = new GenericRepository<Shop>(context);
+			context = new LibContext();
+			repository = new GenericRepository<Shops>(context);
 		}
 
 		public void Add (ShopDTO model)
 		{
 			if (model != null)
 			{
-				repository.Create((Shop)model);
+				repository.Create((Shops)model);
 			}
 		}
 
 		public void Delete (int id)
 		{
-			Shop entity = repository.FindById(id);
+			Shops entity = repository.FindById(id);
 
 			if (entity != null)
 			{
@@ -55,7 +56,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 		{
 			if (model != null)
 			{
-				Shop entity = (Shop)model;
+				Shops entity = (Shops)model;
 				repository.Update(entity);
 			}
 		}

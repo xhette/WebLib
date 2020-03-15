@@ -7,21 +7,22 @@ using WebLib.BusinessLayer.DTO;
 using WebLib.BusinessLayer.DTO.Composite;
 using WebLib.BusinessLayer.GeneralMethods.Generic;
 using WebLib.DataLayer;
+using WebLib.DataLayer.Base;
 
 namespace WebLib.BusinessLayer.GeneralMethods
 {
 	public class LibrarianPage
 	{
-		LibDbContext _context;
+		LibContext _context;
 
-		public LibrarianPage (LibDbContext context)
+		public LibrarianPage (LibContext context)
 		{
 			_context = context;
 		}
 
 		public LibrarianDataDTO LibrarianData (int librarianId)
 		{
-			GenericRepository<Librarian> generic = new GenericRepository<Librarian>(_context);
+			GenericRepository<Librarians> generic = new GenericRepository<Librarians>(_context);
 			LibrarianDataDTO lib = (LibrarianDataDTO)generic.FindById(librarianId);
 
 			return lib;
@@ -38,7 +39,7 @@ namespace WebLib.BusinessLayer.GeneralMethods
 
 		public List<AuthorDTO> Authors ()
 		{
-			GenericRepository<Author> repository = new GenericRepository<Author>(_context);
+			GenericRepository<Authors> repository = new GenericRepository<Authors>(_context);
 			List<AuthorDTO> authors = repository.Get().Select(c => (AuthorDTO)c).ToList();
 
 			return authors;
@@ -76,7 +77,7 @@ namespace WebLib.BusinessLayer.GeneralMethods
 		{
 			try
 			{
-				GenericRepository<AbonentList> generic = new GenericRepository<AbonentList>(_context);
+				GenericRepository<AbonentLists> generic = new GenericRepository<AbonentLists>(_context);
 				var abonent = generic.Get(c => c.Reader == readerId && c.Library == libId).FirstOrDefault();
 				
 				if (abonent != null)
@@ -100,7 +101,7 @@ namespace WebLib.BusinessLayer.GeneralMethods
 		{
 			try
 			{
-				GenericRepository<AbonentList> generic = new GenericRepository<AbonentList>(_context);
+				GenericRepository<AbonentLists> generic = new GenericRepository<AbonentLists>(_context);
 				var abonent = generic.Get(c => c.Reader == readerId && c.Library == libId).FirstOrDefault();
 
 				if (abonent != null)
@@ -125,12 +126,12 @@ namespace WebLib.BusinessLayer.GeneralMethods
 		{
 			try
 			{
-				GenericRepository<Issue> generic = new GenericRepository<Issue>(_context);
+				GenericRepository<Issues> generic = new GenericRepository<Issues>(_context);
 				var issue = generic.Get(c => c.Book == bookId);
 
 				if (issue == null)
 				{
-					Issue newIssue = new Issue
+					Issues newIssue = new Issues
 					{
 						Book = bookId,
 						Reader = readerId,
@@ -158,9 +159,9 @@ namespace WebLib.BusinessLayer.GeneralMethods
 		{
 			try
 			{
-				GenericRepository<Issue> generic = new GenericRepository<Issue>(_context);
+				GenericRepository<Issues> generic = new GenericRepository<Issues>(_context);
 
-				Issue db = (Issue)issue;
+				Issues db = (Issues)issue;
 
 				generic.Update(db);
 
@@ -176,9 +177,9 @@ namespace WebLib.BusinessLayer.GeneralMethods
 		{
 			try
 			{
-				GenericRepository<Issue> generic = new GenericRepository<Issue>(_context);
+				GenericRepository<Issues> generic = new GenericRepository<Issues>(_context);
 
-				Issue db = generic.FindById(issueId);
+				Issues db = generic.FindById(issueId);
 
 				if (db != null)
 				{
@@ -199,7 +200,7 @@ namespace WebLib.BusinessLayer.GeneralMethods
 
 		public ReaderDataDTO ReaderInfo (int rederId)
 		{
-			GenericRepository<Reader> repository = new GenericRepository<Reader>(_context);
+			GenericRepository<Readers> repository = new GenericRepository<Readers>(_context);
 			return (ReaderDataDTO)repository.Get(c => c.Id == rederId).FirstOrDefault();
 		}
 	}

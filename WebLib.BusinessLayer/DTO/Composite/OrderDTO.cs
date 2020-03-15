@@ -15,7 +15,7 @@ namespace WebLib.BusinessLayer.DTO.Composite
 
 		public ShopDTO Shop { get; set; }
 
-		public static explicit operator OrderDTO (Order db)
+		public static explicit operator OrderDTO (Orders db)
 		{
 			if (db == null) return null;
 			else return new OrderDTO

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebLib.DataLayer.Procedures
 {
-	public class Order
+	public class Orders
 	{
 		public int BookId { get; set; }
 

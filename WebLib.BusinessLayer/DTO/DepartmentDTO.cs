@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebLib.DataLayer;
+using WebLib.DataLayer.Base;
 
 namespace WebLib.BusinessLayer.DTO
 {
@@ -15,7 +16,7 @@ namespace WebLib.BusinessLayer.DTO
 
 		public int LibraryId { get; set; }
 
-		public static explicit operator DepartmentDTO (Department dbDepartment)
+		public static explicit operator DepartmentDTO (Departments dbDepartment)
 		{
 			if (dbDepartment == null) return null;
 			else return new DepartmentDTO
@@ -26,10 +27,10 @@ namespace WebLib.BusinessLayer.DTO
 			};
 		}
 
-		public static explicit operator Department(DepartmentDTO dbDepartment)
+		public static explicit operator Departments(DepartmentDTO dbDepartment)
 		{
 			if (dbDepartment == null) return null;
-			else return new Department
+			else return new Departments
 			{
 				Id = dbDepartment.Id,
 				Name = dbDepartment.Name,

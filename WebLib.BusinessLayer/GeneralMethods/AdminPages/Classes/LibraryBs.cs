@@ -4,32 +4,33 @@ using System.Linq;
 using WebLib.BusinessLayer.DTO;
 using WebLib.BusinessLayer.GeneralMethods.Generic;
 using WebLib.DataLayer;
+using WebLib.DataLayer.Base;
 
 namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 {
 	class LibraryBs : IDbModel<LibraryDTO>
 	{
-		private LibDbContext context;
+		private LibContext context;
 
-		private GenericRepository<Library> repository;
+		private GenericRepository<Libraries> repository;
 
 		public LibraryBs ()
 		{
-			context = new LibDbContext();
-			repository = new GenericRepository<Library>(context);
+			context = new LibContext();
+			repository = new GenericRepository<Libraries>(context);
 		}
 
 		public void Add (LibraryDTO model)
 		{
 			if (model != null)
 			{
-				repository.Create((Library)model);
+				repository.Create((Libraries)model);
 			}
 		}
 
 		public void Delete (int id)
 		{
-			Library entity = repository.FindById(id);
+			Libraries entity = repository.FindById(id);
 
 			if (entity != null)
 			{
@@ -55,7 +56,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 		{
 			if (model != null)
 			{
-				Library entity = (Library)model;
+				Libraries entity = (Libraries)model;
 				repository.Update(entity);
 			}
 		}

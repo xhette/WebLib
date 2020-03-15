@@ -4,32 +4,33 @@ using System.Linq;
 using WebLib.BusinessLayer.DTO;
 using WebLib.BusinessLayer.GeneralMethods.Generic;
 using WebLib.DataLayer;
+using WebLib.DataLayer.Base;
 
 namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 {
 	class LibrarianBs : IDbModel<LibrarianDataDTO>
 	{
-		private LibDbContext context;
+		private LibContext context;
 
-		private GenericRepository<Librarian> repository;
+		private GenericRepository<Librarians> repository;
 
 		public LibrarianBs ()
 		{
-			context = new LibDbContext();
-			repository = new GenericRepository<Librarian>(context);
+			context = new LibContext();
+			repository = new GenericRepository<Librarians>(context);
 		}
 
 		public void Add (LibrarianDataDTO model)
 		{
 			if (model != null)
 			{
-				repository.Create((Librarian)model);
+				repository.Create((Librarians)model);
 			}
 		}
 
 		public void Delete (int id)
 		{
-			Librarian entity = repository.FindById(id);
+			Librarians entity = repository.FindById(id);
 
 			if (entity != null)
 			{
@@ -55,7 +56,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 		{
 			if (model != null)
 			{
-				Librarian entity = (Librarian)model;
+				Librarians entity = (Librarians)model;
 				repository.Update(entity);
 			}
 		}

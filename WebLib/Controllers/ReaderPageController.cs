@@ -15,7 +15,7 @@ namespace WebLib.Controllers
     public class ReaderPageController : Controller
     {
         private ReaderPage readerContext;
-        private LibDbContext context;
+        private LibContext context;
         private int userId;
         private int readerId;
 
@@ -25,10 +25,10 @@ namespace WebLib.Controllers
             //if (userId == 0) 
                 userId = 28;
 
-            context = new LibDbContext();
+            context = new LibContext();
             readerContext = new ReaderPage(context);
 
-            readerId = context.Reader.FirstOrDefault(c => c.UserId == userId).Id;
+            readerId = context.Readers.FirstOrDefault(c => c.UserId == userId).Id;
         }
 
 
@@ -75,7 +75,7 @@ namespace WebLib.Controllers
         public ActionResult LibrariesByCity (int? cityId)
         {
             List<LibraryReaderModel> model;
-            int readerId = context.Reader.FirstOrDefault(c => c.UserId == userId).Id;
+            int readerId = context.Readers.FirstOrDefault(c => c.UserId == userId).Id;
 
             if (cityId.HasValue)
             {
@@ -201,7 +201,7 @@ namespace WebLib.Controllers
         public ActionResult AddAbonent (int libId)
         {
             ViewBag.OperationStatus = false;
-            int readerId = context.Reader.FirstOrDefault(c => c.UserId == userId).Id;
+            int readerId = context.Readers.FirstOrDefault(c => c.UserId == userId).Id;
 
             ViewBag.OperationStatus = readerContext.AddAbonentClaim(readerId, libId);
             return RedirectToAction("Libraries", "ReaderPage");

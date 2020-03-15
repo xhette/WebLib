@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebLib.DataLayer;
+using WebLib.DataLayer.Base;
 
 namespace WebLib.BusinessLayer.DTO
 {
@@ -13,7 +14,7 @@ namespace WebLib.BusinessLayer.DTO
 
 		public string Name { get; set; }
 
-		public static explicit operator CityDTO (City db)
+		public static explicit operator CityDTO (Cities db)
 		{
 			if (db == null) return null;
 			else
@@ -26,12 +27,12 @@ namespace WebLib.BusinessLayer.DTO
 			}
 		}
 
-		public static explicit operator City (CityDTO db)
+		public static explicit operator Cities (CityDTO db)
 		{
 			if (db == null) return null;
 			else
 			{
-				return new City
+				return new Cities
 				{
 					Id = db.Id,
 					Name = db.Name

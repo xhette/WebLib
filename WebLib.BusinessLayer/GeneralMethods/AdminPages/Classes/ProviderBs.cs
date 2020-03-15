@@ -4,32 +4,33 @@ using System.Linq;
 using WebLib.BusinessLayer.DTO;
 using WebLib.BusinessLayer.GeneralMethods.Generic;
 using WebLib.DataLayer;
+using WebLib.DataLayer.Base;
 
 namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 {
 	class ProviderBs : IDbModel<ProviderDataDTO>
 	{
-		private LibDbContext context;
+		private LibContext context;
 
-		private GenericRepository<Provider> repository;
+		private GenericRepository<Providers> repository;
 
 		public ProviderBs ()
 		{
-			context = new LibDbContext();
-			repository = new GenericRepository<Provider>(context);
+			context = new LibContext();
+			repository = new GenericRepository<Providers>(context);
 		}
 
 		public void Add (ProviderDataDTO model)
 		{
 			if (model != null)
 			{
-				repository.Create((Provider)model);
+				repository.Create((Providers)model);
 			}
 		}
 
 		public void Delete (int id)
 		{
-			Provider entity = repository.FindById(id);
+			Providers entity = repository.FindById(id);
 
 			if (entity != null)
 			{
@@ -55,7 +56,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 		{
 			if (model != null)
 			{
-				Provider entity = (Provider)model;
+				Providers entity = (Providers)model;
 				repository.Update(entity);
 			}
 		}

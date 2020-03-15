@@ -13,7 +13,7 @@ namespace WebLib.Utils
 	{
 		public static SimpleRoleProvider roles = (SimpleRoleProvider)Roles.Provider;
 		public static SimpleMembershipProvider membership = (SimpleMembershipProvider)Membership.Provider;
-		private static LibDbContext context;
+		private static LibContext context;
 
 		public static void Up ()
 		{

@@ -4,32 +4,33 @@ using System.Linq;
 using WebLib.BusinessLayer.DTO;
 using WebLib.BusinessLayer.GeneralMethods.Generic;
 using WebLib.DataLayer;
+using WebLib.DataLayer.Base;
 
 namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 {
 	public class DepartmentBs : IDbModel<DepartmentDTO>
 	{
-		private LibDbContext context;
+		private LibContext context;
 
-		private GenericRepository<Department> repository;
+		private GenericRepository<Departments> repository;
 
 		public DepartmentBs ()
 		{
-			context = new LibDbContext();
-			repository = new GenericRepository<Department>(context);
+			context = new LibContext();
+			repository = new GenericRepository<Departments>(context);
 		}
 
 		void IDbModel<DepartmentDTO>.Add (DepartmentDTO model)
 		{
 			if (model != null)
 			{
-				repository.Create((Department)model);
+				repository.Create((Departments)model);
 			}
 		}
 
 		void IDbModel<DepartmentDTO>.Delete (int id)
 		{
-			Department entity = repository.FindById(id);
+			Departments entity = repository.FindById(id);
 
 			if (entity != null)
 			{
@@ -55,7 +56,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 		{
 			if (model != null)
 			{
-				Department entity = (Department)model;
+				Departments entity = (Departments)model;
 				repository.Update(entity);
 			}
 		}

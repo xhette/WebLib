@@ -1,21 +1,18 @@
-﻿using System;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WebLib.BusinessLayer.DTO;
 using WebLib.BusinessLayer.DTO.Composite;
 using WebLib.BusinessLayer.GeneralMethods.Generic;
 using WebLib.DataLayer;
+using WebLib.DataLayer.Base;
 
 namespace WebLib.BusinessLayer.GeneralMethods
 {
-	public class ProvidePage
+	public class ProviderPage
 	{
-		LibDbContext _context;
+		LibContext _context;
 
-		public ProvidePage (LibDbContext context)
+		public ProviderPage (LibContext context)
 		{
 			_context = context;
 		}
@@ -32,7 +29,7 @@ namespace WebLib.BusinessLayer.GeneralMethods
 
 		public List<CityDTO> CityList ()
 		{
-			GenericRepository<City> repository = new GenericRepository<City>(_context);
+			GenericRepository<Cities> repository = new GenericRepository<Cities>(_context);
 			List<CityDTO> cities = repository.Get().Select(c => (CityDTO)c).ToList();
 
 			return cities;
@@ -48,7 +45,7 @@ namespace WebLib.BusinessLayer.GeneralMethods
 
 		public List<AuthorDTO> Authors ()
 		{
-			GenericRepository<Author> repository = new GenericRepository<Author>(_context);
+			GenericRepository<Authors> repository = new GenericRepository<Authors>(_context);
 			List<AuthorDTO> authors = repository.Get().Select(c => (AuthorDTO)c).ToList();
 
 			return authors;
@@ -72,7 +69,7 @@ namespace WebLib.BusinessLayer.GeneralMethods
 
 		public LibraryDTO LibraryInfo (int libId)
 		{
-			GenericRepository<Library> generic = new GenericRepository<Library>(_context);
+			GenericRepository<Libraries> generic = new GenericRepository<Libraries>(_context);
 
 			LibraryDTO library = (LibraryDTO)generic.FindById(libId);
 
@@ -82,7 +79,7 @@ namespace WebLib.BusinessLayer.GeneralMethods
 
 		public List<ShopDTO> Shops ()
 		{
-			GenericRepository<Shop> generic = new GenericRepository<Shop>(_context);
+			GenericRepository<Shops> generic = new GenericRepository<Shops>(_context);
 			List<ShopDTO> shops = generic.Get().Select(c => (ShopDTO)c).ToList();
 
 			return shops;

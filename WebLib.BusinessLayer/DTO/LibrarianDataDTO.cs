@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebLib.DataLayer;
+using WebLib.DataLayer.Base;
 
 namespace WebLib.BusinessLayer.DTO
 {
@@ -25,7 +26,7 @@ namespace WebLib.BusinessLayer.DTO
 
         public int? UserId { get; set; }
 
-        public static explicit operator LibrarianDataDTO (Librarian db)
+        public static explicit operator LibrarianDataDTO (Librarians db)
         {
             if (db == null) return null;
             else return new LibrarianDataDTO
@@ -37,14 +38,14 @@ namespace WebLib.BusinessLayer.DTO
                 Patronymic = db.Patronymic,
                 Address = db.Address,
                 Phone = db.Phone,
-                LibraryId = db.LibraryId
+                LibraryId = db.Library
             };
         }
 
-        public static explicit operator Librarian (LibrarianDataDTO db)
+        public static explicit operator Librarians (LibrarianDataDTO db)
         {
             if (db == null) return null;
-            else return new Librarian
+            else return new Librarians
             {
                 Id = db.Id,
                 UserId = db.UserId,
@@ -53,7 +54,7 @@ namespace WebLib.BusinessLayer.DTO
                 Patronymic = db.Patronymic,
                 Address = db.Address,
                 Phone = db.Phone,
-                LibraryId = db.LibraryId
+                Library = db.LibraryId
             };
         }
     }

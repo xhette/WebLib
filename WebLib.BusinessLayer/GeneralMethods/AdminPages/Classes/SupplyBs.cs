@@ -4,32 +4,33 @@ using System.Linq;
 using WebLib.BusinessLayer.DTO;
 using WebLib.BusinessLayer.GeneralMethods.Generic;
 using WebLib.DataLayer;
+using WebLib.DataLayer.Base;
 
 namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 {
 	class SupplyBs : IDbModel<SupplyDTO>
 	{
-		private LibDbContext context;
+		private LibContext context;
 
-		private GenericRepository<Supply> repository;
+		private GenericRepository<Supplies> repository;
 
 		public SupplyBs ()
 		{
-			context = new LibDbContext();
-			repository = new GenericRepository<Supply>(context);
+			context = new LibContext();
+			repository = new GenericRepository<Supplies>(context);
 		}
 
 		public void Add (SupplyDTO model)
 		{
 			if (model != null)
 			{
-				repository.Create((Supply)model);
+				repository.Create((Supplies)model);
 			}
 		}
 
 		public void Delete (int id)
 		{
-			Supply entity = repository.FindById(id);
+			Supplies entity = repository.FindById(id);
 
 			if (entity != null)
 			{
@@ -55,7 +56,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 		{
 			if (model != null)
 			{
-				Supply entity = (Supply)model;
+				Supplies entity = (Supplies)model;
 				repository.Update(entity);
 			}
 		}

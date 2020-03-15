@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebLib.DataLayer;
+using WebLib.DataLayer.Base;
 
 namespace WebLib.BusinessLayer.DTO.Composite
 {
@@ -13,7 +14,7 @@ namespace WebLib.BusinessLayer.DTO.Composite
 
 		public string Name { get; set; }
 
-		public static explicit operator LibraryShortDTO (Library db)
+		public static explicit operator LibraryShortDTO (Libraries db)
 		{
 			if (db == null) return null;
 			else return new LibraryShortDTO

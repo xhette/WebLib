@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebLib.DataLayer;
+using WebLib.DataLayer.Base;
 
 namespace WebLib.BusinessLayer.DTO
 {
@@ -17,7 +18,7 @@ namespace WebLib.BusinessLayer.DTO
 
 		public string Phone { get; set; }
 
-		public static explicit operator ShopDTO (Shop db)
+		public static explicit operator ShopDTO (Shops db)
 		{
 			if (db == null) return null;
 			else return new ShopDTO
@@ -29,10 +30,10 @@ namespace WebLib.BusinessLayer.DTO
 			};
 		}
 
-		public static explicit operator Shop (ShopDTO db)
+		public static explicit operator Shops (ShopDTO db)
 		{
 			if (db == null) return null;
-			else return new Shop
+			else return new Shops
 			{
 				Id = db.Id,
 				Name = db.Name,
