@@ -1,0 +1,45 @@
+﻿@model WebLib.Models.TempworkModel
+
+@{
+    ViewBag.Title = "Authors";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Sidebar {
+    <div class="col-md-2" id="navbar">
+        <nav class="sidebar">
+            <ul class="list-unstyled navbar-list">
+                <li class="navbar-list-item">
+                    @*@Html.ActionLink("Личные данные", "Index", "ReaderPage")*@
+                </li>
+                <li class="navbar-list-item">
+                    @*@Html.ActionLink("Библиотеки", "Libraries", "ReaderPage")*@
+                </li>
+                <li class="navbar-list-item">
+                    @*@Html.ActionLink("Поиск книг", "Books", "ReaderPage")*@
+                </li>
+                <li class="navbar-list-item active-nav-item">
+                    @*@Html.ActionLink("Настройки", "Settings", "ReaderPage")*@
+                </li>
+            </ul>
+        </nav>
+    </div>
+}
+
+<div class="col-md-10 col-md-offset-2">
+    <div class="page-wrapper">
+
+        <div class="row row-default">
+            <div class="col-md-12">
+                @{Html.RenderAction("AuthorsList", "Admin");}
+            </div>
+        </div>
+        <div class="row row-default">
+            <div class="col-md-6">
+                @Html.ActionLink("Отменить", "AuthorsUndo", "History", new { time = Model.Time, step = Model.Step }, new { @class = "btn btn-block btn-default" })
+            </div>
+            <div class="col-md-6">
+                @Html.ActionLink("Повторить", "AuthorsRedo", "History", new { time = Model.Time, step = Model.Step }, new { @class = "btn btn-block btn-default" })
+            </div>
+        </div>
+    </div>
+</div>
