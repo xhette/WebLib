@@ -76,7 +76,6 @@
     <Compile Include="HistoryTables\ReadersHistory.cs" />
     <Compile Include="HistoryTables\ShopsHistory.cs" />
     <Compile Include="HistoryTables\SuppliesHistory.cs" />
-    <Compile Include="HistoryTables\UsersHistory.cs" />
     <Compile Include="LibContext.cs" />
     <Compile Include="Base\Librarians.cs" />
     <Compile Include="Base\Libraries.cs" />

@@ -85,9 +85,11 @@
     <Compile Include="GeneralMethods\AdminPages\Classes\ReaderBs.cs" />
     <Compile Include="GeneralMethods\AdminPages\Classes\ShopBs.cs" />
     <Compile Include="GeneralMethods\AdminPages\Classes\SupplyBs.cs" />
+    <Compile Include="GeneralMethods\AdminPages\TempTables\HistoryCities.cs" />
     <Compile Include="GeneralMethods\AdminPages\TempTables\HistoryAuthors.cs" />
-    <Compile Include="GeneralMethods\AdminPages\TempTables\OperationEnum.cs" />
-    <Compile Include="GeneralMethods\AdminPages\TempTables\TakeLastExtension.cs" />
+    <Compile Include="GeneralMethods\AdminPages\TempTables\HistoryBooks.cs" />
+    <Compile Include="GeneralMethods\AdminPages\TempTables\HistoryLibraries.cs" />
+    <Compile Include="GeneralMethods\AdminPages\TempTables\IHistory.cs" />
     <Compile Include="GeneralMethods\Generic\GenericRepository.cs" />
     <Compile Include="GeneralMethods\Generic\IGenericRepository.cs" />
     <Compile Include="GeneralMethods\LibrarianPage.cs" />

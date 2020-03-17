@@ -12,9 +12,9 @@ using WebLib.DataLayer.Base;
 
 namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 {
-	public static class HistoryAuthors
+	public class HistoryAuthors : IHistory 
 	{
-		public static int Undone(int current, DateTime time)
+		public int Undone(int current, DateTime time)
 		{
 			int step = current;
 
@@ -37,27 +37,27 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 
 						if (operation == "inserted")
 						{
-							Authors author = generic.Get(c => c.Id == pacient.Id).FirstOrDefault();
-							if (author != null)
+							Authors entity = generic.Get(c => c.Id == pacient.Id).FirstOrDefault();
+							if (entity != null)
 							{
-								generic.Remove(author);
+								generic.Remove(entity);
 							}
 						}
 						else if (operation == "updated")
 						{
-							Authors author = generic.Get(c => c.Id == pacient.Id).FirstOrDefault();
-							if (author != null)
+							Authors entity = generic.Get(c => c.Id == pacient.Id).FirstOrDefault();
+							if (entity != null)
 							{
-								author.Surname = pacient.HistorySurname;
-								author.Name = pacient.HistoryName;
-								author.Patronymic = pacient.HistoryPatronymic;
+								entity.Surname = pacient.HistorySurname;
+								entity.Name = pacient.HistoryName;
+								entity.Patronymic = pacient.HistoryPatronymic;
 
-								generic.Update(author);
+								generic.Update(entity);
 							}
 						}
 						else if (operation == "deleted")
 						{
-							Authors author = new Authors
+							Authors entity = new Authors
 							{
 								Id = pacient.Id,
 								Surname = pacient.HistorySurname,
@@ -68,7 +68,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 							using (var scope = context.Database.BeginTransaction())
 							{
 								context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Authors ON");
-								context.Authors.Add(author);
+								context.Authors.Add(entity);
 								context.SaveChanges();
 								context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Authors OFF");
 								scope.Commit();
@@ -89,7 +89,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 			return step;
 		}
 
-		public static int Redone(int current, DateTime time)
+		public int Redone(int current, DateTime time)
 		{
 			int step = current;
 
@@ -114,7 +114,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 
 						if (operation == "inserted")
 						{
-							Authors author = new Authors
+							Authors entity = new Authors
 							{
 								Id = pacient.Id,
 								Surname = pacient.CurrentSurname,
@@ -124,7 +124,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 
 							using (var scope = context.Database.BeginTransaction())
 							{
-								context.Authors.Add(author);
+								context.Authors.Add(entity);
 								context.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT Authors ON");
 								context.SaveChanges();
 								context.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT Authors OFF");
@@ -133,23 +133,23 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 						}
 						else if (operation == "updated")
 						{
-							Authors author = generic.Get(c => c.Id == pacient.Id).FirstOrDefault();
-							if (author != null)
+							Authors entity = generic.Get(c => c.Id == pacient.Id).FirstOrDefault();
+							if (entity != null)
 							{
-								author.Surname = pacient.CurrentSurname;
-								author.Name = pacient.CurrentName;
-								author.Patronymic = pacient.CurrentPatronymic;
+								entity.Surname = pacient.CurrentSurname;
+								entity.Name = pacient.CurrentName;
+								entity.Patronymic = pacient.CurrentPatronymic;
 
-								generic.Update(author);
+								generic.Update(entity);
 							}
 						}
 						else if (operation == "deleted")
 						{
 
-							Authors author = generic.Get(c => c.Id == pacient.Id).FirstOrDefault();
-							if (author != null)
+							Authors entity = generic.Get(c => c.Id == pacient.Id).FirstOrDefault();
+							if (entity != null)
 							{
-								generic.Remove(author);
+								generic.Remove(entity);
 							}
 						}
 

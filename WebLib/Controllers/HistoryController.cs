@@ -10,6 +10,8 @@ namespace WebLib.Controllers
 {
     public class HistoryController : Controller
     {
+        private IHistory history;
+
         public ActionResult Authors(DateTime? time, int? step)
         {
             TempworkModel model = new TempworkModel();
@@ -25,14 +27,16 @@ namespace WebLib.Controllers
 
         public ActionResult AuthorsUndo(DateTime time, int step)
         {
-            step = HistoryAuthors.Undone(step, time);
+            history = new HistoryAuthors();
+            step = history.Undone(step, time);
 
             return RedirectToAction("Authors", "History", new { time = time, step = step });
         }
 
         public ActionResult AuthorsRedo(DateTime time, int step)
         {
-            step = HistoryAuthors.Redone(step, time);
+            history = new HistoryAuthors();
+            step = history.Redone(step, time);
 
             return RedirectToAction("Authors", "History", new { time = time, step = step });
         }
