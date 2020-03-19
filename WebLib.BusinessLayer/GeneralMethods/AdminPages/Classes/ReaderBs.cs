@@ -8,7 +8,7 @@ using WebLib.DataLayer.Base;
 
 namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 {
-	class ReaderBs : IDbModel<ReaderDataDTO>
+	public class ReaderBs : IDbModel<ReaderDataDTO>
 	{
 		private LibContext context;
 

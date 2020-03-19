@@ -20,7 +20,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 			repository = new GenericRepository<Cities>(context);
 		}
 
-		void IDbModel<CityDTO>.Add (CityDTO model)
+		public void Add (CityDTO model)
 		{
 			if (model != null)
 			{
@@ -28,7 +28,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 			}
 		}
 
-		void IDbModel<CityDTO>.Delete (int id)
+		public void Delete (int id)
 		{
 			Cities entity = repository.FindById(id);
 
@@ -38,21 +38,21 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 			}
 		}
 
-		CityDTO IDbModel<CityDTO>.GetById (int id)
+		public CityDTO GetById (int id)
 		{
 			CityDTO entity = (CityDTO)repository.FindById(id);
 
 			return entity;
 		}
 
-		List<CityDTO> IDbModel<CityDTO>.GetList ()
+		public List<CityDTO> GetList ()
 		{
 			List<CityDTO> entities = repository.Get().Select(c => (CityDTO)c).ToList();
 
 			return entities;
 		}
 
-		void IDbModel<CityDTO>.Update (CityDTO model)
+		public void Update (CityDTO model)
 		{
 			if (model != null)
 			{

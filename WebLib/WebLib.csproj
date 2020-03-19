@@ -149,11 +149,15 @@
     <Compile Include="Models\AuthorModel.cs" />
     <Compile Include="Models\BookModel.cs" />
     <Compile Include="Models\DepartmentModel.cs" />
+    <Compile Include="Models\IssueModel.cs" />
+    <Compile Include="Models\LibrarianModel.cs" />
     <Compile Include="Models\LibraryModel.cs" />
     <Compile Include="Models\LibraryShortModel.cs" />
+    <Compile Include="Models\ProviderModel.cs" />
     <Compile Include="Models\ProviderPages\OrderViewModel.cs" />
     <Compile Include="Models\ReaderPages\DepartmentListModel.cs" />
     <Compile Include="Models\ReaderPages\LibraryReaderModel.cs" />
+    <Compile Include="Models\ShopModel.cs" />
     <Compile Include="Models\SupplyModel.cs" />
     <Compile Include="Models\ReaderPages\BookViewModel.cs" />
     <Compile Include="Models\ReaderPages\ReaderDataModel.cs" />

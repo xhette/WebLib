@@ -27,5 +27,17 @@ namespace WebLib.Models
 				Summ = dto.Summ
 			};
 		}
+
+		public static explicit operator SupplyDTO(SupplyModel db)
+		{
+			if (db == null) return null;
+			else return new SupplyDTO
+			{
+				Id = db.Id,
+				ShopId = db.Shop,
+				Date = db.Date,
+				Summ = db.Summ
+			};
+		}
 	}
 }

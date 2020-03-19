@@ -8,7 +8,7 @@ using WebLib.DataLayer.Base;
 
 namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 {
-	class LibraryBs : IDbModel<LibraryDTO>
+	public class LibraryBs : IDbModel<LibraryDTO>
 	{
 		private LibContext context;
 

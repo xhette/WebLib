@@ -12,7 +12,7 @@ namespace WebLib.BusinessLayer.DTO
 	{
         public int Id { get; set; }
 
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
 
         public string Surname { get; set; }
 

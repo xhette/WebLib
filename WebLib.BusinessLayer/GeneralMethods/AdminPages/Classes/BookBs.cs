@@ -20,7 +20,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 			repository = new GenericRepository<Books>(context);
 		}
 
-		void IDbModel<BookDTO>.Add (BookDTO model)
+		public void Add (BookDTO model)
 		{
 			if (model != null)
 			{
@@ -28,7 +28,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 			}
 		}
 
-		void IDbModel<BookDTO>.Delete (int id)
+		public void Delete (int id)
 		{
 			Books entity = repository.FindById(id);
 
@@ -38,21 +38,21 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 			}
 		}
 
-		BookDTO IDbModel<BookDTO>.GetById (int id)
+		public BookDTO GetById (int id)
 		{
 			BookDTO entity = (BookDTO)repository.FindById(id);
 
 			return entity;
 		}
 
-		List<BookDTO> IDbModel<BookDTO>.GetList ()
+		public List<BookDTO> GetList ()
 		{
 			List<BookDTO> entities = repository.Get().Select(c => (BookDTO)c).ToList();
 
 			return entities;
 		}
 
-		void IDbModel<BookDTO>.Update (BookDTO model)
+		public void Update (BookDTO model)
 		{
 			if (model != null)
 			{

@@ -11,7 +11,7 @@ namespace WebLib.Models.ReaderPages
     {
         public int Id { get; set; }
 
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
 
         [Required(ErrorMessage ="Введите фамилию")]
         public string Surname { get; set; }

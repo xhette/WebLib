@@ -88,8 +88,15 @@
     <Compile Include="GeneralMethods\AdminPages\TempTables\HistoryCities.cs" />
     <Compile Include="GeneralMethods\AdminPages\TempTables\HistoryAuthors.cs" />
     <Compile Include="GeneralMethods\AdminPages\TempTables\HistoryBooks.cs" />
+    <Compile Include="GeneralMethods\AdminPages\TempTables\HistoryDepartments.cs" />
+    <Compile Include="GeneralMethods\AdminPages\TempTables\HistoryIssues.cs" />
+    <Compile Include="GeneralMethods\AdminPages\TempTables\HistoryLibrarians.cs" />
     <Compile Include="GeneralMethods\AdminPages\TempTables\HistoryLibraries.cs" />
+    <Compile Include="GeneralMethods\AdminPages\TempTables\HistoryReaders.cs" />
+    <Compile Include="GeneralMethods\AdminPages\TempTables\HistoryShops.cs" />
+    <Compile Include="GeneralMethods\AdminPages\TempTables\HistorySupplies.cs" />
     <Compile Include="GeneralMethods\AdminPages\TempTables\IHistory.cs" />
+    <Compile Include="GeneralMethods\AdminPages\TempTables\HistoryProviders.cs" />
     <Compile Include="GeneralMethods\Generic\GenericRepository.cs" />
     <Compile Include="GeneralMethods\Generic\IGenericRepository.cs" />
     <Compile Include="GeneralMethods\LibrarianPage.cs" />

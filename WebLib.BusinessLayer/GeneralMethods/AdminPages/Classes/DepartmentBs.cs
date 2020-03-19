@@ -20,7 +20,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 			repository = new GenericRepository<Departments>(context);
 		}
 
-		void IDbModel<DepartmentDTO>.Add (DepartmentDTO model)
+		public void Add (DepartmentDTO model)
 		{
 			if (model != null)
 			{
@@ -28,7 +28,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 			}
 		}
 
-		void IDbModel<DepartmentDTO>.Delete (int id)
+		public void Delete (int id)
 		{
 			Departments entity = repository.FindById(id);
 
@@ -38,21 +38,21 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 			}
 		}
 
-		DepartmentDTO IDbModel<DepartmentDTO>.GetById (int id)
+		public DepartmentDTO GetById (int id)
 		{
 			DepartmentDTO entity = (DepartmentDTO)repository.FindById(id);
 
 			return entity;
 		}
 
-		List<DepartmentDTO> IDbModel<DepartmentDTO>.GetList ()
+		public List<DepartmentDTO> GetList ()
 		{
 			List<DepartmentDTO> entities = repository.Get().Select(c => (DepartmentDTO)c).ToList();
 
 			return entities;
 		}
 
-		void IDbModel<DepartmentDTO>.Update (DepartmentDTO model)
+		public void Update (DepartmentDTO model)
 		{
 			if (model != null)
 			{

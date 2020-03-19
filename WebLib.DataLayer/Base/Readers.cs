@@ -40,7 +40,7 @@ namespace WebLib.DataLayer.Base
         [StringLength(22)]
         public string Phone { get; set; }
 
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Issues> Issues { get; set; }

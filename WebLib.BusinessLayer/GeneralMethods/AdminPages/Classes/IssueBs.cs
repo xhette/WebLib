@@ -20,7 +20,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 			repository = new GenericRepository<Issues>(context);
 		}
 
-		void IDbModel<IssueDTO>.Add (IssueDTO model)
+		public void Add (IssueDTO model)
 		{
 			if (model != null)
 			{
@@ -28,7 +28,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 			}
 		}
 
-		void IDbModel<IssueDTO>.Delete (int id)
+		public void Delete (int id)
 		{
 			Issues entity = repository.FindById(id);
 
@@ -38,21 +38,21 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 			}
 		}
 
-		IssueDTO IDbModel<IssueDTO>.GetById (int id)
+		public IssueDTO GetById (int id)
 		{
 			IssueDTO entity = (IssueDTO)repository.FindById(id);
 
 			return entity;
 		}
 
-		List<IssueDTO> IDbModel<IssueDTO>.GetList ()
+		public List<IssueDTO> GetList ()
 		{
 			List<IssueDTO> entities = repository.Get().Select(c => (IssueDTO)c).ToList();
 
 			return entities;
 		}
 
-		void IDbModel<IssueDTO>.Update (IssueDTO model)
+		public void Update (IssueDTO model)
 		{
 			if (model != null)
 			{
