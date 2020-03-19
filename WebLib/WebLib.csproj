@@ -232,6 +232,16 @@
     <Content Include="Views\ReaderPage\_ChangePassword.cshtml" />
     <Content Include="Views\History\Authors.cshtml" />
     <Content Include="Views\Admin\_AuthorsList.cshtml" />
+    <Content Include="Views\Admin\_BooksList.cshtml" />
+    <Content Include="Views\Admin\_CitiesList.cshtml" />
+    <Content Include="Views\Admin\_DepartmentsList.cshtml" />
+    <Content Include="Views\Admin\_IssuesList.cshtml" />
+    <Content Include="Views\Admin\_LibrariansList.cshtml" />
+    <Content Include="Views\Admin\_LibrariesList.cshtml" />
+    <Content Include="Views\Admin\_ProvidersList.cshtml" />
+    <Content Include="Views\Admin\_ReadersList.cshtml" />
+    <Content Include="Views\Admin\_ShopsList.cshtml" />
+    <Content Include="Views\Admin\_SuppliesList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

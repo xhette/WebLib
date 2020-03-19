@@ -1,0 +1,46 @@
+﻿@model IEnumerable<WebLib.Models.LibraryModel>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-center">
+                ID
+            </th>
+            <th class="text-center">
+                Название
+            </th>
+            <th class="text-center">
+                Адрес
+            </th>
+            <th class="text-center">
+                Телефон
+            </th>
+            <th class="text-center">
+                ID
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+        <tr>
+            <td class="text-center">
+                @m.Id
+            </td>
+            <td class="text-center">
+                @m.Name
+            </td>
+            <td class="text-center">
+                @m.Address
+            </td>
+            <td class="text-center">
+                @m.Phone
+            </td>
+            <td class="text-center">
+                @m.CityId
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

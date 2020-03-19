@@ -1,0 +1,39 @@
+﻿@model IEnumerable<WebLib.Models.SupplyModel>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-center">
+                ID
+            </th>
+            <th class="text-center">
+                Дата
+            </th>
+            <th class="text-center">
+                Сумма
+            </th>
+            <th class="text-center">
+                ID магазина
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+        <tr>
+            <td class="text-center">
+                @m.Id
+            </td>
+            <td class="text-center">
+                @(m.Date.HasValue ? m.Date.Value.ToShortDateString() : String.Empty)
+            </td>
+            <td class="text-center">
+                @m.Summ
+            </td>
+            <td class="text-center">
+                @m.ShopId
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

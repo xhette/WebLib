@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebLib.Models.BookModel>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-center">
+                ID
+            </th>
+            <th class="text-center">
+                ID автора
+            </th>
+            <th class="text-center">
+                Название
+            </th>
+            <th class="text-center">
+                ID отдела
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+        <tr>
+            <td class="text-center">
+                @m.Id
+            </td>
+            <td class="text-center">
+                @m.AuthorId
+            </td>
+            <td class="text-center">
+                @m.Title
+            </td>
+            <td class="text-center">
+                @m.DepartmentId
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<WebLib.Models.ReaderPages.ReaderDataModel>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-center">
+                ID
+            </th>
+            <th class="text-center">
+                Фамилия
+            </th>
+            <th class="text-center">
+                Имя
+            </th>
+            <th class="text-center">
+                Отчество
+            </th>
+            <th class="text-center">
+                Дата рождения
+            </th>
+            <th class="text-center">
+                Паспорт
+            </th>
+            <th class="text-center">
+                Адрес
+            </th>
+            <th class="text-center">
+                Телефон
+            </th>
+            <th class="text-center">
+                ID аккаунта
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+        <tr>
+            <td class="text-center">
+                @m.Id
+            </td>
+            <td class="text-center">
+                @m.Surname
+            </td>
+            <td class="text-center">
+                @m.Name
+            </td>
+            <td class="text-center">
+                @m.Patronymic
+            </td>
+            <td class="text-center">
+                @m.BirthDateString
+            </td>
+            <td class="text-center">
+                @m.PassSeria @m.PassNumber
+            </td>
+            <td class="text-center">
+                @m.Address
+            </td>
+            <td class="text-center">
+                @m.Phone
+            </td>
+            <td class="text-center">
+                @(m.UserId.HasValue ? m.UserId.Value.ToString() : String.Empty)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

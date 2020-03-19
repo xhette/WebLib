@@ -1,0 +1,28 @@
+﻿@model IEnumerable<WebLib.Models.CityModel>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-center">
+                ID
+            </th>
+            <th class="text-center">
+                Название
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+            <tr>
+                <td class="text-center">
+                    @m.Id
+                </td>
+                <td class="text-center">
+                    @m.Name
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
