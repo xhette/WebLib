@@ -242,6 +242,18 @@
     <Content Include="Views\Admin\_ReadersList.cshtml" />
     <Content Include="Views\Admin\_ShopsList.cshtml" />
     <Content Include="Views\Admin\_SuppliesList.cshtml" />
+    <Content Include="Views\History\Books.cshtml" />
+    <Content Include="Views\History\Cities.cshtml" />
+    <Content Include="Views\History\Departments.cshtml" />
+    <Content Include="Views\History\Issues.cshtml" />
+    <Content Include="Views\History\Librarians.cshtml" />
+    <Content Include="Views\History\Libraries.cshtml" />
+    <Content Include="Views\History\Providers.cshtml" />
+    <Content Include="Views\History\Readers.cshtml" />
+    <Content Include="Views\History\Shops.cshtml" />
+    <Content Include="Views\History\Supplies.cshtml" />
+    <Content Include="Views\History\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

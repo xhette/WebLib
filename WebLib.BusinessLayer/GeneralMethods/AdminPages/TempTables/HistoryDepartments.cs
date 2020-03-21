@@ -9,7 +9,7 @@ using WebLib.DataLayer.Base;
 
 namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 {
-	class HistoryDepartments : IHistory
+	public class HistoryDepartments : IHistory
 	{
 
 		public int Redone(int current, DateTime time)

@@ -34,7 +34,7 @@ namespace WebLib.Models
 			else return new SupplyDTO
 			{
 				Id = db.Id,
-				ShopId = db.Shop,
+				ShopId = db.ShopId,
 				Date = db.Date,
 				Summ = db.Summ
 			};

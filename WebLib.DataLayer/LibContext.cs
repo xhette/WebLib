@@ -43,7 +43,6 @@ namespace WebLib.DataLayer
 		public virtual DbSet<ReadersHistory> ReadersHistory { get; set; }
 		public virtual DbSet<ShopsHistory> ShopsHistory { get; set; }
 		public virtual DbSet<SuppliesHistory> SuppliesHistory { get; set; }
-		public virtual DbSet<UsersHistory> UsersHistory { get; set; }
 
 		protected override void OnModelCreating (DbModelBuilder modelBuilder)
 		{
@@ -529,18 +528,6 @@ namespace WebLib.DataLayer
 				.HasPrecision(10, 10);
 
 			modelBuilder.Entity<SuppliesHistory>()
-				.Property(e => e.Operation)
-				.IsUnicode(false);
-
-			modelBuilder.Entity<UsersHistory>()
-				.Property(e => e.HistoryName)
-				.IsUnicode(false);
-
-			modelBuilder.Entity<UsersHistory>()
-				.Property(e => e.CurrentName)
-				.IsUnicode(false);
-
-			modelBuilder.Entity<UsersHistory>()
 				.Property(e => e.Operation)
 				.IsUnicode(false);
 		}
