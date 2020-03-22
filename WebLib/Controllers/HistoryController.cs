@@ -12,6 +12,11 @@ namespace WebLib.Controllers
     {
         private IHistory history;
 
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         public ActionResult Authors(DateTime? time, int? step)
         {
             TempworkModel model = new TempworkModel();

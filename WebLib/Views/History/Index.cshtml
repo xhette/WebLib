@@ -1,8 +1,109 @@
 ﻿
 @{
     ViewBag.Title = "Отмена изменений";
-    Layout = "~/Views/Shared/_Layout2.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Sidebar {
+    <div class="col-md-2" id="navbar">
+        <nav class="sidebar">
+            <ul class="list-unstyled navbar-list">
+                <li class="navbar-list-item">
+                    @Html.ActionLink("Просмотр данных", "Index", "Admin")
+                </li>
+                <li class="navbar-list-item active-nav-item">
+                    @Html.ActionLink("Отмена изменений", "Index", "History")
+                </li>
+                <li class="navbar-list-item">
+                    @Html.ActionLink("Резервное копирование", "Index", "Backup")
+                </li>
+            </ul>
+        </nav>
+    </div>
 }
 
-<h2>Index</h2>
+<div class="col-md-10 col-md-offset-2">
+    <div class="page-wrapper">
+
+        <div class="row row-default">
+            <div class="col-md-3">
+                <div class="panel panel-default" style="margin: 20px">
+                    <div class="panel-body">
+                        <h4 class="text-center">@Html.ActionLink("Авторы", "Authors", "History")</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-default" style="margin: 20px">
+                    <div class="panel-body">
+                        <h4 class="text-center">@Html.ActionLink("Книги", "Books", "History")</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-default" style="margin: 20px">
+                    <div class="panel-body">
+                        <h4 class="text-center">@Html.ActionLink("Города", "Cities", "History")</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-default" style="margin: 20px">
+                    <div class="panel-body">
+                        <h4 class="text-center">@Html.ActionLink("Отделы", "Departments", "History")</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-default" style="margin: 20px">
+                    <div class="panel-body">
+                        <h4 class="text-center">@Html.ActionLink("Выдачи", "Issues", "History")</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-default" style="margin: 20px">
+                    <div class="panel-body">
+                        <h4 class="text-center">@Html.ActionLink("Библиотекари", "Librarians", "History")</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-default" style="margin: 20px">
+                    <div class="panel-body">
+                        <h4 class="text-center">@Html.ActionLink("Библиотеки", "Libraries", "History")</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-default" style="margin: 20px">
+                    <div class="panel-body">
+                        <h4 class="text-center">@Html.ActionLink("Поставщики", "Providers", "History")</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-default" style="margin: 20px">
+                    <div class="panel-body">
+                        <h4 class="text-center">@Html.ActionLink("Читатели", "Readers", "History")</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-default" style="margin: 20px">
+                    <div class="panel-body">
+                        <h4 class="text-center">@Html.ActionLink("Магазины", "Shops", "History")</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-default" style="margin: 20px">
+                    <div class="panel-body">
+                        <h4 class="text-center">@Html.ActionLink("Поставки", "Supplies", "History")</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 

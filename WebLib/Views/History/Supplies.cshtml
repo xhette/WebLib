@@ -1,7 +1,7 @@
 ﻿@model WebLib.Models.TempworkModel
 
 @{
-    ViewBag.Title = "Supplies";
+    ViewBag.Title = "Поставки";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Sidebar {
@@ -9,16 +9,13 @@
         <nav class="sidebar">
             <ul class="list-unstyled navbar-list">
                 <li class="navbar-list-item">
-                    @*@Html.ActionLink("Личные данные", "Index", "ReaderPage")*@
-                </li>
-                <li class="navbar-list-item">
-                    @*@Html.ActionLink("Библиотеки", "Libraries", "ReaderPage")*@
-                </li>
-                <li class="navbar-list-item">
-                    @*@Html.ActionLink("Поиск книг", "Books", "ReaderPage")*@
+                    @Html.ActionLink("Просмотр данных", "Index", "Admin")
                 </li>
                 <li class="navbar-list-item active-nav-item">
-                    @*@Html.ActionLink("Настройки", "Settings", "ReaderPage")*@
+                    @Html.ActionLink("Отмена изменений", "Index", "History")
+                </li>
+                <li class="navbar-list-item">
+                    @Html.ActionLink("Резервное копирование", "Index", "Backup")
                 </li>
             </ul>
         </nav>
