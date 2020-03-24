@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WebLib.BusinessLayer.BusinessModels;
 using WebLib.BusinessLayer.DTO;
 using WebLib.BusinessLayer.GeneralMethods.Generic;
 using WebLib.DataLayer;
@@ -14,51 +15,92 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 
 		private GenericRepository<Libraries> repository;
 
-		public LibraryBs ()
+		public LibraryBs()
 		{
 			context = new LibContext();
 			repository = new GenericRepository<Libraries>(context);
 		}
 
-		public void Add (LibraryDTO model)
+		public ResultModel Add(LibraryDTO model)
 		{
+			ResultModel result = new ResultModel();
+
 			if (model != null)
 			{
-				repository.Create((Libraries)model);
+				try
+				{
+					repository.Create((Libraries)model);
+				}
+				catch (Exception ex)
+				{
+					result.Code = OperationStatusEnum.UnexpectedError;
+					result.Message = ex.Message;
+				}
 			}
-		}
-
-		public void Delete (int id)
-		{
-			Libraries entity = repository.FindById(id);
-
-			if (entity != null)
+			else
 			{
-				repository.Remove(entity);
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = "Ошибка при добавлении данных";
 			}
+
+			return result;
 		}
 
-		public LibraryDTO GetById (int id)
+		public ResultModel Delete(int id)
+		{
+			ResultModel result = new ResultModel();
+
+			try
+			{
+				Libraries entity = repository.FindById(id);
+
+				if (entity != null)
+				{
+					repository.Remove(entity);
+				}
+			}
+			catch (Exception ex)
+			{
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = ex.Message;
+			}
+
+			return result;
+		}
+
+		public LibraryDTO GetById(int id)
 		{
 			LibraryDTO entity = (LibraryDTO)repository.FindById(id);
 
 			return entity;
 		}
 
-		public List<LibraryDTO> GetList ()
+		public List<LibraryDTO> GetList()
 		{
 			List<LibraryDTO> entities = repository.Get().Select(c => (LibraryDTO)c).ToList();
 
 			return entities;
 		}
 
-		public void Update (LibraryDTO model)
+		public ResultModel Update(LibraryDTO model)
 		{
-			if (model != null)
+			ResultModel result = new ResultModel();
+
+			try
 			{
-				Libraries entity = (Libraries)model;
-				repository.Update(entity);
+				if (model != null)
+				{
+					Libraries entity = (Libraries)model;
+					repository.Update(entity);
+				}
 			}
+			catch (Exception ex)
+			{
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = ex.Message;
+			}
+
+			return result;
 		}
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WebLib.BusinessLayer.BusinessModels;
 using WebLib.BusinessLayer.DTO;
 using WebLib.BusinessLayer.GeneralMethods.Generic;
 using WebLib.DataLayer;
@@ -14,51 +15,92 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 
 		private GenericRepository<Shops> repository;
 
-		public ShopBs ()
+		public ShopBs()
 		{
 			context = new LibContext();
 			repository = new GenericRepository<Shops>(context);
 		}
 
-		public void Add (ShopDTO model)
+		public ResultModel Add(ShopDTO model)
 		{
+			ResultModel result = new ResultModel();
+
 			if (model != null)
 			{
-				repository.Create((Shops)model);
+				try
+				{
+					repository.Create((Shops)model);
+				}
+				catch (Exception ex)
+				{
+					result.Code = OperationStatusEnum.UnexpectedError;
+					result.Message = ex.Message;
+				}
 			}
-		}
-
-		public void Delete (int id)
-		{
-			Shops entity = repository.FindById(id);
-
-			if (entity != null)
+			else
 			{
-				repository.Remove(entity);
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = "Ошибка при добавлении данных";
 			}
+
+			return result;
 		}
 
-		public ShopDTO GetById (int id)
+		public ResultModel Delete(int id)
+		{
+			ResultModel result = new ResultModel();
+
+			try
+			{
+				Shops entity = repository.FindById(id);
+
+				if (entity != null)
+				{
+					repository.Remove(entity);
+				}
+			}
+			catch (Exception ex)
+			{
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = ex.Message;
+			}
+
+			return result;
+		}
+
+		public ShopDTO GetById(int id)
 		{
 			ShopDTO entity = (ShopDTO)repository.FindById(id);
 
 			return entity;
 		}
 
-		public List<ShopDTO> GetList ()
+		public List<ShopDTO> GetList()
 		{
 			List<ShopDTO> entities = repository.Get().Select(c => (ShopDTO)c).ToList();
 
 			return entities;
 		}
 
-		public void Update (ShopDTO model)
+		public ResultModel Update(ShopDTO model)
 		{
-			if (model != null)
+			ResultModel result = new ResultModel();
+
+			try
 			{
-				Shops entity = (Shops)model;
-				repository.Update(entity);
+				if (model != null)
+				{
+					Shops entity = (Shops)model;
+					repository.Update(entity);
+				}
 			}
+			catch (Exception ex)
+			{
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = ex.Message;
+			}
+
+			return result;
 		}
 	}
 }

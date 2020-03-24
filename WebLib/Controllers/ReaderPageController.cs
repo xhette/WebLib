@@ -23,12 +23,17 @@ namespace WebLib.Controllers
         {
             //userId = WebSecurity.GetUserId(User.Identity.Name);
             //if (userId == 0) 
-                userId = 28;
+                userId = 99;
 
             context = new LibContext();
             readerContext = new ReaderPage(context);
 
-            readerId = context.Readers.FirstOrDefault(c => c.UserId == userId).Id;
+            var reader = context.Readers.FirstOrDefault(c => c.UserId == userId);
+
+            if (reader != null)
+            {
+                readerId = reader.Id;
+            }
         }
 
 
@@ -200,10 +205,21 @@ namespace WebLib.Controllers
 
         public ActionResult AddAbonent (int libId)
         {
-            ViewBag.OperationStatus = false;
+            TempData["OperationStatus"] = false;
             int readerId = context.Readers.FirstOrDefault(c => c.UserId == userId).Id;
 
-            ViewBag.OperationStatus = readerContext.AddAbonentClaim(readerId, libId);
+            var result = readerContext.AddAbonentClaim(readerId, libId);
+
+            if (result.Code == BusinessLayer.OperationStatusEnum.Success)
+            {
+                TempData["OperationStatus"] = true;
+                TempData["OpearionMessage"] = result.Message;
+            }
+            else
+            {
+                TempData["OpearionMessage"] = result.Message;
+            }
+
             return RedirectToAction("Libraries", "ReaderPage");
         }
 
@@ -227,9 +243,20 @@ namespace WebLib.Controllers
         {
             if (ModelState.IsValid)
             {
-                ReaderDataDTO reader = (ReaderDataDTO)model;
-                readerContext.UpdateReader(reader);
+                TempData["OperationStatus"] = false;
 
+                ReaderDataDTO reader = (ReaderDataDTO)model;
+                var result = readerContext.UpdateReader(reader);
+
+                if (result.Code == BusinessLayer.OperationStatusEnum.Success)
+                {
+                    TempData["OperationStatus"] = true;
+                    TempData["OpearionMessage"] = result.Message;
+                }
+                else
+                {
+                    TempData["OpearionMessage"] = result.Message;
+                }
                 return RedirectToAction("Settings", "ReaderPage");
             }
             else
@@ -255,10 +282,19 @@ namespace WebLib.Controllers
         {
             if (ModelState.IsValid)
             {
+                TempData["OperationStatus"] = false;
+
                 string userName = User.Identity.Name;
                 if (WebSecurity.ChangePassword(userName, model.OldPassword, model.NewPassword))
                 {
+                    TempData["OperationStatus"] = true;
+                    TempData["OpearionMessage"] = "Пароль успешно изменен.";
+
                     return RedirectToAction("Settings", "ReaderPage", new { page = 2 });
+                }
+                else
+                {
+                    TempData["OpearionMessage"] = "Произошла ошибка при смене пароля. Попробуйте еще раз.";
                 }
             }
             return PartialView("~/Views/ReaderPage/_ChangePassword.cshtml", model);

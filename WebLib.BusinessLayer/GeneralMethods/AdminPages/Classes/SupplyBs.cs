@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WebLib.BusinessLayer.BusinessModels;
 using WebLib.BusinessLayer.DTO;
 using WebLib.BusinessLayer.GeneralMethods.Generic;
 using WebLib.DataLayer;
@@ -14,51 +15,92 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 
 		private GenericRepository<Supplies> repository;
 
-		public SupplyBs ()
+		public SupplyBs()
 		{
 			context = new LibContext();
 			repository = new GenericRepository<Supplies>(context);
 		}
 
-		public void Add (SupplyDTO model)
+		public ResultModel Add(SupplyDTO model)
 		{
+			ResultModel result = new ResultModel();
+
 			if (model != null)
 			{
-				repository.Create((Supplies)model);
+				try
+				{
+					repository.Create((Supplies)model);
+				}
+				catch (Exception ex)
+				{
+					result.Code = OperationStatusEnum.UnexpectedError;
+					result.Message = ex.Message;
+				}
 			}
-		}
-
-		public void Delete (int id)
-		{
-			Supplies entity = repository.FindById(id);
-
-			if (entity != null)
+			else
 			{
-				repository.Remove(entity);
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = "Ошибка при добавлении данных";
 			}
+
+			return result;
 		}
 
-		public SupplyDTO GetById (int id)
+		public ResultModel Delete(int id)
+		{
+			ResultModel result = new ResultModel();
+
+			try
+			{
+				Supplies entity = repository.FindById(id);
+
+				if (entity != null)
+				{
+					repository.Remove(entity);
+				}
+			}
+			catch (Exception ex)
+			{
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = ex.Message;
+			}
+
+			return result;
+		}
+
+		public SupplyDTO GetById(int id)
 		{
 			SupplyDTO entity = (SupplyDTO)repository.FindById(id);
 
 			return entity;
 		}
 
-		public List<SupplyDTO> GetList ()
+		public List<SupplyDTO> GetList()
 		{
 			List<SupplyDTO> entities = repository.Get().Select(c => (SupplyDTO)c).ToList();
 
 			return entities;
 		}
 
-		public void Update (SupplyDTO model)
+		public ResultModel Update(SupplyDTO model)
 		{
-			if (model != null)
+			ResultModel result = new ResultModel();
+
+			try
 			{
-				Supplies entity = (Supplies)model;
-				repository.Update(entity);
+				if (model != null)
+				{
+					Supplies entity = (Supplies)model;
+					repository.Update(entity);
+				}
 			}
+			catch (Exception ex)
+			{
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = ex.Message;
+			}
+
+			return result;
 		}
 	}
 }

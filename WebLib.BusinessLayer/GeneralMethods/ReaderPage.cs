@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
+using WebLib.BusinessLayer.BusinessModels;
 using WebLib.BusinessLayer.DTO;
 using WebLib.BusinessLayer.DTO.Composite;
 using WebLib.BusinessLayer.GeneralMethods.Generic;
@@ -100,8 +103,9 @@ namespace WebLib.BusinessLayer.GeneralMethods
 			return library;
 		}
 
-		public bool AddAbonentClaim (int readerId, int libId)
+		public ResultModel AddAbonentClaim (int readerId, int libId)
 		{
+			ResultModel result = new ResultModel();
 			try
 			{
 				GenericRepository<AbonentLists> generic = new GenericRepository<AbonentLists>(_context);
@@ -116,16 +120,21 @@ namespace WebLib.BusinessLayer.GeneralMethods
 
 				generic.Create(abonent);
 
-				return true;
+				result.Message = "Ваша заявка принята к рассмотрению.";
 			}
-			catch
+			catch (Exception exc)
 			{
-				return false;
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = exc.Message;
 			}
+
+			return result;
 		}
 
-		public bool UpdateReader(ReaderDataDTO reader)
+		public ResultModel UpdateReader(ReaderDataDTO reader)
 		{
+			ResultModel result = new ResultModel();
+
 			try
 			{
 				GenericRepository<Readers> generic = new GenericRepository<Readers>(_context);
@@ -133,12 +142,15 @@ namespace WebLib.BusinessLayer.GeneralMethods
 				Readers dbReader = (Readers)reader;
 				generic.Update(dbReader);
 
-				return true;
+				result.Message = "Данные успешно оьновлены.";
 			}
-			catch
+			catch (Exception exc)
 			{
-				return false;
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = exc.Message;
 			}
+
+			return result;
 		}
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WebLib.BusinessLayer.BusinessModels;
 using WebLib.BusinessLayer.DTO;
 using WebLib.BusinessLayer.GeneralMethods.Generic;
 using WebLib.DataLayer;
@@ -20,22 +21,52 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 			repository = new GenericRepository<Books>(context);
 		}
 
-		public void Add (BookDTO model)
+		public ResultModel Add (BookDTO model)
 		{
+			ResultModel result = new ResultModel();
+
 			if (model != null)
 			{
-				repository.Create((Books)model);
+				try
+				{
+					repository.Create((Books)model);
+				}
+				catch (Exception ex)
+				{
+					result.Code = OperationStatusEnum.UnexpectedError;
+					result.Message = ex.Message;
+				}
 			}
+			else
+			{
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = "Ошибка при добавлении данных";
+			}
+
+			return result;
 		}
 
-		public void Delete (int id)
+		public ResultModel Delete(int id)
 		{
-			Books entity = repository.FindById(id);
+			ResultModel result = new ResultModel();
 
-			if (entity != null)
+			try
 			{
-				repository.Remove(entity);
+				Books entity = repository.FindById(id);
+
+				if (entity != null)
+				{
+					repository.Remove(entity);
+				}
 			}
+			catch (Exception ex)
+			{
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = ex.Message;
+			}
+
+			return result;
+
 		}
 
 		public BookDTO GetById (int id)
@@ -52,13 +83,25 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 			return entities;
 		}
 
-		public void Update (BookDTO model)
+		public ResultModel Update (BookDTO model)
 		{
-			if (model != null)
+			ResultModel result = new ResultModel();
+
+			try
 			{
-				Books entity = (Books)model;
-				repository.Update(entity);
+				if (model != null)
+				{
+					Books entity = (Books)model;
+					repository.Update(entity);
+				}
 			}
+			catch (Exception ex)
+			{
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = ex.Message;
+			}
+
+			return result;
 		}
 	}
 }

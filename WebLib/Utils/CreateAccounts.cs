@@ -52,6 +52,37 @@ namespace WebLib.Utils
 			if (!roles.IsUserInRole(admin, adminRole))
 				roles.AddUsersToRoles(new[] { admin }, new[] { adminRole });
 
+			const string reader = "reader";
+			const string readerPassword = "reader";
+
+			DeleteUserIfExist(reader);
+
+			membership.CreateUserAndAccount(reader, readerPassword);
+			if (!roles.IsUserInRole(reader, readerRole))
+				roles.AddUsersToRoles(new[] { reader }, new[] { readerRole });
+
+
+			const string librarian = "librarian";
+			const string librarianPassword = "librarian";
+
+			DeleteUserIfExist(librarian);
+
+			membership.CreateUserAndAccount(librarian, librarianPassword);
+			if (!roles.IsUserInRole(librarian, librarianRole))
+				roles.AddUsersToRoles(new[] { librarian }, new[] { librarianRole });
+
+
+			const string provider = "provider";
+			const string providerPassword = "provider";
+
+			DeleteUserIfExist(provider);
+
+			membership.CreateUserAndAccount(provider, providerPassword);
+			if (!roles.IsUserInRole(provider, providerRole))
+				roles.AddUsersToRoles(new[] { provider }, new[] { providerRole });
+
+
+
 		}
 		private static void DeleteUserIfExist (string userName)
 		{

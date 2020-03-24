@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WebLib.BusinessLayer.BusinessModels;
 using WebLib.BusinessLayer.DTO;
 using WebLib.BusinessLayer.GeneralMethods.Generic;
 using WebLib.DataLayer;
@@ -14,51 +15,93 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 
 		private GenericRepository<Authors> repository;
 
-		public AuthorBs ()
+		public AuthorBs()
 		{
 			context = new LibContext();
 			repository = new GenericRepository<Authors>(context);
 		}
 
-		public void Add (AuthorDTO model)
+		public ResultModel Add(AuthorDTO model)
 		{
+			ResultModel result = new ResultModel();
+
 			if (model != null)
 			{
-				repository.Create((Authors)model);
+				try
+				{
+					repository.Create((Authors)model);
+					result.Message = "Данные успешно добавлены";
+				}
+				catch (Exception ex)
+				{
+					result.Code = OperationStatusEnum.UnexpectedError;
+					result.Message = ex.Message;
+				}
 			}
-		}
-
-		public void Delete (int id)
-		{
-			Authors entity = repository.FindById(id);
-
-			if (entity != null)
+			else
 			{
-				repository.Remove(entity);
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = "Ошибка при добавлении данных";
 			}
+
+			return result;
 		}
 
-		public AuthorDTO GetById (int id)
+		public ResultModel Delete(int id)
+		{
+			ResultModel result = new ResultModel();
+
+			try
+			{
+				Authors entity = repository.FindById(id);
+
+				if (entity != null)
+				{
+					repository.Remove(entity);
+				}
+			}
+			catch (Exception ex)
+			{
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = ex.Message;
+			}
+
+			return result;
+		}
+
+		public AuthorDTO GetById(int id)
 		{
 			AuthorDTO entity = (AuthorDTO)repository.FindById(id);
 
 			return entity;
 		}
 
-		public List<AuthorDTO> GetList ()
+		public List<AuthorDTO> GetList()
 		{
 			List<AuthorDTO> entities = repository.Get().Select(c => (AuthorDTO)c).ToList();
 
 			return entities;
 		}
 
-		public void Update (AuthorDTO model)
+		public ResultModel Update(AuthorDTO model)
 		{
-			if (model != null)
+			ResultModel result = new ResultModel();
+
+			try
 			{
-				Authors entity = (Authors)model;
-				repository.Update(entity);
+				if (model != null)
+				{
+					Authors entity = (Authors)model;
+					repository.Update(entity);
+				}
 			}
+			catch (Exception ex)
+			{
+				result.Code = OperationStatusEnum.UnexpectedError;
+
+			}
+
+			return result;
 		}
 	}
 }

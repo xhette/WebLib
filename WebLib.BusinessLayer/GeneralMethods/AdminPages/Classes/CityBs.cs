@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WebLib.BusinessLayer.BusinessModels;
 using WebLib.BusinessLayer.DTO;
 using WebLib.BusinessLayer.GeneralMethods.Generic;
 using WebLib.DataLayer;
@@ -14,51 +15,92 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 
 		private GenericRepository<Cities> repository;
 
-		public CityBs ()
+		public CityBs()
 		{
 			context = new LibContext();
 			repository = new GenericRepository<Cities>(context);
 		}
 
-		public void Add (CityDTO model)
+		public ResultModel Add(CityDTO model)
 		{
+			ResultModel result = new ResultModel();
+
 			if (model != null)
 			{
-				repository.Create((Cities)model);
+				try
+				{
+					repository.Create((Cities)model);
+				}
+				catch (Exception ex)
+				{
+					result.Code = OperationStatusEnum.UnexpectedError;
+					result.Message = ex.Message;
+				}
 			}
-		}
-
-		public void Delete (int id)
-		{
-			Cities entity = repository.FindById(id);
-
-			if (entity != null)
+			else
 			{
-				repository.Remove(entity);
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = "Ошибка при добавлении данных";
 			}
+
+			return result;
 		}
 
-		public CityDTO GetById (int id)
+		public ResultModel Delete(int id)
+		{
+			ResultModel result = new ResultModel();
+
+			try
+			{
+				Cities entity = repository.FindById(id);
+
+				if (entity != null)
+				{
+					repository.Remove(entity);
+				}
+			}
+			catch (Exception ex)
+			{
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = ex.Message;
+			}
+
+			return result;
+		}
+
+		public CityDTO GetById(int id)
 		{
 			CityDTO entity = (CityDTO)repository.FindById(id);
 
 			return entity;
 		}
 
-		public List<CityDTO> GetList ()
+		public List<CityDTO> GetList()
 		{
 			List<CityDTO> entities = repository.Get().Select(c => (CityDTO)c).ToList();
 
 			return entities;
 		}
 
-		public void Update (CityDTO model)
+		public ResultModel Update(CityDTO model)
 		{
-			if (model != null)
+			ResultModel result = new ResultModel();
+
+			try
 			{
-				Cities entity = (Cities)model;
-				repository.Update(entity);
+				if (model != null)
+				{
+					Cities entity = (Cities)model;
+					repository.Update(entity);
+				}
 			}
+			catch (Exception ex)
+			{
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = ex.Message;
+			}
+
+			return result;
 		}
 	}
 }

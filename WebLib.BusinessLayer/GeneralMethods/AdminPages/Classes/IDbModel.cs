@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebLib.BusinessLayer.BusinessModels;
 
 namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 {
@@ -12,10 +13,10 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 
 		T GetById (int id);
 
-		void Add (T model);
+		ResultModel Add (T model);
 
-		void Update (T model);
+		ResultModel Update (T model);
 
-		void Delete (int id);
+		ResultModel Delete (int id);
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WebLib.BusinessLayer.BusinessModels;
 using WebLib.BusinessLayer.DTO;
 using WebLib.BusinessLayer.GeneralMethods.Generic;
 using WebLib.DataLayer;
@@ -14,51 +15,92 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 
 		private GenericRepository<Issues> repository;
 
-		public IssueBs ()
+		public IssueBs()
 		{
 			context = new LibContext();
 			repository = new GenericRepository<Issues>(context);
 		}
 
-		public void Add (IssueDTO model)
+		public ResultModel Add(IssueDTO model)
 		{
+			ResultModel result = new ResultModel();
+
 			if (model != null)
 			{
-				repository.Create((Issues)model);
+				try
+				{
+					repository.Create((Issues)model);
+				}
+				catch (Exception ex)
+				{
+					result.Code = OperationStatusEnum.UnexpectedError;
+					result.Message = ex.Message;
+				}
 			}
-		}
-
-		public void Delete (int id)
-		{
-			Issues entity = repository.FindById(id);
-
-			if (entity != null)
+			else
 			{
-				repository.Remove(entity);
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = "Ошибка при добавлении данных";
 			}
+
+			return result;
 		}
 
-		public IssueDTO GetById (int id)
+		public ResultModel Delete(int id)
+		{
+			ResultModel result = new ResultModel();
+
+			try
+			{
+				Issues entity = repository.FindById(id);
+
+				if (entity != null)
+				{
+					repository.Remove(entity);
+				}
+			}
+			catch (Exception ex)
+			{
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = ex.Message;
+			}
+
+			return result;
+		}
+
+		public IssueDTO GetById(int id)
 		{
 			IssueDTO entity = (IssueDTO)repository.FindById(id);
 
 			return entity;
 		}
 
-		public List<IssueDTO> GetList ()
+		public List<IssueDTO> GetList()
 		{
 			List<IssueDTO> entities = repository.Get().Select(c => (IssueDTO)c).ToList();
 
 			return entities;
 		}
 
-		public void Update (IssueDTO model)
+		public ResultModel Update(IssueDTO model)
 		{
-			if (model != null)
+			ResultModel result = new ResultModel();
+
+			try
 			{
-				Issues entity = (Issues)model;
-				repository.Update(entity);
+				if (model != null)
+				{
+					Issues entity = (Issues)model;
+					repository.Update(entity);
+				}
 			}
+			catch (Exception ex)
+			{
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = ex.Message;
+			}
+
+			return result;
 		}
 	}
 }

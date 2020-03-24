@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WebLib.BusinessLayer.BusinessModels;
 using WebLib.BusinessLayer.DTO;
 using WebLib.BusinessLayer.GeneralMethods.Generic;
 using WebLib.DataLayer;
@@ -14,51 +15,92 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes
 
 		private GenericRepository<Providers> repository;
 
-		public ProviderBs ()
+		public ProviderBs()
 		{
 			context = new LibContext();
 			repository = new GenericRepository<Providers>(context);
 		}
 
-		public void Add (ProviderDataDTO model)
+		public ResultModel Add(ProviderDataDTO model)
 		{
+			ResultModel result = new ResultModel();
+
 			if (model != null)
 			{
-				repository.Create((Providers)model);
+				try
+				{
+					repository.Create((Providers)model);
+				}
+				catch (Exception ex)
+				{
+					result.Code = OperationStatusEnum.UnexpectedError;
+					result.Message = ex.Message;
+				}
 			}
-		}
-
-		public void Delete (int id)
-		{
-			Providers entity = repository.FindById(id);
-
-			if (entity != null)
+			else
 			{
-				repository.Remove(entity);
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = "Ошибка при добавлении данных";
 			}
+
+			return result;
 		}
 
-		public ProviderDataDTO GetById (int id)
+		public ResultModel Delete(int id)
+		{
+			ResultModel result = new ResultModel();
+
+			try
+			{
+				Providers entity = repository.FindById(id);
+
+				if (entity != null)
+				{
+					repository.Remove(entity);
+				}
+			}
+			catch (Exception ex)
+			{
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = ex.Message;
+			}
+
+			return result;
+		}
+
+		public ProviderDataDTO GetById(int id)
 		{
 			ProviderDataDTO entity = (ProviderDataDTO)repository.FindById(id);
 
 			return entity;
 		}
 
-		public List<ProviderDataDTO> GetList ()
+		public List<ProviderDataDTO> GetList()
 		{
 			List<ProviderDataDTO> entities = repository.Get().Select(c => (ProviderDataDTO)c).ToList();
 
 			return entities;
 		}
 
-		public void Update (ProviderDataDTO model)
+		public ResultModel Update(ProviderDataDTO model)
 		{
-			if (model != null)
+			ResultModel result = new ResultModel();
+
+			try
 			{
-				Providers entity = (Providers)model;
-				repository.Update(entity);
+				if (model != null)
+				{
+					Providers entity = (Providers)model;
+					repository.Update(entity);
+				}
 			}
+			catch (Exception ex)
+			{
+				result.Code = OperationStatusEnum.UnexpectedError;
+				result.Message = ex.Message;
+			}
+
+			return result;
 		}
 	}
 }

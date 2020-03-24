@@ -23,7 +23,7 @@ namespace WebLib
 			if (!WebSecurity.Initialized)
 			{
 				WebSecurity.InitializeDatabaseConnection ("LibDbConnection", "Users", "Id", "Name", autoCreateTables: true);
-				Utils.CreateAccounts.Up();
+				//Utils.CreateAccounts.Up();
 			}
 			#endregion
 		}
