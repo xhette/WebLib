@@ -1,8 +1,9 @@
 ﻿@model WebLib.Models.LibrarianPages.AddIssueModel
 
-@using (Html.BeginForm("EditIssue", "LibrarianPage", null, FormMethod.Post))
+@using (Html.BeginForm("AddIssue", "LibrarianPage", null, FormMethod.Post))
 {
-    <div class="modal-header">
+    @Html.HiddenFor(c => c.BookId)
+    <div class="modal-header row">
         <h5 class="modal-title text-center" id="addIssueModal">
             <span class="text-center">
                 Выдать книгу №@Model.BookId
@@ -12,11 +13,17 @@
             </button>
         </h5>
     </div>
-    <div class="modal-body">
-        ...
+    <div class="modal-body row">
+        <div class="control-group col-md-12 pull-left" style="min-height: 100px;">
+            <label class="control-label" for="ReaderList">Выберите читателя: </label>
+            <div class="controls">
+                @Html.DropDownListFor(m => m.ReaderId, new SelectList(Model.Readers, "Id", "FullName", 0), new { @id = "ReaderList", @class = "form-control", @style = "min-width: 100%" })
+                <p class="help-block">@Html.ValidationMessageFor(m => m.ReaderId, null, new { @class = "text-danger" })</p>
+            </div>
+        </div>
     </div>
-    <div class="modal-footer">
+    <div class="text-right modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-        <button type="button" class="btn btn-primary">Выдать</button>
+        <button type="submit" class="btn btn-primary">Выдать</button>
     </div>
 }
