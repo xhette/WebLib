@@ -1,67 +1,75 @@
 ﻿
 @model IEnumerable<WebLib.Models.ReaderPages.BookViewModel>
 
+<div class="modal fade" id="AddIssueModal" tabindex="-1" role="dialog" aria-labelledby="addIssueModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-md-12">
         <table class="table">
             @if (ViewBag.TableHead != null && ViewBag.TableHead)
             {
-            <thead>
-                <tr>
-                    <th>
-                        Автор
-                    </th>
-                    <th>
-                        Название
-                    </th>
-                    <th>
-                        Отдел
-                    </th>
-                    <th>
-                        Библиотека
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
+                <thead>
+                    <tr>
+                        <th>
+                            Автор
+                        </th>
+                        <th>
+                            Название
+                        </th>
+                        <th>
+                            Отдел
+                        </th>
+                        <th>
+                            Библиотека
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
             }
-        <tbody>
-            @if (Model != null && Model.Count() > 0)
-            {
-                foreach (var book in Model)
+            <tbody>
+                @if (Model != null && Model.Count() > 0)
                 {
-            <tr>
-                <td>
-                    @book.AuthorFullName
-                </td>
-                <td>
-                    "@book.Title"
-                </td>
-                <td>
-                    @book.DepartmentName
-                </td>
-                <td>
-                    @book.LibraryName
-                </td>
-                <td>
-                    @if (book.GiveOut.HasValue && book.GiveOut.Value)
+                    foreach (var book in Model)
                     {
-                        <a href="@Url.Action("AddIssue", "LibrarianPage", new { id = book.BookId })" class="btn btn-sm">
-                            Выдать
-                        </a>
+                        <tr>
+                            <td>
+                                @book.AuthorFullName
+                            </td>
+                            <td>
+                                "@book.Title"
+                            </td>
+                            <td>
+                                @book.DepartmentName
+                            </td>
+                            <td>
+                                @book.LibraryName
+                            </td>
+                            <td>
+                                @if (book.GiveOut.HasValue && !book.GiveOut.Value)
+                                {
+                                    <a href="@Url.Action("AddIssue", "LibrarianPage", new { id = book.BookId })" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#AddIssueModal">
+                                        Выдать
+                                    </a>
+                                }
+                            </td>
+                        </tr>
                     }
-                </td>
-            </tr>
                 }
-            }
-            else
-            {
-                <tr>
-                    <td colspan="4" class="text-center">
-                        Нет данных
-                    </td>
-                </tr>
-            }
-        </tbody>
+                else
+                {
+                    <tr>
+                        <td colspan="4" class="text-center">
+                            Нет данных
+                        </td>
+                    </tr>
+                }
+            </tbody>
         </table>
     </div>
 </div>

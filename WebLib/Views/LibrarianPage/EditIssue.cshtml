@@ -75,20 +75,19 @@
                     <div class="control-group col-md-12" , style="min-height: 100px;">
                         <label class="control-label" for="IssueDate">Дата выдачи</label>
                         <div class="controls">
-                            @Html.TextBoxFor(m => m.IssueDate, "{0:dd.MM.yyyy}", new { @class = "form-control", @id = "IssueDate", @style = "min-width: 100%" })
+                            @Html.TextBoxFor(model => model.IssueDate, "{0:yyyy-MM-dd}", new { @class = "form-control datepicker", @id = "IssueDate", @style = "min-width: 100%; line-height: 20px", type = "date" })
                             <p class="help-block">@Html.ValidationMessageFor(m => m.IssueDate, null, new { @class = "text-danger" })</p>
                         </div>
                     </div>
                     <div class="control-group col-md-12" , style="min-height: 100px;">
                         <label class="control-label" for="ReturnDate">Дата возврата</label>
                         <div class="controls">
-                            @Html.TextBoxFor(m => m.ReturnDate, "{0:dd.MM.yyyy}", new { @class = "form-control", @id = "ReturnDate", @style = "min-width: 100%" })
+                            @Html.TextBoxFor(model => model.ReturnDate, "{0:yyyy-MM-dd}", new { @class = "form-control datepicker", @id = "ReturnDate", @style = "min-width: 100%; line-height: 20px", type = "date" })
                             <p class="help-block">@Html.ValidationMessageFor(m => m.ReturnDate, null, new { @class = "text-danger" })</p>
                         </div>
                     </div>
-                    <div class="text-right">
-                        <button type="submit" class="btn btn-primary">Сохранить</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
+                    <div class="text-center col-md-12">
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">Сохранить</button>
                     </div>
                 }
             </div>
@@ -98,6 +97,11 @@
 
 
 <script type="text/javascript">
+
+    $(document).ready(function () {
+        BookListChange();
+    });
+
     $(function () {
         $('#AuthorList').change(function () {
             // получаем выбранный id
@@ -105,7 +109,7 @@
             console.log(id);
             $.ajax({
                 type: 'GET',
-                url: '@Url.Action("BooksByAuthor")/' + id,
+                url: '@Url.Action("BookListByAuthor")/' + id,
                 success: function (data) {
 
                     $('#BookList').replaceWith(data);

@@ -43,7 +43,7 @@
                 @issue.StatusString
             </td>
             <td>
-                @Html.ActionLink("Изменить", "EditIssue", "LibrarianPage", new { id = issue.Id }) | @Html.ActionLink("Удалить","DeleteIssue", "LibrarianPage")
+                @Html.ActionLink("Изменить", "EditIssue", "LibrarianPage", new { id = issue.Id }, null) | @Html.ActionLink("Удалить","DeleteIssue", "LibrarianPage")
             </td>
         </tr>
         }

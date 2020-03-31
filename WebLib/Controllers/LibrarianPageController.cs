@@ -173,9 +173,9 @@ namespace WebLib.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditIssue(int id)
+        public ActionResult EditIssue(int id = 0)
         {
-            var issue = librarianContext.IssuesList(libId).Where(c => c.Issue.Id == id);
+            var issue = librarianContext.IssuesList(libId).Where(c => c.Issue.Id == id).FirstOrDefault();
             EditIssueModel model = (EditIssueModel)issue;
             model.Authors = librarianContext.Authors().Select(c => (AuthorModel)c).ToList();
             model.Readers = librarianContext.AbonentList(libId).Select(c => new ReaderDataModel
@@ -218,10 +218,52 @@ namespace WebLib.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult AddIssue(int id)
+        {
+            AddIssueModel model = new AddIssueModel();
+            model.BookId = id;
+            model.Readers = librarianContext.AbonentList(libId).Select(c => new ReaderDataModel
+            {
+                Id = c.Reader.Id,
+                Surname = c.Reader.Surname,
+                Name = c.Reader.Name,
+                Patronymic = c.Reader.Patronymic
+            }).ToList();
+
+            return PartialView("~/Views/LibrarianPage/_AddIssue.cshtml", model);
+        }
+
+        [HttpPost]
+        public ActionResult AddIssue(AddIssueModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = librarianContext.AddIssue(model.BookId, model.ReaderId);
+
+                if (result)
+                {
+                    TempData["OperationStatus"] = true;
+                    TempData["OpearionMessage"] = "";
+                }
+                else
+                {
+                    TempData["OperationStatus"] = false;
+                    TempData["OpearionMessage"] = "";
+                }
+
+                return RedirectToAction("Issues", "LibrarianPage");
+            }
+            else
+            {
+                return PartialView("~/Views/LibrarianPage/_AddIssue.cshtml", model);
+            }
+        }
+
         #region DropdownPartials
 
         [HttpGet]
-        public ActionResult BooksByAuthor (int id = 0)
+        public ActionResult BookListByAuthor (int id = 0)
         {
             List<BookModel> model = librarianContext.Books(libId).Select(c => new BookModel
             {

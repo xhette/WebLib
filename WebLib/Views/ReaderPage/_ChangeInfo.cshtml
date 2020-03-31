@@ -34,7 +34,7 @@
         <!-- BirthDate -->
         <label class="control-label" for="BirthDate">Дата рождения</label>
         <div class="controls">
-            @Html.TextBoxFor(m => m.BirthDate, "{0:dd.MM.yyyy}", new { @class = "form-control", @id = "BirthDate", @style = "min-width: 100%"})
+            @Html.TextBoxFor(m => m.BirthDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-input", @id = "BirthDate", @style = "min-width: 100%", type = "date"})
             <p class="help-block">@Html.ValidationMessageFor(m => m.BirthDate, null, new { @class = "text-danger" })</p>
         </div>
     </div>

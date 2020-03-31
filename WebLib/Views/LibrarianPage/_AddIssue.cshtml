@@ -1,0 +1,22 @@
+﻿@model WebLib.Models.LibrarianPages.AddIssueModel
+
+@using (Html.BeginForm("EditIssue", "LibrarianPage", null, FormMethod.Post))
+{
+    <div class="modal-header">
+        <h5 class="modal-title text-center" id="addIssueModal">
+            <span class="text-center">
+                Выдать книгу №@Model.BookId
+            </span>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </h5>
+    </div>
+    <div class="modal-body">
+        ...
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+        <button type="button" class="btn btn-primary">Выдать</button>
+    </div>
+}

@@ -9,8 +9,16 @@
         <input type="submit" class="btn btn-default" value="Поиск" />
     }
 </div>
-
 <div id="ByTitleSearch">
+
+
+    <div class="modal fade" id="AddIssueModal" tabindex="-1" role="dialog" aria-labelledby="addIssueModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+            </div>
+        </div>
+    </div>
 
     <div class="row row-default">
         <div class="col-md-12">
@@ -45,15 +53,16 @@
                                     @book.DepartmentName
                                 </td>
                                 <td>
-                                    @if (book.GiveOut.HasValue && book.GiveOut.Value)
+                                    @if (book.GiveOut.HasValue && !book.GiveOut.Value)
                                     {
-                                        <a href="@Url.Action("AddIssue", "LibrarianPage", new { id = book.BookId })" class="btn btn-sm">
+                                        <a href="@Url.Action("AddIssue", "LibrarianPage", new { id = book.BookId })" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#AddIssueModal">
                                             Выдать
-                                        </a> 
+                                        </a>
                                     }
                                 </td>
                             </tr>
-                        } }
+                        }
+                    }
                     else
                     {
                         <tr>

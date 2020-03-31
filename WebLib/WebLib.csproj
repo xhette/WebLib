@@ -232,6 +232,7 @@
     <Compile Include="Models\DepartmentModel.cs" />
     <Compile Include="Models\IssueModel.cs" />
     <Compile Include="Models\LibrarianModel.cs" />
+    <Compile Include="Models\LibrarianPages\AddIssueModel.cs" />
     <Compile Include="Models\LibrarianPages\EditIssueModel.cs" />
     <Compile Include="Models\LibrarianPages\IssueDetailedModel.cs" />
     <Compile Include="Models\LibraryModel.cs" />
@@ -260,6 +261,15 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery-ui.structure.css" />
+    <Content Include="Content\jquery-ui.theme.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -294,6 +304,7 @@
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -449,6 +460,7 @@
     <Content Include="Views\LibrarianPage\_ReaderDropdown.cshtml" />
     <Content Include="Views\Shared\_BookDropdown.cshtml" />
     <Content Include="Views\LibrarianPage\EditIssue.cshtml" />
+    <Content Include="Views\LibrarianPage\_AddIssue.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

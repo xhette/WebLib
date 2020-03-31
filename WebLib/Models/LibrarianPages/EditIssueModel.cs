@@ -27,12 +27,8 @@ namespace WebLib.Models.LibrarianPages
 		public int SelectedReader { get; set; }
 
 		[Required(ErrorMessage = "Введите дату выдачи")]
-		[DataType(DataType.Date)]
-		[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
 		public DateTime? IssueDate { get; set; }
 
-		[DataType(DataType.Date)]
-		[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
 		public DateTime? ReturnDate { get; set; }
 
 		public static explicit operator EditIssueModel (IssueDTO issue)
