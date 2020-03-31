@@ -17,10 +17,6 @@
                     <th>
                         Отдел
                     </th>
-                    <th>
-                        Библиотека
-                    </th>
-                    <th></th>
                 </tr>
             </thead>
             }
@@ -29,28 +25,17 @@
             {
                 foreach (var book in Model)
                 {
-            <tr>
-                <td>
-                    @book.AuthorFullName
-                </td>
-                <td>
-                    "@book.Title"
-                </td>
-                <td>
-                    @book.DepartmentName
-                </td>
-                <td>
-                    @book.LibraryName
-                </td>
-                <td>
-                    @if (book.GiveOut.HasValue && book.GiveOut.Value)
-                    {
-                        <a href="@Url.Action("AddIssue", "LibrarianPage", new { id = book.BookId })" class="btn btn-sm">
-                            Выдать
-                        </a>
-                    }
-                </td>
-            </tr>
+                    <tr>
+                        <td>
+                            @book.AuthorFullName
+                        </td>
+                        <td>
+                            "@book.Title"
+                        </td>
+                        <td>
+                            @book.DepartmentName
+                        </td>
+                    </tr>
                 }
             }
             else

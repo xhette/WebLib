@@ -1,0 +1,16 @@
+﻿@model IEnumerable<WebLib.Models.ReaderPages.ReaderDataModel>
+
+    <div id="ReadersDropdown">
+        <div class="dropdown">
+            @using (Ajax.BeginForm("ReaderSearch", "LibrarianPage", new AjaxOptions { UpdateTargetId = "ReadersDropdown" }))
+            {
+                <input class="dropdown-toggle" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                    @foreach (var reader in Model)
+                    {
+                        <a class="dropdown-item">@reader.FullName</a>
+                    }
+                </div>
+            }
+        </div>
+    </div>

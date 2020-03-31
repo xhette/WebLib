@@ -1,0 +1,48 @@
+﻿
+@model WebLib.Models.ReaderPages.DepartmentListModel
+<div class="row row-default">
+    @using (Ajax.BeginForm("DepartmentSearch", "LibrarianPage", new AjaxOptions { UpdateTargetId = "ByDepartmentSearch" }, new { @class = "form-inline ml-auto pull-right" }))
+    {
+        @Html.AntiForgeryToken()
+        <input type="text" class="form-control search-input" name="symbols" />
+        <input type="submit" class="btn btn-default" value="Поиск" />
+    }
+</div>
+
+<div class="row row-default">
+    <div id="ByDepartmentSearch">
+        <div class="col-md-12">
+            @if (Model != null && Model.Library != null)
+            {
+                <div class="panel panel-default" style="margin: 25px 100px">
+                        <div class="panel-heading">
+                            <strong>@Model.Library.Name</strong>
+                        </div>
+                        <div class="panel-body">
+                            @if (Model.DepartmentsIn != null && Model.DepartmentsIn.Count() > 0)
+                            {
+                                foreach (var dept in Model.DepartmentsIn)
+                                {
+                                    <ul class="accordion list-group" id="deptsAccordion">
+                                        <li class="list-group-item">
+                                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="@("#collapse-book-" + dept.Id)" aria-expanded="true" aria-controls="@("collapse-book-" + dept.Id)">
+                                                @dept.Name
+                                            </button>
+
+                                            <div id="@("collapse-book-" + dept.Id)" class="collapse" data-parent="#deptsAccordion" style="margin-top: 20px">
+                                                @{ Html.RenderAction("BookSearchByDepartment", "LibrarianPage", new { deptId = dept.Id }); }
+                                            </div>
+                                        </li>
+                                    </ul>
+                                }
+                            }
+                            else
+                            {
+                                <span>Нет данных</span>
+                            }
+                        </div>
+                    </div>
+            }
+        </div>
+    </div>
+</div>

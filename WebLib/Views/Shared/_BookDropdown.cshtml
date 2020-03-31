@@ -1,0 +1,8 @@
+﻿@model IEnumerable<WebLib.Models.BookModel>
+
+        <select id="BookList" name="BookList" class="form-control" style = "min-width: 100%" onchange = "BookListChange()">
+            @foreach (var item in Model)
+            {
+                <option value="@item.Id">@item.Title</option>
+            }
+        </select>

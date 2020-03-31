@@ -184,6 +184,7 @@
     <Compile Include="Procedures\DepartmentDetailed.cs" />
     <Compile Include="Procedures\DepartmentGrouped.cs" />
     <Compile Include="Procedures\IssueDetailed.cs" />
+    <Compile Include="Procedures\LibrarianDetailed.cs" />
     <Compile Include="Procedures\LibraryDetailed.cs" />
     <Compile Include="Procedures\Order.cs" />
     <Compile Include="StoredProcedure.cs" />

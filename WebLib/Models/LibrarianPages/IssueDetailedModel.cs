@@ -4,12 +4,12 @@ using System.Linq;
 using System.Web;
 using WebLib.BusinessLayer.DTO.Composite;
 using WebLib.Enums;
+using WebLib.Models.ReaderPages;
 
-namespace WebLib.Models.ReaderPages
+namespace WebLib.Models.LibrarianPages
 {
-	public class ReaderIssueModel
+	public class IssueDetailedModel
 	{
-
 		public int Id { get; set; }
 
 		public DateTime? IssueDate { get; set; }
@@ -35,6 +35,10 @@ namespace WebLib.Models.ReaderPages
 
 		public BookViewModel Book { get; set; }
 
+		public int ReaderId { get; set; }
+
+		public string ReaderFullName { get; set; }
+
 		public IssueStatusEnum Status { get; set; }
 
 		public string StatusString
@@ -51,19 +55,21 @@ namespace WebLib.Models.ReaderPages
 			}
 		}
 
-
-		public static explicit operator ReaderIssueModel (IssueDetailedDTO dto)
+		public static explicit operator IssueDetailedModel(IssueDetailedDTO dto)
 		{
 			if (dto == null) return null;
 			else
 			{
-				ReaderIssueModel reader = new ReaderIssueModel
+				IssueDetailedModel reader = new IssueDetailedModel
 				{
 					Id = dto.Issue.Id,
 					IssueDate = dto.Issue.IssueDate,
 					ReturnDate = dto.Issue.ReturnDate,
 
-					Book = (BookViewModel)dto.Book
+					Book = (BookViewModel)dto.Book,
+
+					ReaderId = dto.Reader.Id,
+					ReaderFullName = String.Format("{0} {1} {2}", dto.Reader.Surname, dto.Reader.Name, dto.Reader.Patronymic)
 				};
 
 

@@ -1,0 +1,39 @@
+﻿
+@model IEnumerable<WebLib.Models.AuthorModel>
+
+<div class="row row-default">
+    @using (Ajax.BeginForm("AuthorSearch", "LibrarianPage", new AjaxOptions { UpdateTargetId = "ByAuthorSearch" }, new { @class = "form-inline ml-auto pull-right" }))
+    {
+        @Html.AntiForgeryToken()
+        <input type="text" class="form-control search-input" name="symbols" />
+        <input type="submit" class="btn btn-default" value="Поиск" />
+    }
+</div>
+
+<div class="row row-default">
+    <div id="ByAuthorSearch">
+        <ul class="accordion list-group" id="authorsAccordion" style="margin: 0 100px">
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var author in Model)
+                {
+                    <li class="list-group-item">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="@("#collapse-book-" + author.Id)" aria-expanded="true" aria-controls="@("collapse-book-" + author.Id)">
+                            @author.FullName
+                        </button>
+
+                        <div id="@("collapse-book-" + author.Id)" class="collapse" data-parent="#authorsAccordion" style="margin-top: 20px">
+                            @{ Html.RenderAction("BookSearchByAuthor", "LibrarianPage", new { authorId = author.Id }); }
+                        </div>
+                    </li>
+                }
+            }
+            else
+            {
+                <li class="list-group-item">
+                    Нет данных
+                </li>
+            }
+        </ul>
+    </div>
+</div>

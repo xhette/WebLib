@@ -232,6 +232,8 @@
     <Compile Include="Models\DepartmentModel.cs" />
     <Compile Include="Models\IssueModel.cs" />
     <Compile Include="Models\LibrarianModel.cs" />
+    <Compile Include="Models\LibrarianPages\EditIssueModel.cs" />
+    <Compile Include="Models\LibrarianPages\IssueDetailedModel.cs" />
     <Compile Include="Models\LibraryModel.cs" />
     <Compile Include="Models\LibraryShortModel.cs" />
     <Compile Include="Models\ProviderModel.cs" />
@@ -434,12 +436,24 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Backup\Index.cshtml" />
+    <Content Include="Views\LibrarianPage\_AuthorSearch.cshtml" />
+    <Content Include="Views\LibrarianPage\_BooksByAuthor.cshtml" />
+    <Content Include="Views\LibrarianPage\_BooksByDepartment.cshtml" />
+    <Content Include="Views\LibrarianPage\_BooksByTitle.cshtml" />
+    <Content Include="Views\LibrarianPage\_BookSearch.cshtml" />
+    <Content Include="Views\LibrarianPage\_DepartmentSearch.cshtml" />
+    <Content Include="Views\LibrarianPage\Index.cshtml" />
+    <Content Include="Views\LibrarianPage\_LibrarianInfo.cshtml" />
+    <Content Include="Views\LibrarianPage\Issues.cshtml" />
+    <Content Include="Views\LibrarianPage\_IssuesSearch.cshtml" />
+    <Content Include="Views\LibrarianPage\_ReaderDropdown.cshtml" />
+    <Content Include="Views\Shared\_BookDropdown.cshtml" />
+    <Content Include="Views\LibrarianPage\EditIssue.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Backup\" />
     <Folder Include="Content\Restore\" />
-    <Folder Include="Views\LibrarianPage\" />
     <Folder Include="Views\ProviderPage\" />
   </ItemGroup>
   <ItemGroup>

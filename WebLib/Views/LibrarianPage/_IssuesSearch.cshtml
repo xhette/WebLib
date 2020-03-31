@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebLib.Models.LibrarianPages.IssueDetailedModel>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Книга
+            </th>
+            <th>
+                Читатель
+            </th>
+            <th>
+                Дата выдачи
+            </th>
+            <th>
+                Дата возврата
+            </th>
+            <th>
+                Статус
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var issue in Model)
+        {
+        <tr>
+            <td>
+                @issue.Book.AuthorFullName "@issue.Book.Title"
+            </td>
+            <td>
+                @issue.ReaderFullName
+            </td>
+            <td>
+                @(issue.IssueDate.HasValue ? issue.IssueDate.Value.ToShortDateString() : String.Empty)
+            </td>
+            <td>
+                @(issue.ReturnDate.HasValue ? issue.ReturnDate.Value.ToShortDateString() : String.Empty)
+            </td>
+            <td>
+                @issue.StatusString
+            </td>
+            <td>
+                @Html.ActionLink("Изменить", "EditIssue", "LibrarianPage", new { id = issue.Id }) | @Html.ActionLink("Удалить","DeleteIssue", "LibrarianPage")
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

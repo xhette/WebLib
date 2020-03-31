@@ -22,8 +22,8 @@ namespace WebLib.BusinessLayer.GeneralMethods
 
 		public LibrarianDataDTO LibrarianData (int librarianId)
 		{
-			GenericRepository<Librarians> generic = new GenericRepository<Librarians>(_context);
-			LibrarianDataDTO lib = (LibrarianDataDTO)generic.FindById(librarianId);
+			StoredProcedure procedure = new StoredProcedure(_context);
+			var lib = (LibrarianDataDTO)procedure.LibrarianList().FirstOrDefault(c => c.LibrarianId == librarianId);
 
 			return lib;
 		}
@@ -45,18 +45,18 @@ namespace WebLib.BusinessLayer.GeneralMethods
 			return authors;
 		}
 
-		public List<DepartmentsGroupedDTO> Departments (int libId)
+		public DepartmentsGroupedDTO Departments (int libId)
 		{
 			StoredProcedure procedure = new StoredProcedure(_context);
-			List<DepartmentsGroupedDTO> departments = procedure.DepartmentList().Where(c => c.Library.Id == libId).Select(c => (DepartmentsGroupedDTO)c).ToList();
+			DepartmentsGroupedDTO departments = (DepartmentsGroupedDTO)procedure.DepartmentList().FirstOrDefault(c => c.Library.Id == libId);
 
 			return departments;
 		}
 
-		public List<DepartmentsGroupedDTO> Departments (string symbols, int libId)
+		public DepartmentsGroupedDTO Departments (string symbols, int libId)
 		{
 			StoredProcedure procedure = new StoredProcedure(_context);
-			List<DepartmentsGroupedDTO> departments = procedure.DepartmentList(symbols).Where(c => c.Library.Id == libId).Select(c => (DepartmentsGroupedDTO)c).ToList();
+			DepartmentsGroupedDTO departments = (DepartmentsGroupedDTO)procedure.DepartmentList(symbols).FirstOrDefault(c => c.Library.Id == libId);
 
 			return departments;
 		}
@@ -127,10 +127,6 @@ namespace WebLib.BusinessLayer.GeneralMethods
 			try
 			{
 				GenericRepository<Issues> generic = new GenericRepository<Issues>(_context);
-				var issue = generic.Get(c => c.Book == bookId);
-
-				if (issue == null)
-				{
 					Issues newIssue = new Issues
 					{
 						Book = bookId,
@@ -143,13 +139,9 @@ namespace WebLib.BusinessLayer.GeneralMethods
 					generic.Create(newIssue);
 
 					return true;
-				}
-				else
-				{
-					return false;
-				}
+
 			}
-			catch
+			catch (Exception ex)
 			{
 				return false;
 			}
@@ -192,7 +184,7 @@ namespace WebLib.BusinessLayer.GeneralMethods
 				}
 
 			}
-			catch
+			catch (Exception ex)
 			{
 				return false;
 			}
@@ -202,6 +194,29 @@ namespace WebLib.BusinessLayer.GeneralMethods
 		{
 			GenericRepository<Readers> repository = new GenericRepository<Readers>(_context);
 			return (ReaderDataDTO)repository.Get(c => c.Id == rederId).FirstOrDefault();
+		}
+
+		public bool GiveOut(int bookId)
+		{
+			try
+			{
+				GenericRepository<Issues> generic = new GenericRepository<Issues>(_context);
+
+				Issues db = generic.Get(c => c.Book == bookId && c.ReturnDate == null).FirstOrDefault();
+
+				if(db == null)
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+			}
+			catch
+			{
+				return false;
+			}
 		}
 	}
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using WebLib.BusinessLayer.DTO;
+using WebLib.BusinessLayer.DTO.Composite;
 
 namespace WebLib.Models
 {
@@ -23,6 +24,19 @@ namespace WebLib.Models
 			else return new BookModel
 			{
 				Id = dto.Id,
+				AuthorId = dto.AuthorId,
+				Title = dto.Title,
+				DepartmentId = dto.DepartmentId
+			};
+		}
+
+
+		public static explicit operator BookModel(BookDetailedDTO dto)
+		{
+			if (dto == null) return null;
+			else return new BookModel
+			{
+				Id = dto.BookId,
 				AuthorId = dto.AuthorId,
 				Title = dto.Title,
 				DepartmentId = dto.DepartmentId

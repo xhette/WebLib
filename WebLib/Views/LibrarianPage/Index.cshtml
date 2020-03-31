@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "Books";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int page = ViewBag.SearchingType;
+}
+
+@section Sidebar {
+    <div class="col-md-2" id="navbar">
+        <nav class="sidebar">
+            @{Html.RenderAction("SidebarPartial", "LibrarianPage");}
+            <div class="row">
+                <ul class="list-unstyled employee-nav">
+                    <li class="navbar-list-item active-nav-item">
+                        @Html.ActionLink("Книги", "Index", "LibrarianPage")
+                    </li>
+                    <li class="navbar-list-item">
+                        @Html.ActionLink("Выдачи", "Issues", "LibrarianPage")
+                    </li>
+                    <li class="navbar-list-item">
+                        @Html.ActionLink("Заявки", "Abonents", "LibrarianPage")
+                    </li>
+                    <li class="navbar-list-item">
+                        @Html.ActionLink("Читатели", "Readers", "LibrarianPage")
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+}
+
+<div class="col-md-10 col-md-offset-2">
+    <div class="page-wrapper">
+
+        <div class="row row-default">
+            <div class="col-md-12">
+                <ul class="nav nav-tabs">
+                    <li class="" id="byTitle">
+                        @Html.ActionLink("По названию", "Index", "LibrarianPage", new { page = 1 }, null)
+                    </li>
+                    <li class="" id="byAuthor">
+                        @Html.ActionLink("По автору", "Index", "LibrarianPage", new { page = 2 }, null)
+                    </li>
+                    <li class="" id="byDepartment">
+                        @Html.ActionLink("По отделу", "Index", "LibrarianPage", new { page = 3 }, null)
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        @switch (page)
+        {
+            case 1:
+                Html.RenderAction("BooksByTitle", "LibrarianPage");
+                break;
+            case 2:
+                Html.RenderAction("BooksByAuthor", "LibrarianPage");
+                break;
+            case 3:
+                Html.RenderAction("BooksByDepartment", "LibrarianPage");
+                break;
+            default: break;
+        }
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var byTitle = $("#byTitle");
+        var byAuthor = $("#byAuthor");
+        var byDepartment = $("#byDepartment");
+
+        byTitle.removeClass("active");
+        byAuthor.removeClass("active");
+        byDepartment.removeClass("active");
+
+        var page = @ViewBag.SearchingType;
+
+        switch (page) {
+            case 1: byTitle.addClass("active");
+                break;
+            case 2: byAuthor.addClass("active");
+                break;
+            case 3: byDepartment.addClass("active");
+                break;
+            default: break;
+        }
+    });
+</script>
+
+

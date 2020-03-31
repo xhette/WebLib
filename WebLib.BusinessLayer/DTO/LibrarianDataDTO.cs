@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebLib.DataLayer;
 using WebLib.DataLayer.Base;
+using WebLib.DataLayer.Procedures;
 
 namespace WebLib.BusinessLayer.DTO
 {
@@ -23,6 +24,8 @@ namespace WebLib.BusinessLayer.DTO
         public string Phone { get; set; }
 
         public int LibraryId { get; set; }
+
+        public string LibraryName { get; set; }
 
         public int? UserId { get; set; }
 
@@ -55,6 +58,23 @@ namespace WebLib.BusinessLayer.DTO
                 Address = db.Address,
                 Phone = db.Phone,
                 Library = db.LibraryId
+            };
+        }
+
+        public static explicit operator LibrarianDataDTO(LibrarianDetailed db)
+        {
+            if (db == null) return null;
+            else return new LibrarianDataDTO
+            {
+                Id = db.LibrarianId,
+                UserId = db.UserId,
+                Surname = db.LibrarianSurname,
+                Name = db.LibrarianName,
+                Patronymic = db.LibrarianPatronymic,
+                Address = db.LibrarianAddress,
+                Phone = db.LibrarianPhone,
+                LibraryId = db.LibraryId,
+                LibraryName = db.LibraryName
             };
         }
     }

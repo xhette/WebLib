@@ -1,0 +1,83 @@
+﻿@model IEnumerable<WebLib.Models.LibrarianPages.IssueDetailedModel>
+
+@{
+    ViewBag.Title = "Issues";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int page = ViewBag.SearchingType;
+}
+
+@section Sidebar {
+    <div class="col-md-2" id="navbar">
+        <nav class="sidebar">
+            @{Html.RenderAction("SidebarPartial", "LibrarianPage");}
+            <div class="row">
+                <ul class="list-unstyled employee-nav">
+                    <li class="navbar-list-item">
+                        @Html.ActionLink("Книги", "Index", "LibrarianPage")
+                    </li>
+                    <li class="navbar-list-item active-nav-item">
+                        @Html.ActionLink("Выдачи", "Issues", "LibrarianPage")
+                    </li>
+                    <li class="navbar-list-item">
+                        @Html.ActionLink("Заявки", "Abonents", "LibrarianPage")
+                    </li>
+                    <li class="navbar-list-item">
+                        @Html.ActionLink("Читатели", "Readers", "LibrarianPage")
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+}
+
+<div class="col-md-10 col-md-offset-2">
+    <div class="page-wrapper">
+        <div class="row row-default">
+            <div class="col-md-12">
+                <ul class="nav nav-tabs">
+                    <li class="" id="allIssues">
+                        @Html.ActionLink("Все", "Issues", "LibrarianPage", new { page = 1 }, null)
+                    </li>
+                    <li class="" id="spoiledIssues">
+                        @Html.ActionLink("Просроченные", "Issues", "LibrarianPage", new { page = 2 }, null)
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row row-default">
+            <div class="col-md-12">
+                @switch (page)
+                {
+                    case 1:
+                        Html.RenderAction("AllIssues", "LibrarianPage");
+                        break;
+                    case 2:
+                        Html.RenderAction("SpoiledIssues", "LibrarianPage");
+                        break;
+                    default: break;
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var allIssues = $("#allIssues");
+        var spoiledIssues = $("#spoiledIssues");
+
+        allIssues.removeClass("active");
+        spoiledIssues.removeClass("active");
+
+        var page = @ViewBag.SearchingType;
+
+        switch (page) {
+            case 1: allIssues.addClass("active");
+                break;
+            case 2: spoiledIssues.addClass("active");
+                break;
+            default: break;
+        }
+    });
+</script>

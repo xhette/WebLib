@@ -1,0 +1,69 @@
+﻿
+@model IEnumerable<WebLib.Models.ReaderPages.BookViewModel>
+
+<div class="row row-default">
+    @using (Ajax.BeginForm("BookSearch", "LibrarianPage", new AjaxOptions { UpdateTargetId = "ByTitleSearch" }, new { @class = "form-inline ml-auto pull-right" }))
+    {
+        @Html.AntiForgeryToken()
+        <input type="text" class="form-control search-input" name="symbols" />
+        <input type="submit" class="btn btn-default" value="Поиск" />
+    }
+</div>
+
+<div id="ByTitleSearch">
+
+    <div class="row row-default">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Автор
+                        </th>
+                        <th>
+                            Название
+                        </th>
+                        <th>
+                            Отдел
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Count() > 0)
+                    {
+                        foreach (var book in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @book.AuthorFullName
+                                </td>
+                                <td>
+                                    "@book.Title"
+                                </td>
+                                <td>
+                                    @book.DepartmentName
+                                </td>
+                                <td>
+                                    @if (book.GiveOut.HasValue && book.GiveOut.Value)
+                                    {
+                                        <a href="@Url.Action("AddIssue", "LibrarianPage", new { id = book.BookId })" class="btn btn-sm">
+                                            Выдать
+                                        </a> 
+                                    }
+                                </td>
+                            </tr>
+                        } }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center">
+                                Нет данных
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

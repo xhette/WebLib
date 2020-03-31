@@ -21,6 +21,8 @@ namespace WebLib.Models.ReaderPages
 
 		public string AuthorPatronymic { get; set; }
 
+		public bool? GiveOut { get; set; }
+
 		public string AuthorFullName
 		{
 			get

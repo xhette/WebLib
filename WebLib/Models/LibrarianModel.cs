@@ -22,6 +22,16 @@ namespace WebLib.Models
 
         public int LibraryId { get; set; }
 
+        public string LibraryName { get; set; }
+
+        public string FullName
+        {
+            get
+            {
+                return String.Format("{0} {1} {2}", Surname, Name, Patronymic);
+            }
+        }
+
         public int? UserId { get; set; }
 
         public static explicit operator LibrarianDataDTO(LibrarianModel db)
@@ -52,7 +62,8 @@ namespace WebLib.Models
                 Patronymic = db.Patronymic,
                 Address = db.Address,
                 Phone = db.Phone,
-                LibraryId = db.LibraryId
+                LibraryId = db.LibraryId,
+                LibraryName = db.LibraryName
             };
         }
     }

@@ -46,17 +46,17 @@
                                     @Model.Reader.FullName
                                 </strong>
                             </div>
-                            <ul class="list-group">
-                                <li class="list-group-item">
+                            <ul class="list-unstyled user-card-list">
+                                <li class="user-card-li">
                                     <strong>Дата рождения: </strong>@Model.Reader.BirthDateString
                                 </li>
-                                <li class="list-group-item">
+                                <li class="user-card-li">
                                     <strong>Паспорт: </strong>@Model.Reader.PassSeria @Model.Reader.PassNumber
                                 </li>
-                                <li class="list-group-item">
+                                <li class="user-card-li">
                                     <strong>Адрес: </strong>@Model.Reader.Address
                                 </li>
-                                <li class="list-group-item">
+                                <li class="user-card-li">
                                     <strong>Телефон: </strong>@Model.Reader.Phone
                                 </li>
                             </ul>
@@ -126,7 +126,7 @@
                                                             @issue.Book.AuthorFullName "@issue.Book.Title"
                                                         </td>
                                                         <td>
-                                                            @(WebLib.Utils.Enums.GetDescription(issue.Status))
+                                                            @issue.StatusString
                                                         </td>
                                                     </tr>
                                                 }

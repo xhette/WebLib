@@ -81,6 +81,13 @@ namespace WebLib.DataLayer
 
 			return books;
 		}
+
+		public List<LibrarianDetailed> LibrarianList()
+		{
+			var librarians = context.Database.SqlQuery<LibrarianDetailed>("LibrariansDetailed").ToList();
+
+			return librarians;
+		}
 		#endregion
 	}
 }
