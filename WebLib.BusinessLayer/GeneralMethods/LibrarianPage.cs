@@ -67,6 +67,12 @@ namespace WebLib.BusinessLayer.GeneralMethods
 			return procedure.Abonents().Where(c => c.LibraryId == libId).Select(c => (AbonentInLibraryDTO)c).ToList();
 		}
 
+		public List<AbonentInLibraryDTO> AbonentListSpoiled(int libId)
+		{
+			StoredProcedure procedure = new StoredProcedure(_context);
+			return procedure.AbonentsSpoiled().Where(c => c.LibraryId == libId).Select(c => (AbonentInLibraryDTO)c).ToList();
+		}
+
 		public List<IssueDetailedDTO> IssuesList (int libId)
 		{
 			StoredProcedure procedure = new StoredProcedure(_context);

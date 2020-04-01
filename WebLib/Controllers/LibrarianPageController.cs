@@ -7,6 +7,7 @@ using WebLib.BusinessLayer.DTO;
 using WebLib.BusinessLayer.GeneralMethods;
 using WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes;
 using WebLib.DataLayer;
+using WebLib.Enums;
 using WebLib.Models;
 using WebLib.Models.LibrarianPages;
 using WebLib.Models.ReaderPages;
@@ -146,9 +147,10 @@ namespace WebLib.Controllers
             return PartialView("~/Views/LibrarianPage/_BookSearch.cshtml", model);
         }
 
-        #endregion
+		#endregion
 
-        public ActionResult Issues(int page = 1)
+		#region Issues
+		public ActionResult Issues(int page = 1)
         {
             ViewBag.SearchingType = page;
 
@@ -178,7 +180,7 @@ namespace WebLib.Controllers
             var issue = librarianContext.IssuesList(libId).Where(c => c.Issue.Id == id).FirstOrDefault();
             EditIssueModel model = (EditIssueModel)issue;
             model.Authors = librarianContext.Authors().Select(c => (AuthorModel)c).ToList();
-            model.Readers = librarianContext.AbonentList(libId).Select(c => new ReaderDataModel
+            model.Readers = librarianContext.AbonentList(libId).Where(c => c.Status == 3).Select(c => new ReaderDataModel
             {
                 Id = c.Reader.Id,
                 Surname = c.Reader.Surname,
@@ -202,12 +204,12 @@ namespace WebLib.Controllers
                 if (result)
                 {
                     TempData["OperationStatus"] = true;
-                    TempData["OpearionMessage"] = "";
+                    TempData["OpearionMessage"] = "Новые данные успешно сохранены";
                 }
                 else
                 {
                     TempData["OperationStatus"] = false;
-                    TempData["OpearionMessage"] = "";
+                    TempData["OpearionMessage"] = "Произошла ошибка при обновлении данных";
                 }
 
                 return RedirectToAction("Issues", "LibrarianPage");
@@ -223,7 +225,7 @@ namespace WebLib.Controllers
         {
             AddIssueModel model = new AddIssueModel();
             model.BookId = id;
-            model.Readers = librarianContext.AbonentList(libId).Select(c => new ReaderDataModel
+            model.Readers = librarianContext.AbonentList(libId).Where(c => c.Status == 3).Select(c => new ReaderDataModel
             {
                 Id = c.Reader.Id,
                 Surname = c.Reader.Surname,
@@ -244,12 +246,12 @@ namespace WebLib.Controllers
                 if (result)
                 {
                     TempData["OperationStatus"] = true;
-                    TempData["OpearionMessage"] = "";
+                    TempData["OpearionMessage"] = "Книга успешно выдана";
                 }
                 else
                 {
                     TempData["OperationStatus"] = false;
-                    TempData["OpearionMessage"] = "";
+                    TempData["OpearionMessage"] = "Произошла ошибка при выдаче книги";
                 }
 
                 return RedirectToAction("Issues", "LibrarianPage");
@@ -259,6 +261,122 @@ namespace WebLib.Controllers
                 return PartialView("~/Views/LibrarianPage/_AddIssue.cshtml", model);
             }
         }
+
+        public ActionResult DeleteIssue (int id)
+        {
+            var result = librarianContext.DeleteIssue(id);
+
+            if (result)
+            {
+                TempData["OperationStatus"] = true;
+                TempData["OpearionMessage"] = "Выдача успешно удалена";
+            }
+            else
+            {
+                TempData["OperationStatus"] = false;
+                TempData["OpearionMessage"] = "Произошла ошибка при удалении выдачи";
+            }
+
+            return RedirectToAction("Issues", "LibrarianPage");
+        }
+		#endregion
+
+		#region AbonentClaims
+        public ActionResult Claims()
+        {
+            List<AbonentModel> model = librarianContext.AbonentList(libId).Select(c => (AbonentModel)c).ToList();
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult ChangeStatus (int libId, int readerId, AbonentStatusEnum status)
+        {
+            StatusChangeModel model = new StatusChangeModel
+            {
+                LibraryId = libId,
+                ReaderId = readerId,
+                Status = status
+            };
+
+            IEnumerable<AbonentStatusEnum> values = Enum.GetValues(typeof(AbonentStatusEnum)).Cast<AbonentStatusEnum>();
+            model.StatusList = values.Select(value => new SelectListItem
+            {
+                Text = Utils.Enums.GetDescription(value),
+                Value = value.ToString()
+            });
+
+            return PartialView("~/Views/LibrarianPage/_ChangeAbonentStatus.cshtml", model);
+        }
+
+        [HttpPost]
+        public ActionResult ChangeStatus (StatusChangeModel model)
+        {
+            var result = librarianContext.ChangeStatusAbonent(model.LibraryId, model.ReaderId, (int)model.Status);
+
+            if (result)
+            {
+                TempData["OperationStatus"] = true;
+                TempData["OpearionMessage"] = "Статус успешно изменен";
+            }
+            else
+            {
+                TempData["OperationStatus"] = false;
+                TempData["OpearionMessage"] = "Произошла ошибка при смене статуса";
+            }
+
+            return RedirectToAction("Claims", "LibrarianPage");
+        }
+
+        public ActionResult DeleteAbonent(int libId, int readerId)
+        {
+            var result = librarianContext.DeleteAbonent(libId, readerId);
+
+            if (result)
+            {
+                TempData["OperationStatus"] = true;
+                TempData["OpearionMessage"] = "Читатель удален";
+            }
+            else
+            {
+                TempData["OperationStatus"] = false;
+                TempData["OpearionMessage"] = "Произошла ошибка при удалении читателя";
+            }
+
+            return RedirectToAction("Claims", "LibrarianPage");
+        }
+		#endregion
+
+		#region Readers
+        public ActionResult Readers(int page = 1)
+        {
+            ViewBag.SearchingType = page;
+
+            return View();
+        }
+
+        public ActionResult AllReaders()
+        {
+            List<ReaderDataModel> model = librarianContext.AbonentList(libId).Select(c => (ReaderDataModel)c).ToList();
+
+            return PartialView("~/Views/LibrarianPage/_AllReaders.cshtml", model); ;
+        }
+
+        public ActionResult Deptors()
+        {
+            List<ReaderDataModel> model = librarianContext.AbonentListSpoiled(libId).Select(c => (ReaderDataModel)c).ToList();
+
+            return PartialView("~/Views/LibrarianPage/_Deptors.cshtml", model); ;
+        }
+
+        public ActionResult ReaderData(int readerId)
+        {
+            ReaderDataModel model = (ReaderDataModel)librarianContext.ReaderInfo(readerId);
+
+            return PartialView("~/Views/LibrarianPage/_ReaderInfo.cshtml", model); ;
+        }
+
+        #endregion
 
         #region DropdownPartials
 

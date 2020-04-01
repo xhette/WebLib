@@ -32,6 +32,13 @@ namespace WebLib.DataLayer
 			return abonents;
 		}
 
+		public List<AbonentInLibrary> AbonentsSpoiled()
+		{
+			var abonents = context.Database.SqlQuery<AbonentInLibrary>("AbonentsInLibrariesSpoiled").ToList();
+
+			return abonents;
+		}
+
 		public List<AbonentsInLibrariesDetailed> LibrariesWithAbonents ()
 		{
 			var abonents = context.Database.SqlQuery<AbonentsInLibrariesDetailed>("AbonentsInLibrariesDetailed").ToList();

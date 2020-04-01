@@ -1,0 +1,30 @@
+﻿@model WebLib.Models.LibrarianPages.StatusChangeModel
+
+@using (Html.BeginForm("ChangeStatus", "LibrarianPage", null, FormMethod.Post))
+{
+    @Html.HiddenFor(c => c.LibraryId)
+    @Html.HiddenFor(c => c.ReaderId)
+    <div class="modal-header row">
+        <h5 class="modal-title text-center" id="addIssueModal">
+            <span class="text-center">
+                Изменить статус заявки
+            </span>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </h5>
+    </div>
+    <div class="modal-body row">
+        <div class="control-group col-md-12 pull-left" style="min-height: 100px;">
+            <label class="control-label" for="StatusList">Выберите статус: </label>
+            <div class="controls">
+                @Html.DropDownListFor(m => m.Status, new SelectList(Model.StatusList, "Value", "Text", Model.Status), new { @id = "StatusList", @class = "form-control", @style = "min-width: 100%" })
+                <p class="help-block">@Html.ValidationMessageFor(m => m.Status, null, new { @class = "text-danger" })</p>
+            </div>
+        </div>
+    </div>
+    <div class="text-right modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </div>
+}

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using WebLib.BusinessLayer.DTO;
+using WebLib.BusinessLayer.DTO.Composite;
 
 namespace WebLib.Models.ReaderPages
 {
@@ -74,6 +75,19 @@ namespace WebLib.Models.ReaderPages
                 BirthDate = dbReader.BirthDate.HasValue ? dbReader.BirthDate.Value : DateTime.MinValue,
                 Address = dbReader.Address,
                 Phone = dbReader.Phone
+            };
+        }
+
+        public static explicit operator ReaderDataModel(AbonentInLibraryDTO dbReader)
+        {
+            if (dbReader == null) return null;
+            else return new ReaderDataModel
+            {
+                UserId = dbReader.Reader.UserId,
+                Id = dbReader.Reader.Id,
+                Surname = dbReader.Reader.Surname,
+                Name = dbReader.Reader.Name,
+                Patronymic = dbReader.Reader.Patronymic
             };
         }
 

@@ -232,9 +232,11 @@
     <Compile Include="Models\DepartmentModel.cs" />
     <Compile Include="Models\IssueModel.cs" />
     <Compile Include="Models\LibrarianModel.cs" />
+    <Compile Include="Models\LibrarianPages\AbonentModel.cs" />
     <Compile Include="Models\LibrarianPages\AddIssueModel.cs" />
     <Compile Include="Models\LibrarianPages\EditIssueModel.cs" />
     <Compile Include="Models\LibrarianPages\IssueDetailedModel.cs" />
+    <Compile Include="Models\LibrarianPages\StatusChangeModel.cs" />
     <Compile Include="Models\LibraryModel.cs" />
     <Compile Include="Models\LibraryShortModel.cs" />
     <Compile Include="Models\ProviderModel.cs" />
@@ -461,6 +463,8 @@
     <Content Include="Views\Shared\_BookDropdown.cshtml" />
     <Content Include="Views\LibrarianPage\EditIssue.cshtml" />
     <Content Include="Views\LibrarianPage\_AddIssue.cshtml" />
+    <Content Include="Views\LibrarianPage\Claims.cshtml" />
+    <Content Include="Views\LibrarianPage\_ChangeAbonentStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

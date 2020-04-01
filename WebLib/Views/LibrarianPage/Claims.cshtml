@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "Claims";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<WebLib.Models.LibrarianPages.AbonentModel>
+
+@section Sidebar {
+    <div class="col-md-2" id="navbar">
+        <nav class="sidebar">
+            @{Html.RenderAction("SidebarPartial", "LibrarianPage");}
+            <div class="row">
+                <ul class="list-unstyled employee-nav">
+                    <li class="navbar-list-item">
+                        @Html.ActionLink("Книги", "Index", "LibrarianPage")
+                    </li>
+                    <li class="navbar-list-item">
+                        @Html.ActionLink("Выдачи", "Issues", "LibrarianPage")
+                    </li>
+                    <li class="navbar-list-item active-nav-item">
+                        @Html.ActionLink("Заявки", "Abonents", "LibrarianPage")
+                    </li>
+                    <li class="navbar-list-item">
+                        @Html.ActionLink("Читатели", "Readers", "LibrarianPage")
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+}
+<div class="modal fade" id="ChangeAbonentStatus" tabindex="-1" role="dialog" aria-labelledby="abonentStatusModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+
+<div class="col-md-10 col-md-offset-2">
+    <div class="page-wrapper">
+        <div class="row row-default">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Читательский билет
+                            </th>
+                            <th>
+                                ФИО
+                            </th>
+                            <th>
+                                Статус
+                            </th>
+                            <th colspan="2"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Count() > 0)
+                        {
+                            foreach (var claim in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @claim.ReaderCard
+                                    </td>
+                                    <td>
+                                        @claim.Reader.Surname @claim.Reader.Name @claim.Reader.Patronymic
+                                    </td>
+                                    <td>
+                                        @(WebLib.Utils.Enums.GetDescription(claim.Status))
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("ChangeStatus", "LibrarianPage", new { libId = claim.Library.Id, readerId = claim.Reader.Id, status = claim.Status })"
+                                           data-toggle="modal" data-target="#ChangeAbonentStatus">
+                                            Изменить статус
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Удалить", "DeleteAbonent", "LibrarianPage", new { libId = claim.Library.Id, readerId = claim.Reader.Id }, null)
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
