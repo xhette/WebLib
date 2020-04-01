@@ -1,0 +1,16 @@
+﻿@model WebLib.Models.ReaderPages.ReaderDataModel
+
+<ul class="list-unstyled user-card-list">
+    <li class="user-card-li">
+        <strong>Дата рождения: </strong>@Model.BirthDateString
+    </li>
+    <li class="user-card-li">
+        <strong>Паспорт: </strong>@Model.PassSeria @Model.PassNumber
+    </li>
+    <li class="user-card-li">
+        <strong>Адрес: </strong>@Model.Address
+    </li>
+    <li class="user-card-li">
+        <strong>Телефон: </strong>@Model.Phone
+    </li>
+</ul>

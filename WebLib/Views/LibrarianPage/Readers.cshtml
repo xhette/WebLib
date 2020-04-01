@@ -1,7 +1,6 @@
-﻿@model IEnumerable<WebLib.Models.LibrarianPages.IssueDetailedModel>
-
+﻿
 @{
-    ViewBag.Title = "Issues";
+    ViewBag.Title = "Readers";
     Layout = "~/Views/Shared/_Layout.cshtml";
     int page = ViewBag.SearchingType;
 }
@@ -15,13 +14,13 @@
                     <li class="navbar-list-item">
                         @Html.ActionLink("Книги", "Index", "LibrarianPage")
                     </li>
-                    <li class="navbar-list-item active-nav-item">
+                    <li class="navbar-list-item">
                         @Html.ActionLink("Выдачи", "Issues", "LibrarianPage")
                     </li>
                     <li class="navbar-list-item">
                         @Html.ActionLink("Заявки", "Claims", "LibrarianPage")
                     </li>
-                    <li class="navbar-list-item">
+                    <li class="navbar-list-item active-nav-item">
                         @Html.ActionLink("Читатели", "Readers", "LibrarianPage")
                     </li>
                 </ul>
@@ -35,11 +34,11 @@
         <div class="row row-default">
             <div class="col-md-12">
                 <ul class="nav nav-tabs">
-                    <li class="" id="allIssues">
-                        @Html.ActionLink("Все", "Issues", "LibrarianPage", new { page = 1 }, null)
+                    <li class="" id="allReaders">
+                        @Html.ActionLink("Все", "Readers", "LibrarianPage", new { page = 1 }, null)
                     </li>
-                    <li class="" id="spoiledIssues">
-                        @Html.ActionLink("Просроченные", "Issues", "LibrarianPage", new { page = 2 }, null)
+                    <li class="" id="spoiledReaders">
+                        @Html.ActionLink("Должники", "Readers", "LibrarianPage", new { page = 2 }, null)
                     </li>
                 </ul>
             </div>
@@ -50,10 +49,10 @@
                 @switch (page)
                 {
                     case 1:
-                        Html.RenderAction("AllIssues", "LibrarianPage");
+                        Html.RenderAction("AllReaders", "LibrarianPage");
                         break;
                     case 2:
-                        Html.RenderAction("SpoiledIssues", "LibrarianPage");
+                        Html.RenderAction("Deptors", "LibrarianPage");
                         break;
                     default: break;
                 }
@@ -64,18 +63,18 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        var allIssues = $("#allIssues");
-        var spoiledIssues = $("#spoiledIssues");
+        var allReaders = $("#allReaders");
+        var spoiledReaders = $("#spoiledReaders");
 
-        allIssues.removeClass("active");
-        spoiledIssues.removeClass("active");
+        allReaders.removeClass("active");
+        spoiledReaders.removeClass("active");
 
         var page = @ViewBag.SearchingType;
 
         switch (page) {
-            case 1: allIssues.addClass("active");
+            case 1: allReaders.addClass("active");
                 break;
-            case 2: spoiledIssues.addClass("active");
+            case 2: spoiledReaders.addClass("active");
                 break;
             default: break;
         }

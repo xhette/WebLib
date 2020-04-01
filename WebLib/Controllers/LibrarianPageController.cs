@@ -357,14 +357,14 @@ namespace WebLib.Controllers
 
         public ActionResult AllReaders()
         {
-            List<ReaderDataModel> model = librarianContext.AbonentList(libId).Select(c => (ReaderDataModel)c).ToList();
+            List<ReaderDataModel> model = librarianContext.AbonentList(libId).Where(c => c.Status == 3).Select(c => (ReaderDataModel)c).ToList();
 
             return PartialView("~/Views/LibrarianPage/_AllReaders.cshtml", model); ;
         }
 
         public ActionResult Deptors()
         {
-            List<ReaderDataModel> model = librarianContext.AbonentListSpoiled(libId).Select(c => (ReaderDataModel)c).ToList();
+            List<ReaderDataModel> model = librarianContext.AbonentListSpoiled(libId).Where(c => c.Status == 3).Select(c => (ReaderDataModel)c).ToList();
 
             return PartialView("~/Views/LibrarianPage/_Deptors.cshtml", model); ;
         }

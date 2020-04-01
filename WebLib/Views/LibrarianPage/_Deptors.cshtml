@@ -1,0 +1,26 @@
+﻿@model IEnumerable<WebLib.Models.ReaderPages.ReaderDataModel>
+
+<ul class="accordion list-group" id="authorsAccordion" style="margin: 0 100px">
+    @if (Model != null && Model.Count() > 0)
+    {
+        foreach (var reader in Model)
+        {
+            <li class="list-group-item">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="@("#collapse-book-" + reader.Id)" aria-expanded="true" aria-controls="@("collapse-book-" + reader.Id)">
+                    @reader.FullName
+                </button>
+
+                <div id="@("collapse-book-" + reader.Id)" class="collapse" data-parent="#authorsAccordion" style="margin-top: 20px">
+                    @{ Html.RenderAction("ReaderData", "LibrarianPage", new { readerId = reader.Id }); }
+                </div>
+            </li>
+        }
+    }
+    else
+    {
+        <li class="list-group-item">
+            Нет данных
+        </li>
+    }
+</ul>
+

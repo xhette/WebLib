@@ -465,6 +465,10 @@
     <Content Include="Views\LibrarianPage\_AddIssue.cshtml" />
     <Content Include="Views\LibrarianPage\Claims.cshtml" />
     <Content Include="Views\LibrarianPage\_ChangeAbonentStatus.cshtml" />
+    <Content Include="Views\LibrarianPage\Readers.cshtml" />
+    <Content Include="Views\LibrarianPage\_AllReaders.cshtml" />
+    <Content Include="Views\LibrarianPage\_Deptors.cshtml" />
+    <Content Include="Views\LibrarianPage\_ReaderInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
