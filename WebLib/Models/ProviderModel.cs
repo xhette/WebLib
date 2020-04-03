@@ -20,6 +20,14 @@ namespace WebLib.Models
 
         public int? UserId { get; set; }
 
+        public string FullName
+        {
+            get
+            {
+                return String.Format("{0} {1} {2}", Surname, Name, Patronymic);
+            }
+        }
+
         public static explicit operator ProviderDataDTO(ProviderModel db)
         {
             if (db == null) return null;

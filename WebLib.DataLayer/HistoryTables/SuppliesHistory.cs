@@ -16,13 +16,13 @@ namespace WebLib.DataLayer
 
         public DateTime? HistoryDate { get; set; }
 
-        public decimal? HistorySumm { get; set; }
+        public double? HistorySumm { get; set; }
 
         public int? HistoryShop { get; set; }
 
         public DateTime? CurrentDate { get; set; }
 
-        public decimal? CurrentSumm { get; set; }
+        public double? CurrentSumm { get; set; }
 
         public int? CurrentShop { get; set; }
 

@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Shops";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<WebLib.Models.ShopModel>
+
+@section Sidebar {
+    <div class="col-md-2" id="navbar">
+        <nav class="sidebar">
+            @{Html.RenderAction("SidebarPartial", "ProviderPage");}
+            <div class="row">
+                <ul class="list-unstyled employee-nav">
+                    <li class="navbar-list-item">
+                        @Html.ActionLink("Поставки", "Index", "ProviderPage")
+                    </li>
+                    <li class="navbar-list-item active-nav-item">
+                        @Html.ActionLink("Магазины", "Shops", "ProviderPage")
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+}
+
+
+<div class="col-md-10 col-md-offset-2">
+    <div class="page-wrapper">
+            @if (Model != null && Model.Count() > 0)
+            {
+            }
+            else
+            {
+               
+            }
+    </div>
+</div>
+
+

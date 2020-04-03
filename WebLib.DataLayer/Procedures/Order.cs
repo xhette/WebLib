@@ -20,21 +20,13 @@ namespace WebLib.DataLayer.Procedures
 
 		public string Title { get; set; }
 
-		public int DepartmentId { get; set; }
-
-		public string DepartmentName { get; set; }
-
-		public int LibraryId { get; set; }
-
-		public string LibraryName { get; set; }
-
-		public decimal Cost { get; set; }
+		public double Cost { get; set; }
 
 		public int SupplyId { get; set; }
 
 		public DateTime Date { get; set; }
 
-		public decimal SupplySumm { get; set; }
+		public double SupplySumm { get; set; }
 
 		public int ShopId { get; set; }
 

@@ -215,8 +215,7 @@ namespace WebLib.DataLayer
 				.HasForeignKey(e => e.Shop);
 
 			modelBuilder.Entity<Supplies>()
-				.Property(e => e.Summ)
-				.HasPrecision(10, 10);
+				.Property(e => e.Summ);
 
 			modelBuilder.Entity<Supplies>()
 				.HasMany(e => e.OrderLists)
@@ -247,8 +246,7 @@ namespace WebLib.DataLayer
 				.IsUnicode(false);
 
 			modelBuilder.Entity<OrderLists>()
-				.Property(e => e.Cost)
-				.HasPrecision(10, 10);
+				.Property(e => e.Cost);
 
 			modelBuilder.Entity<webpages_Roles>()
 				.HasMany(e => e.webpages_UsersInRoles)
@@ -520,12 +518,10 @@ namespace WebLib.DataLayer
 				.IsUnicode(false);
 
 			modelBuilder.Entity<SuppliesHistory>()
-				.Property(e => e.HistorySumm)
-				.HasPrecision(10, 10);
+				.Property(e => e.HistorySumm);
 
 			modelBuilder.Entity<SuppliesHistory>()
-				.Property(e => e.CurrentSumm)
-				.HasPrecision(10, 10);
+				.Property(e => e.CurrentSumm);
 
 			modelBuilder.Entity<SuppliesHistory>()
 				.Property(e => e.Operation)

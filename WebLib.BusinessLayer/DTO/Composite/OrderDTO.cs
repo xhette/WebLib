@@ -9,45 +9,32 @@ namespace WebLib.BusinessLayer.DTO.Composite
 {
 	public class OrderDTO
 	{
-		public BookDetailedDTO Book { get; set; }
+		public AuthorDTO Author { get; set; }
 
-		public SupplyDTO Supply { get; set; }
+		public BookDTO Book { get; set; }
 
-		public ShopDTO Shop { get; set; }
+		public double Cost { get; set; }
 
 		public static explicit operator OrderDTO (Orders db)
 		{
 			if (db == null) return null;
 			else return new OrderDTO
 			{
-				Book = new BookDetailedDTO
+				Author = new AuthorDTO
+				{
+					Id = db.AuthorId,
+					Surname = db.AuthorSurname,
+					Name = db.AuthorName,
+					Patronymic = db.AuthorPatronymic,
+				},
+				Book = new BookDTO
 				{
 					AuthorId = db.AuthorId,
-					AuthorSurname = db.AuthorSurname,
-					AuthorName = db.AuthorName,
-					AuthorPatronymic = db.AuthorPatronymic,
 
-					BookId = db.BookId,
-					Title = db.Title,
-
-					DepartmentId = db.DepartmentId,
-					DepartmentName = db.DepartmentName,
-
-					LibraryId = db.LibraryId,
-					LibraryName = db.LibraryName
+					Id = db.BookId,
+					Title = db.Title
 				},
-				Supply = new SupplyDTO
-				{
-					Id = db.SupplyId,
-					ShopId = db.ShopId,
-					Date = db.Date,
-					Summ = db.SupplySumm
-				},
-				Shop = new ShopDTO
-				{
-					Id = db.ShopId,
-					Name = db.ShopName
-				}
+				Cost = db.Cost
 			};
 		}
 	}

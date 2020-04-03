@@ -85,14 +85,44 @@ namespace WebLib.BusinessLayer.GeneralMethods
 			return shops;
 		}
 
-		public List<OrderDTO> Orders ()
+		public List<OrderDTO> Orders (int supplyId)
 		{
 			StoredProcedure procedure = new StoredProcedure(_context);
-			List<OrderDTO> orders = procedure.OrderList().Select(c => (OrderDTO)c).ToList();
+			List<OrderDTO> orders = procedure.OrderList().Where(c => c.SupplyId == supplyId).Select(c => (OrderDTO)c).ToList();
 
 			return orders;
 		}
 
+		public ProviderDataDTO ProviderInfo(int providerId)
+		{
+			GenericRepository<Providers> generic = new GenericRepository<Providers>(_context);
 
+			ProviderDataDTO provider = (ProviderDataDTO)generic.Get(c => c.Id == providerId).FirstOrDefault();
+
+			return provider;
+		}
+
+		public List<SupplyDetailedDTO> SuppliesList()
+		{
+			List<SupplyDetailedDTO> supplies = _context.Supplies.Join(_context.Shops, sup => sup.Shop, sh => sh.Id, (sup, sh) => new SupplyDetailedDTO
+			{
+				Shop = new ShopDTO
+				{
+					Id = sh.Id,
+					Name = sh.Name,
+					Address = sh.Address,
+					Phone = sh.Phone
+				},
+				Supply = new SupplyDTO
+				{
+					Id = sup.Id,
+					ShopId = sup.Shop,
+					Summ = sup.Summ,
+					Date = sup.Date
+				}
+			}).ToList();
+
+			return supplies;
+		}
 	}
 }

@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using WebLib.BusinessLayer.GeneralMethods;
 using WebLib.DataLayer;
+using WebLib.Models;
+using WebLib.Models.ProviderPages;
 
 namespace WebLib.Controllers
 {
@@ -13,7 +15,7 @@ namespace WebLib.Controllers
         private ProviderPage providerContext;
         private LibContext context;
         private int userId;
-        private int readerId;
+        private int providerId;
 
         public ProviderPageController()
         {
@@ -24,17 +26,40 @@ namespace WebLib.Controllers
             context = new LibContext();
             providerContext = new ProviderPage(context);
 
-            var reader = context.Readers.FirstOrDefault(c => c.UserId == userId);
+            var provider = context.Providers.FirstOrDefault(c => c.UserId == userId);
 
-            if (reader != null)
+            if (provider != null)
             {
-                readerId = reader.Id;
+                providerId = provider.Id;
             }
+        }
+
+        public ActionResult SidebarPartial()
+        {
+            ProviderModel model = (ProviderModel)providerContext.ProviderInfo(providerId);
+
+            return PartialView("~/Views/ProviderPage/_ProviderInfo.cshtml", model);
         }
 
         public ActionResult Index()
         {
-            return View();
+            List<SupplyViewModel> model = providerContext.SuppliesList().Select(c => (SupplyViewModel)c).ToList();
+
+            return View(model);
+        }
+
+        public ActionResult OrderList(int supplyId)
+        {
+            List<OrderModel> model = providerContext.Orders(supplyId).Select(c => (OrderModel)c).ToList();
+
+            return PartialView("~/Views/ProviderPage/_OrdersBySupply.cshtml", model);
+        }
+
+        public ActionResult Shops()
+        {
+            List<ShopModel> model = providerContext.Shops().Select(c => (ShopModel)c).ToList();
+
+            return View(model);
         }
     }
 }

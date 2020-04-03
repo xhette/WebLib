@@ -240,7 +240,8 @@
     <Compile Include="Models\LibraryModel.cs" />
     <Compile Include="Models\LibraryShortModel.cs" />
     <Compile Include="Models\ProviderModel.cs" />
-    <Compile Include="Models\ProviderPages\OrderViewModel.cs" />
+    <Compile Include="Models\ProviderPages\OrderModel.cs" />
+    <Compile Include="Models\ProviderPages\SupplyViewModel.cs" />
     <Compile Include="Models\ReaderPages\DepartmentListModel.cs" />
     <Compile Include="Models\ReaderPages\LibraryReaderModel.cs" />
     <Compile Include="Models\ShopModel.cs" />
@@ -469,12 +470,15 @@
     <Content Include="Views\LibrarianPage\_AllReaders.cshtml" />
     <Content Include="Views\LibrarianPage\_Deptors.cshtml" />
     <Content Include="Views\LibrarianPage\_ReaderInfo.cshtml" />
+    <Content Include="Views\ProviderPage\Index.cshtml" />
+    <Content Include="Views\ProviderPage\_ProviderInfo.cshtml" />
+    <Content Include="Views\ProviderPage\_OrdersBySupply.cshtml" />
+    <Content Include="Views\ProviderPage\Shops.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Backup\" />
     <Folder Include="Content\Restore\" />
-    <Folder Include="Views\ProviderPage\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

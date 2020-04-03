@@ -138,6 +138,7 @@
     <Compile Include="DTO\Composite\LibraryShortDTO.cs" />
     <Compile Include="DTO\Composite\OrderDTO.cs" />
     <Compile Include="DTO\Composite\ReaderShortDataDTO.cs" />
+    <Compile Include="DTO\Composite\SupplyDetailedDTO.cs" />
     <Compile Include="DTO\LibrarianDataDTO.cs" />
     <Compile Include="DTO\ProviderDataDTO.cs" />
     <Compile Include="DTO\ShopDTO.cs" />

@@ -14,7 +14,7 @@ namespace WebLib.BusinessLayer.DTO
 
 		public DateTime? Date { get; set; }
 
-		public decimal? Summ { get; set; }
+		public double? Summ { get; set; }
 
 		public int ShopId { get; set; }
 

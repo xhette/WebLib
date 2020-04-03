@@ -13,7 +13,7 @@ namespace WebLib.DataLayer.Base
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Book { get; set; }
 
-        public decimal? Cost { get; set; }
+        public double? Cost { get; set; }
 
         [Key]
         [Column(Order = 1)]

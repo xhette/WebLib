@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<WebLib.Models.ProviderPages.SupplyViewModel>
+
+@section Sidebar {
+    <div class="col-md-2" id="navbar">
+        <nav class="sidebar">
+            @{Html.RenderAction("SidebarPartial", "ProviderPage");}
+            <div class="row">
+                <ul class="list-unstyled employee-nav">
+                    <li class="navbar-list-item active-nav-item">
+                        @Html.ActionLink("Поставки", "Index", "ProviderPage")
+                    </li>
+                    <li class="navbar-list-item">
+                        @Html.ActionLink("Магазины", "Shops", "ProviderPage")
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+}
+
+
+<div class="col-md-10 col-md-offset-2">
+    <div class="page-wrapper">
+        <ul class="accordion list-group" id="supplyAccordion" style="margin: 0 100px">
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var supply in Model)
+                {
+                    <li class="list-group-item">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="@("#collapse-supply-" + supply.Supply.Id)" aria-expanded="true" aria-controls="@("collapse-supply-" + supply.Supply.Id)">
+                            #@supply.Supply.Id &#8212; @(supply.Supply.Date.HasValue ? supply.Supply.Date.Value.ToShortDateString() : String.Empty)
+                        </button>
+
+                        <div id="@("collapse-supply-" + supply.Supply.Id)" class="collapse" data-parent="#supplyAccordion" style="margin-top: 20px; padding: 0 20px;">
+
+                            <p>
+                                <strong>@supply.Shop.Name</strong>
+                            </p>
+                            <p class="text-muted">
+                                @supply.Shop.Address
+                            </p>
+                            <p>
+                                <small>
+                                    @supply.Shop.Phone
+                                </small>
+                            </p>
+
+                            @{ Html.RenderAction("OrderList", "ProviderPage", new { supplyId = supply.Supply.Id }); }
+                        </div>
+                    </li>
+                }
+            }
+            else
+            {
+                <li class="list-group-item">
+                    Нет данных
+                </li>
+            }
+        </ul>
+    </div>
+</div>
