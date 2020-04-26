@@ -23,7 +23,7 @@ namespace WebLib.Controllers
         {
             //userId = WebSecurity.GetUserId(User.Identity.Name);
             //if (userId == 0) 
-                userId = 99;
+                userId = 2;
 
             context = new LibContext();
             readerContext = new ReaderPage(context);

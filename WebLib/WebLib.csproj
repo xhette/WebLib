@@ -221,6 +221,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProviderPageController.cs" />
     <Compile Include="Controllers\ReaderPageController.cs" />
+    <Compile Include="Controllers\StartController.cs" />
     <Compile Include="Enums\AbonentStatusEnum.cs" />
     <Compile Include="Enums\IssueStatusEnum.cs" />
     <Compile Include="Global.asax.cs">
@@ -474,11 +475,14 @@
     <Content Include="Views\ProviderPage\_ProviderInfo.cshtml" />
     <Content Include="Views\ProviderPage\_OrdersBySupply.cshtml" />
     <Content Include="Views\ProviderPage\Shops.cshtml" />
+    <Content Include="Views\ProviderPage\_AddShop.cshtml" />
+    <Content Include="Views\ProviderPage\_EditShop.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Backup\" />
     <Folder Include="Content\Restore\" />
+    <Folder Include="Views\Start\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

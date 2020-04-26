@@ -1,0 +1,38 @@
+﻿@model WebLib.Models.ShopModel
+
+@using (Html.BeginForm("AddShop", "ProviderPage", null, FormMethod.Post))
+{
+    <div class="modal-header row">
+        <h5 class="modal-title text-center" id="addIssueModal">
+            <span class="text-center">
+                Добавить магазин
+            </span>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </h5>
+    </div>
+    <div class="modal-body row">
+        <div class="control-group col-md-12 pull-left" style="min-height: 100px;">
+            <label class="control-label" for="Name">Название</label>
+            <div class="controls">
+                @Html.TextBoxFor(m => m.Name, new { @id = "Name", @class = "form-control", @style = "min-width: 100%" })
+                <p class="help-block">@Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })</p>
+            </div>
+            <label class="control-label" for="Address">Адрес</label>
+            <div class="controls">
+                @Html.TextBoxFor(m => m.Address, new { @id = "Address", @class = "form-control", @style = "min-width: 100%" })
+                <p class="help-block">@Html.ValidationMessageFor(m => m.Address, null, new { @class = "text-danger" })</p>
+            </div>
+            <label class="control-label" for="Phone">Телефон</label>
+            <div class="controls">
+                @Html.TextBoxFor(m => m.Phone, new { @id = "Phone", @class = "form-control", @style = "min-width: 100%" })
+                <p class="help-block">@Html.ValidationMessageFor(m => m.Phone, null, new { @class = "text-danger" })</p>
+            </div>
+        </div>
+    </div>
+    <div class="text-right modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+        <button type="submit" class="btn btn-primary">Добавить</button>
+    </div>
+}

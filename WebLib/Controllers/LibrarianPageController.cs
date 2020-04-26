@@ -26,7 +26,7 @@ namespace WebLib.Controllers
         {
             //userId = WebSecurity.GetUserId(User.Identity.Name);
             //if (userId == 0) 
-            userId = 100;
+            userId = 3;
 
             context = new LibContext();
             librarianContext = new LibrarianPage(context);

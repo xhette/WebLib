@@ -24,16 +24,86 @@
     </div>
 }
 
+<div class="modal fade" id="ShopModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="EditShopModal" tabindex="-1" role="dialog" aria-labelledby="editShopModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
 
 <div class="col-md-10 col-md-offset-2">
     <div class="page-wrapper">
-            @if (Model != null && Model.Count() > 0)
-            {
-            }
-            else
-            {
-               
-            }
+        <div class="row row-default">
+            <div class="col-md-12 text-right">
+                <a href="@Url.Action("AddShop","ProviderPage")" data-toggle="modal" data-target="#ShopModal" class="btn btn-primary">
+                    Добавить
+                </a>
+            </div>
+        </div>
+        <div class="row row-default">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Название
+                            </th>
+                            <th>
+                                Телефон
+                            </th>
+                            <th>
+                                Адрес
+                            </th>
+                            <th>
+
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Count() > 0)
+                        {
+                            foreach (var shop in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @shop.Name
+                                    </td>
+                                    <td>
+                                        @shop.Phone
+                                    </td>
+                                    <td>
+                                        @shop.Address
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("EditShop", "ProviderPage", new { id = shop.Id})"
+                                           data-toggle="modal" data-target="#EditShopModal">
+                                            Изменить
+                                        </a> | @Html.ActionLink("Удалить", "DeleteShop", "ProviderPage", new { id = shop.Id}, null)
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td class="text-center" colspan="4">
+                                    Нет данных
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 
