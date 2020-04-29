@@ -14,6 +14,9 @@ namespace WebLib.DataLayer.Base
             Supplies = new HashSet<Supplies>();
         }
 
+
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [StringLength(50)]

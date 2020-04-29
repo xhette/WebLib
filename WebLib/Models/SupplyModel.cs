@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using WebLib.BusinessLayer.DTO;
@@ -10,10 +11,12 @@ namespace WebLib.Models
 	{
 		public int Id { get; set; }
 
+		[Required(ErrorMessage = "Введите дату")]
 		public DateTime? Date { get; set; }
 
 		public double? Summ { get; set; }
 
+		[Required(ErrorMessage ="Выберите магазин")]
 		public int ShopId { get; set; }
 
 		public static explicit operator SupplyModel (SupplyDTO dto)

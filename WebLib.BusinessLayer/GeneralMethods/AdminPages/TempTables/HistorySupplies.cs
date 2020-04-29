@@ -32,6 +32,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 							string operation = pacient.Operation;
 
 							context.Database.ExecuteSqlCommand("DISABLE TRIGGER SuppliesHistory ON Supplies");
+							context.Database.ExecuteSqlCommand("DISABLE TRIGGER SuppliesInsert ON Supplies");
 
 							if (operation == "inserted")
 							{
@@ -65,15 +66,14 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 
 								using (var scope = context.Database.BeginTransaction())
 								{
-									context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Supplies ON");
 									context.Supplies.Add(entity);
 									context.SaveChanges();
-									context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Supplies OFF");
 									scope.Commit();
 								}
 							}
 
 							context.Database.ExecuteSqlCommand("ENABLE TRIGGER SuppliesHistory ON Supplies");
+							context.Database.ExecuteSqlCommand("ENABLE TRIGGER SuppliesInsert ON Supplies");
 
 						}
 
@@ -110,6 +110,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 						string operation = pacient.Operation;
 
 						context.Database.ExecuteSqlCommand("DISABLE TRIGGER SuppliesHistory ON Supplies");
+						context.Database.ExecuteSqlCommand("DISABLE TRIGGER SuppliesInsert ON Supplies");
 
 						if (operation == "inserted")
 						{
@@ -124,9 +125,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 							using (var scope = context.Database.BeginTransaction())
 							{
 								context.Supplies.Add(entity);
-								context.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT Supplies ON");
 								context.SaveChanges();
-								context.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT Supplies OFF");
 								scope.Commit();
 							}
 						}
@@ -153,6 +152,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 						}
 
 						context.Database.ExecuteSqlCommand("ENABLE TRIGGER SuppliesHistory ON Supplies");
+						context.Database.ExecuteSqlCommand("ENABLE TRIGGER SuppliesInsert ON Supplies");
 
 					}
 

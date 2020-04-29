@@ -32,6 +32,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 							string operation = pacient.Operation;
 
 							context.Database.ExecuteSqlCommand("DISABLE TRIGGER LibrariesHistory ON Libraries");
+							context.Database.ExecuteSqlCommand("DISABLE TRIGGER LibrariesInsert ON Libraries");
 
 							if (operation == "inserted")
 							{
@@ -67,15 +68,14 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 
 								using (var scope = context.Database.BeginTransaction())
 								{
-									context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Libraries ON");
 									context.Libraries.Add(entity);
 									context.SaveChanges();
-									context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Libraries OFF");
 									scope.Commit();
 								}
 							}
 
 							context.Database.ExecuteSqlCommand("ENABLE TRIGGER CitiesHistory ON Cities");
+							context.Database.ExecuteSqlCommand("ENABLE TRIGGER LibrariesInsert ON Libraries");
 
 						}
 
@@ -112,6 +112,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 						string operation = pacient.Operation;
 
 						context.Database.ExecuteSqlCommand("DISABLE TRIGGER LibrariesHistory ON Libraries");
+						context.Database.ExecuteSqlCommand("DISABLE TRIGGER LibrariesInsert ON Libraries");
 
 						if (operation == "inserted")
 						{
@@ -127,9 +128,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 							using (var scope = context.Database.BeginTransaction())
 							{
 								context.Libraries.Add(entity);
-								context.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT Libraries ON");
 								context.SaveChanges();
-								context.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT Libraries OFF");
 								scope.Commit();
 							}
 						}
@@ -157,6 +156,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 						}
 
 						context.Database.ExecuteSqlCommand("ENABLE TRIGGER LibrariesHistory ON Libraries");
+						context.Database.ExecuteSqlCommand("ENABLE TRIGGER LibrariesInsert ON Libraries");
 
 					}
 

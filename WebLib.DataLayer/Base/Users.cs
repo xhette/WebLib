@@ -16,6 +16,8 @@ namespace WebLib.DataLayer.Base
             Readers = new HashSet<Readers>();
         }
 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [StringLength(50)]

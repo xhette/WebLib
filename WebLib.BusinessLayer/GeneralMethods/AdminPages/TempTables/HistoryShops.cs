@@ -32,6 +32,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 							string operation = pacient.Operation;
 
 							context.Database.ExecuteSqlCommand("DISABLE TRIGGER ShopsHistory ON Shops");
+							context.Database.ExecuteSqlCommand("DISABLE TRIGGER ShopsInsert ON Shops");
 
 							if (operation == "inserted")
 							{
@@ -65,15 +66,14 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 
 								using (var scope = context.Database.BeginTransaction())
 								{
-									context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Shops ON");
 									context.Shops.Add(entity);
 									context.SaveChanges();
-									context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Shops OFF");
 									scope.Commit();
 								}
 							}
 
 							context.Database.ExecuteSqlCommand("ENABLE TRIGGER ShopsHistory ON Shops");
+							context.Database.ExecuteSqlCommand("ENABLE TRIGGER ShopsInsert ON Shops");
 
 						}
 
@@ -110,6 +110,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 						string operation = pacient.Operation;
 
 						context.Database.ExecuteSqlCommand("DISABLE TRIGGER ShopsHistory ON Shops");
+						context.Database.ExecuteSqlCommand("DISABLE TRIGGER ShopsInsert ON Shops");
 
 						if (operation == "inserted")
 						{
@@ -124,9 +125,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 							using (var scope = context.Database.BeginTransaction())
 							{
 								context.Shops.Add(entity);
-								context.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT Shops ON");
 								context.SaveChanges();
-								context.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT Shops OFF");
 								scope.Commit();
 							}
 						}
@@ -153,6 +152,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 						}
 
 						context.Database.ExecuteSqlCommand("ENABLE TRIGGER ShopsHistory ON Shops");
+						context.Database.ExecuteSqlCommand("ENABLE TRIGGER ShopsInsert ON Shops");
 
 					}
 

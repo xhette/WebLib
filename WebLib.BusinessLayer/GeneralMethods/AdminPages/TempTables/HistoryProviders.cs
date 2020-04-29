@@ -32,6 +32,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 							string operation = pacient.Operation;
 
 							context.Database.ExecuteSqlCommand("DISABLE TRIGGER ProvidersHistory ON Providers");
+							context.Database.ExecuteSqlCommand("DISABLE TRIGGER ProvidersInsert ON Providers");
 
 							if (operation == "inserted")
 							{
@@ -69,15 +70,14 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 
 								using (var scope = context.Database.BeginTransaction())
 								{
-									context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Providers ON");
 									context.Providers.Add(entity);
 									context.SaveChanges();
-									context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Providers OFF");
 									scope.Commit();
 								}
 							}
 
 							context.Database.ExecuteSqlCommand("ENABLE TRIGGER LibrariansHistory ON Librarians");
+							context.Database.ExecuteSqlCommand("ENABLE TRIGGER ProvidersInsert ON Providers");
 
 						}
 
@@ -114,6 +114,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 						string operation = pacient.Operation;
 
 						context.Database.ExecuteSqlCommand("DISABLE TRIGGER ProvidersHistory ON Providers");
+						context.Database.ExecuteSqlCommand("DISABLE TRIGGER ProvidersInsert ON Providers");
 
 						if (operation == "inserted")
 						{
@@ -130,9 +131,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 							using (var scope = context.Database.BeginTransaction())
 							{
 								context.Providers.Add(entity);
-								context.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT Providers ON");
 								context.SaveChanges();
-								context.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT Providers OFF");
 								scope.Commit();
 							}
 						}
@@ -161,6 +160,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 						}
 
 						context.Database.ExecuteSqlCommand("ENABLE TRIGGER ProvidersHistory ON Providers");
+						context.Database.ExecuteSqlCommand("ENABLE TRIGGER ProvidersInsert ON Providers");
 
 					}
 

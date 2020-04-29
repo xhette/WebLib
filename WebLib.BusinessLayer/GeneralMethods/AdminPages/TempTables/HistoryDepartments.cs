@@ -33,6 +33,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 							string operation = pacient.Operation;
 
 							context.Database.ExecuteSqlCommand("DISABLE TRIGGER DepartmentsHistory ON Departments");
+							context.Database.ExecuteSqlCommand("DISABLE TRIGGER DepartmentsInsert ON Departments");
 
 							if (operation == "inserted")
 							{
@@ -64,15 +65,14 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 
 								using (var scope = context.Database.BeginTransaction())
 								{
-									context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Departments ON");
 									context.Departments.Add(entity);
 									context.SaveChanges();
-									context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Departments OFF");
 									scope.Commit();
 								}
 							}
 
 							context.Database.ExecuteSqlCommand("ENABLE TRIGGER DepartmentsHistory ON Departments");
+							context.Database.ExecuteSqlCommand("ENABLE TRIGGER DepartmentsInsert ON Departments");
 
 						}
 
@@ -109,6 +109,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 						string operation = pacient.Operation;
 
 						context.Database.ExecuteSqlCommand("DISABLE TRIGGER DepartmentsHistory ON Departments");
+						context.Database.ExecuteSqlCommand("DISABLE TRIGGER DepartmentsInsert ON Departments");
 
 						if (operation == "inserted")
 						{
@@ -122,9 +123,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 							using (var scope = context.Database.BeginTransaction())
 							{
 								context.Departments.Add(entity);
-								context.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT Departments ON");
 								context.SaveChanges();
-								context.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT Departments OFF");
 								scope.Commit();
 							}
 						}
@@ -150,6 +149,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 						}
 
 						context.Database.ExecuteSqlCommand("ENABLE TRIGGER DepartmentsHistory ON Departments");
+						context.Database.ExecuteSqlCommand("ENABLE TRIGGER DepartmentsInsert ON Departments");
 
 					}
 

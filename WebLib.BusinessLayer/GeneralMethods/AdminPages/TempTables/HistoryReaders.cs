@@ -32,6 +32,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 							string operation = pacient.Operation;
 
 							context.Database.ExecuteSqlCommand("DISABLE TRIGGER ReadersHistory ON Readers");
+							context.Database.ExecuteSqlCommand("DISABLE TRIGGER ReadersInsert ON Readers");
 
 							if (operation == "inserted")
 							{
@@ -77,15 +78,14 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 
 								using (var scope = context.Database.BeginTransaction())
 								{
-									context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Readers ON");
 									context.Readers.Add(entity);
 									context.SaveChanges();
-									context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Readers OFF");
 									scope.Commit();
 								}
 							}
 
 							context.Database.ExecuteSqlCommand("ENABLE TRIGGER ReadersHistory ON Readers");
+							context.Database.ExecuteSqlCommand("ENABLE TRIGGER ReadersInsert ON Readers");
 
 						}
 
@@ -122,6 +122,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 						string operation = pacient.Operation;
 
 						context.Database.ExecuteSqlCommand("DISABLE TRIGGER ReadersHistory ON Readers");
+						context.Database.ExecuteSqlCommand("DISABLE TRIGGER ReadersInsert ON Readers");
 
 						if (operation == "inserted")
 						{
@@ -142,9 +143,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 							using (var scope = context.Database.BeginTransaction())
 							{
 								context.Readers.Add(entity);
-								context.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT Readers ON");
 								context.SaveChanges();
-								context.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT Readers OFF");
 								scope.Commit();
 							}
 						}
@@ -177,6 +176,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 						}
 
 						context.Database.ExecuteSqlCommand("ENABLE TRIGGER ReadersHistory ON Readers");
+						context.Database.ExecuteSqlCommand("ENABLE TRIGGER ReadersInsert ON Readers");
 
 					}
 

@@ -32,6 +32,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 							string operation = pacient.Operation;
 
 							context.Database.ExecuteSqlCommand("DISABLE TRIGGER IssuesHistory ON Issues");
+							context.Database.ExecuteSqlCommand("DISABLE TRIGGER IssuesInsert ON Issues");
 
 							if (operation == "inserted")
 							{
@@ -67,15 +68,14 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 
 								using (var scope = context.Database.BeginTransaction())
 								{
-									context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Issues ON");
 									context.Issues.Add(entity);
 									context.SaveChanges();
-									context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Issues OFF");
 									scope.Commit();
 								}
 							}
 
 							context.Database.ExecuteSqlCommand("ENABLE TRIGGER IssuesHistory ON Issues");
+							context.Database.ExecuteSqlCommand("ENABLE TRIGGER IssuesInsert ON Issues");
 
 						}
 
@@ -112,6 +112,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 						string operation = pacient.Operation;
 
 						context.Database.ExecuteSqlCommand("DISABLE TRIGGER IssuesHistory ON Issues");
+						context.Database.ExecuteSqlCommand("DISABLE TRIGGER IssuesInsert ON Issues");
 
 						if (operation == "inserted")
 						{
@@ -127,9 +128,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 							using (var scope = context.Database.BeginTransaction())
 							{
 								context.Issues.Add(entity);
-								context.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT Providers ON");
 								context.SaveChanges();
-								context.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT Providers OFF");
 								scope.Commit();
 							}
 						}
@@ -157,6 +156,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 						}
 
 						context.Database.ExecuteSqlCommand("ENABLE TRIGGER IssuesHistory ON Issues");
+						context.Database.ExecuteSqlCommand("ENABLE TRIGGER IssuesInsert ON Issues");
 
 					}
 

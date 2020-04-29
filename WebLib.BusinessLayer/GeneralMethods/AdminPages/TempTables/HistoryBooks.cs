@@ -32,6 +32,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 							string operation = pacient.Operation;
 
 							context.Database.ExecuteSqlCommand("DISABLE TRIGGER BooksHistory ON Books");
+							context.Database.ExecuteSqlCommand("DISABLE TRIGGER BooksInsert ON Books");
 
 							if (operation == "inserted")
 							{
@@ -64,15 +65,14 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 
 								using (var scope = context.Database.BeginTransaction())
 								{
-									context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Books ON");
 									context.Books.Add(entity);
 									context.SaveChanges();
-									context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Books OFF");
 									scope.Commit();
 								}
 							}
 
 							context.Database.ExecuteSqlCommand("ENABLE TRIGGER BooksHistory ON Books");
+							context.Database.ExecuteSqlCommand("ENABLE TRIGGER BooksInsert ON Books");
 
 						}
 
@@ -109,6 +109,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 						string operation = pacient.Operation;
 
 						context.Database.ExecuteSqlCommand("DISABLE TRIGGER BooksHistory ON Books");
+						context.Database.ExecuteSqlCommand("DISABLE TRIGGER BooksInsert ON Books");
 
 						if (operation == "inserted")
 						{
@@ -123,9 +124,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 							using (var scope = context.Database.BeginTransaction())
 							{
 								context.Books.Add(entity);
-								context.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT Books ON");
 								context.SaveChanges();
-								context.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT Books OFF");
 								scope.Commit();
 							}
 						}
@@ -152,6 +151,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 						}
 
 						context.Database.ExecuteSqlCommand("ENABLE TRIGGER BooksHistory ON Books");
+						context.Database.ExecuteSqlCommand("ENABLE TRIGGER BooksInsert ON Books");
 
 					}
 

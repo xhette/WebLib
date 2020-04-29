@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using WebLib.BusinessLayer.DTO;
@@ -11,9 +12,10 @@ namespace WebLib.Models
 	{
 		public int Id { get; set; }
 
+		[Required(ErrorMessage ="Введите заголовок")]
 		public string Title { get; set; }
 
-
+		[Required(ErrorMessage = "Выберите автора")]
 		public int AuthorId { get; set; }
 
 		public int? DepartmentId { get; set; }

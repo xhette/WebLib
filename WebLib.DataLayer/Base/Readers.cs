@@ -15,6 +15,9 @@ namespace WebLib.DataLayer.Base
             AbonentLists = new HashSet<AbonentLists>();
         }
 
+
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [StringLength(50)]

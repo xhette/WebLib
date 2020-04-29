@@ -8,6 +8,9 @@ namespace WebLib.DataLayer.Base
 
     public partial class Providers
     {
+
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [StringLength(50)]

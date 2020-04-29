@@ -241,7 +241,9 @@
     <Compile Include="Models\LibraryModel.cs" />
     <Compile Include="Models\LibraryShortModel.cs" />
     <Compile Include="Models\ProviderModel.cs" />
+    <Compile Include="Models\ProviderPages\AddOrderModel.cs" />
     <Compile Include="Models\ProviderPages\OrderModel.cs" />
+    <Compile Include="Models\ProviderPages\SupplyAddModel.cs" />
     <Compile Include="Models\ProviderPages\SupplyViewModel.cs" />
     <Compile Include="Models\ReaderPages\DepartmentListModel.cs" />
     <Compile Include="Models\ReaderPages\LibraryReaderModel.cs" />
@@ -477,6 +479,14 @@
     <Content Include="Views\ProviderPage\Shops.cshtml" />
     <Content Include="Views\ProviderPage\_AddShop.cshtml" />
     <Content Include="Views\ProviderPage\_EditShop.cshtml" />
+    <Content Include="Views\ProviderPage\_AddSupply.cshtml" />
+    <Content Include="Views\ProviderPage\_AddAuthor.cshtml" />
+    <Content Include="Views\ProviderPage\AddOrder.cshtml" />
+    <Content Include="Views\ProviderPage\Books.cshtml" />
+    <Content Include="Views\ProviderPage\_AuthorSearch.cshtml" />
+    <Content Include="Views\ProviderPage\_BooksByAuthor.cshtml" />
+    <Content Include="Views\ProviderPage\_BooksByTitle.cshtml" />
+    <Content Include="Views\ProviderPage\_BookSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

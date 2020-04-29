@@ -1,0 +1,76 @@
+﻿
+@model IEnumerable<WebLib.Models.ReaderPages.BookViewModel>
+
+<div class="modal fade" id="EditBookModal" tabindex="-1" role="dialog" aria-labelledby="bookModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            @if (ViewBag.TableHead != null && ViewBag.TableHead)
+            {
+                <thead>
+                    <tr>
+                        <th>
+                            Автор
+                        </th>
+                        <th>
+                            Название
+                        </th>
+                        <th>
+                            Отдел
+                        </th>
+                        <th>
+                            Библиотека
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+            }
+            <tbody>
+                @if (Model != null && Model.Count() > 0)
+                {
+                    foreach (var book in Model)
+                    {
+                <tr>
+                    <td>
+                        @book.AuthorFullName
+                    </td>
+                    <td>
+                        "@book.Title"
+                    </td>
+                    <td>
+                        @book.DepartmentName
+                    </td>
+                    <td>
+                        @book.LibraryName
+                    </td>
+                    <td>
+                        <a href="@Url.Action("EditBook", "ProviderPage", new { id = book.Id})"
+                           data-toggle="modal" data-target="#EditBookModal">
+                            Изменить
+                        </a> | @Html.ActionLink("Удалить", "DeleteBook", "ProviderPage", new { id = book.Id }, null)
+                    </td>
+                </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4" class="text-center">
+                            Нет данных
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+

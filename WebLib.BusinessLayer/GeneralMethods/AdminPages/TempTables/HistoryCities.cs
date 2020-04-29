@@ -32,6 +32,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 							string operation = pacient.Operation;
 
 							context.Database.ExecuteSqlCommand("DISABLE TRIGGER CitiesHistory ON Cities");
+							context.Database.ExecuteSqlCommand("DISABLE TRIGGER CitiesInsert ON Cities");
 
 							if (operation == "inserted")
 							{
@@ -61,15 +62,14 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 
 								using (var scope = context.Database.BeginTransaction())
 								{
-									context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Cities ON");
 									context.Cities.Add(entity);
 									context.SaveChanges();
-									context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Cities OFF");
 									scope.Commit();
 								}
 							}
 
 							context.Database.ExecuteSqlCommand("ENABLE TRIGGER CitiesHistory ON Cities");
+							context.Database.ExecuteSqlCommand("ENABLE TRIGGER CitiesInsert ON Cities");
 
 						}
 
@@ -106,6 +106,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 						string operation = pacient.Operation;
 
 						context.Database.ExecuteSqlCommand("DISABLE TRIGGER CitiesHistory ON Cities");
+						context.Database.ExecuteSqlCommand("DISABLE TRIGGER CitiesInsert ON Cities");
 
 						if (operation == "inserted")
 						{
@@ -118,9 +119,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 							using (var scope = context.Database.BeginTransaction())
 							{
 								context.Cities.Add(entity);
-								context.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT Cities ON");
 								context.SaveChanges();
-								context.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT Cities OFF");
 								scope.Commit();
 							}
 						}
@@ -145,6 +144,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 						}
 
 						context.Database.ExecuteSqlCommand("ENABLE TRIGGER CitiesHistory ON Cities");
+						context.Database.ExecuteSqlCommand("ENABLE TRIGGER CitiesInsert ON Cities");
 
 					}
 

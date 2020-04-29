@@ -14,6 +14,9 @@ namespace WebLib.DataLayer.Base
             Libraries = new HashSet<Libraries>();
         }
 
+
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [StringLength(50)]

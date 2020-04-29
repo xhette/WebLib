@@ -32,6 +32,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 							string operation = pacient.Operation;
 
 							context.Database.ExecuteSqlCommand("DISABLE TRIGGER LibrariansHistory ON Librarians");
+							context.Database.ExecuteSqlCommand("DISABLE TRIGGER LibrariansInsert ON Librarians");
 
 							if (operation == "inserted")
 							{
@@ -73,15 +74,14 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 
 								using (var scope = context.Database.BeginTransaction())
 								{
-									context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Librarians ON");
 									context.Librarians.Add(entity);
 									context.SaveChanges();
-									context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Librarians OFF");
 									scope.Commit();
 								}
 							}
 
 							context.Database.ExecuteSqlCommand("ENABLE TRIGGER LibrariansHistory ON Librarians");
+							context.Database.ExecuteSqlCommand("ENABLE TRIGGER LibrariansInsert ON Librarians");
 
 						}
 
@@ -118,6 +118,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 						string operation = pacient.Operation;
 
 						context.Database.ExecuteSqlCommand("DISABLE TRIGGER LibrariansHistory ON Librarians");
+						context.Database.ExecuteSqlCommand("DISABLE TRIGGER LibrariansInsert ON Librarians");
 
 						if (operation == "inserted")
 						{
@@ -136,9 +137,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 							using (var scope = context.Database.BeginTransaction())
 							{
 								context.Librarians.Add(entity);
-								context.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT Librarians ON");
 								context.SaveChanges();
-								context.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT Librarians OFF");
 								scope.Commit();
 							}
 						}
@@ -169,6 +168,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 						}
 
 						context.Database.ExecuteSqlCommand("ENABLE TRIGGER LibrariansHistory ON Librarians");
+						context.Database.ExecuteSqlCommand("ENABLE TRIGGER LibrariansInsert ON Librarians");
 
 					}
 

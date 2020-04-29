@@ -89,6 +89,13 @@ namespace WebLib.DataLayer
 			return books;
 		}
 
+		public List<BookDetailed> ProviderBookList()
+		{
+			var books = context.Database.SqlQuery<BookDetailed>("ProviderListBook").ToList();
+
+			return books;
+		}
+
 		public List<LibrarianDetailed> LibrarianList()
 		{
 			var librarians = context.Database.SqlQuery<LibrarianDetailed>("LibrariansDetailed").ToList();

@@ -39,5 +39,17 @@ namespace WebLib.Models
             };
         }
 
+        public static explicit operator AuthorDTO(AuthorModel dbAuthor)
+        {
+            if (dbAuthor == null) return null;
+            else return new AuthorDTO
+            {
+                Id = dbAuthor.Id,
+                Surname = dbAuthor.Surname,
+                Name = dbAuthor.Name,
+                Patronymic = dbAuthor.Patronymic
+            };
+        }
+
     }
 }

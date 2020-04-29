@@ -15,6 +15,8 @@ namespace WebLib.DataLayer.Base
             OrderLists = new HashSet<OrderLists>();
         }
 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [StringLength(50)]

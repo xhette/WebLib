@@ -8,6 +8,9 @@ namespace WebLib.DataLayer.Base
 
     public partial class Issues
     {
+
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         public DateTime? IssueDate { get; set; }
