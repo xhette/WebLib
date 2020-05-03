@@ -8,6 +8,8 @@ using WebLib.DataLayer;
 
 namespace WebLib.Controllers
 {
+
+    [Authorize(Roles = "admin")]
     public class BackupController : Controller
     {
         public ActionResult Index()

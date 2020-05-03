@@ -51,10 +51,8 @@
                         @book.LibraryName
                     </td>
                     <td>
-                        <a href="@Url.Action("EditBook", "ProviderPage", new { id = book.Id})"
-                           data-toggle="modal" data-target="#EditBookModal">
-                            Изменить
-                        </a> | @Html.ActionLink("Удалить", "DeleteBook", "ProviderPage", new { id = book.Id }, null)
+                        @Html.ActionLink("Изменить", "EditBook", "ProviderPage", new { id = book.BookId }, null)
+                        | @Html.ActionLink("Удалить", "DeleteBook", "ProviderPage", new { id = book.BookId }, null)
                     </td>
                 </tr>
                     }

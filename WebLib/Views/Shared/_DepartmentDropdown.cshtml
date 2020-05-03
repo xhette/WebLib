@@ -1,0 +1,9 @@
+﻿
+@model IEnumerable<WebLib.Models.DepartmentModel>
+
+<select id="DepartmentList" name="DepartmentList" class="form-control" style="min-width: 100%" onchange="DepartmentListChange()">
+    @foreach (var item in Model)
+    {
+        <option value="@item.Id">@item.Name</option>
+    }
+</select>

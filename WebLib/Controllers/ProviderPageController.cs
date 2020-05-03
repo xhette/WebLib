@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using WebLib.BusinessLayer.DTO;
 using WebLib.BusinessLayer.DTO.Composite;
 using WebLib.BusinessLayer.GeneralMethods;
@@ -11,36 +12,41 @@ using WebLib.DataLayer;
 using WebLib.Models;
 using WebLib.Models.ProviderPages;
 using WebLib.Models.ReaderPages;
+using WebMatrix.WebData;
 
 namespace WebLib.Controllers
 {
+    [Authorize(Roles = "provider")]
     public class ProviderPageController : Controller
     {
+        private SimpleRoleProvider roles = (SimpleRoleProvider)Roles.Provider;
+        private SimpleMembershipProvider membership = (SimpleMembershipProvider)Membership.Provider;
+
         private ProviderPage providerContext;
         private LibContext context;
-        private int userId;
-        private int providerId;
 
         public ProviderPageController()
         {
-            //userId = WebSecurity.GetUserId(User.Identity.Name);
-            //if (userId == 0) 
-            userId = 4;
-
             context = new LibContext();
             providerContext = new ProviderPage(context);
+        }
+
+        public ActionResult SidebarPartial()
+        {
+            ProviderModel model = new ProviderModel();
+
+            if (!WebSecurity.IsAuthenticated) RedirectToAction("Index", "Login");
+            int userId = WebSecurity.GetUserId(User.Identity.Name);
 
             var provider = context.Providers.FirstOrDefault(c => c.UserId == userId);
 
             if (provider != null)
             {
-                providerId = provider.Id;
-            }
-        }
+                int providerId = provider.Id;
 
-        public ActionResult SidebarPartial()
-        {
-            ProviderModel model = (ProviderModel)providerContext.ProviderInfo(providerId);
+
+                model = (ProviderModel)providerContext.ProviderInfo(providerId);
+            }
 
             return PartialView("~/Views/ProviderPage/_ProviderInfo.cshtml", model);
         }
@@ -359,6 +365,127 @@ namespace WebLib.Controllers
             return PartialView("~/Views/ProviderPage/_BookSearch.cshtml", model);
         }
 
+        [HttpGet]
+        public ActionResult EditBook(int id)
+        {
+            BookEditModel model = (BookEditModel)providerContext.Books().FirstOrDefault(c => c.BookId == id);
+            model.Authors = providerContext.Authors().Select(c => (AuthorModel)c).ToList();
+            LibraryBs libraryBs = new LibraryBs();
+            model.Libraries = libraryBs.GetList().Select(c => (LibraryModel)c).ToList();
+
+            if (model.Book.DepartmentId.HasValue && model.Book.DepartmentId.Value > 0)
+            {
+                DepartmentBs bs = new DepartmentBs();
+                if (model.SelectedLib == 0)
+                {
+                    model.SelectedLib = bs.GetById(model.Book.DepartmentId.Value).LibraryId;
+                }
+                var departments = bs.GetList().Where(c => c.LibraryId == model.SelectedLib).ToList();
+
+                if (departments != null)
+                {
+                    model.Departments = departments.Select(c => (DepartmentModel)c).ToList();
+                }
+            }
+            else
+            {
+                DepartmentBs bs = new DepartmentBs();
+
+                var lib = model.Libraries.FirstOrDefault();
+
+                if (lib != null)
+                {
+                    model.SelectedLib = lib.Id;
+                    var departments = bs.GetList().Where(c => c.LibraryId == model.SelectedLib).ToList();
+
+                    if (departments != null)
+                    {
+                        model.Departments = departments.Select(c => (DepartmentModel)c).ToList();
+                    }
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditBook(BookEditModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.Book.DepartmentId == 0)
+                    model.Book.DepartmentId = null;
+
+                BookBs bs = new BookBs();
+                var result = bs.Update((BookDTO)model);
+
+                if (result.Code == BusinessLayer.OperationStatusEnum.Success)
+                {
+                    TempData["OperationStatus"] = true;
+                    TempData["OpearionMessage"] = "Данные успешно обновлены";
+
+                    return RedirectToAction("Books", "ProviderPage");
+                }
+                else
+                {
+                    TempData["OperationStatus"] = false;
+                    TempData["OpearionMessage"] = result.Message;
+                }
+            }
+
+            model.Authors = providerContext.Authors().Select(c => (AuthorModel)c).ToList();
+            DepartmentBs dbs = new DepartmentBs();
+            model.Departments = dbs.GetList().Where(c => c.LibraryId == model.SelectedLib).Select(c => (DepartmentModel)c).ToList();
+            return View(model);
+        }
+
+        public ActionResult DeleteBook(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                BookBs bs = new BookBs();
+                var result = bs.Delete(id);
+
+                if (result.Code == BusinessLayer.OperationStatusEnum.Success)
+                {
+                    TempData["OperationStatus"] = true;
+                    TempData["OpearionMessage"] = "Данные успешно обновлены";
+                }
+                else
+                {
+                    TempData["OperationStatus"] = false;
+                    TempData["OpearionMessage"] = result.Message;
+                }
+            }
+            return RedirectToAction("Books", "ProviderPage");
+        }
+
+        public ActionResult DepartmentListByLib(int id = 0)
+        {
+            DepartmentBs bs = new DepartmentBs();
+
+            if (id != 0)
+            {
+                List<DepartmentModel> model = bs.GetList().Where(c => c.LibraryId == id).Select(c => (DepartmentModel)c).ToList();
+
+                return PartialView("~/Views/Shared/_DepartmentDropdown.cshtml", model);
+            }
+            else
+            {
+                int libId = 0;
+                LibraryBs lbs = new LibraryBs();
+                var lib = lbs.GetList().FirstOrDefault();
+
+                if (lib != null)
+                {
+                    libId = lib.Id;
+                }
+
+                List<DepartmentModel> model = bs.GetList().Where(c => c.LibraryId == id).Select(c => (DepartmentModel)c).ToList();
+                return PartialView("~/Views/Shared/_DepartmentDropdown.cshtml", model);
+            }
+
+        }
         #endregion
     }
 }

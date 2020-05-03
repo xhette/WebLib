@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using WebLib.BusinessLayer.DTO;
 using WebLib.BusinessLayer.GeneralMethods;
 using WebLib.DataLayer;
@@ -12,33 +13,37 @@ using WebMatrix.WebData;
 
 namespace WebLib.Controllers
 {
+
+    [Authorize(Roles = "reader")]
     public class ReaderPageController : Controller
     {
+        private SimpleRoleProvider roles = (SimpleRoleProvider)Roles.Provider;
+        private SimpleMembershipProvider membership = (SimpleMembershipProvider)Membership.Provider;
+
         private ReaderPage readerContext;
         private LibContext context;
-        private int userId;
-        private int readerId;
 
         public ReaderPageController ()
         {
-            //userId = WebSecurity.GetUserId(User.Identity.Name);
-            //if (userId == 0) 
-                userId = 2;
-
             context = new LibContext();
             readerContext = new ReaderPage(context);
-
-            var reader = context.Readers.FirstOrDefault(c => c.UserId == userId);
-
-            if (reader != null)
-            {
-                readerId = reader.Id;
-            }
         }
 
 
         public ActionResult Index ()
         {
+            if (!WebSecurity.IsAuthenticated) RedirectToAction("Index", "Login");
+            int userId = WebSecurity.GetUserId(User.Identity.Name);
+
+            var reader = context.Readers.FirstOrDefault(c => c.UserId == userId);
+
+            int readerId;
+
+            if (reader != null)
+            {
+                readerId = reader.Id;
+            }
+
             ReaderPageModel model = new ReaderPageModel();
             model.Reader = (ReaderDataModel)readerContext.ReaderData(userId);
             model.Libraries = readerContext.AbonentList(model.Reader.Id).Select(c => (LibraryShortModel)c).ToList();
@@ -52,18 +57,35 @@ namespace WebLib.Controllers
 
         public ActionResult Libraries ()
         {
-            List<SelectListItem> cities;
-            List<LibraryReaderModel> model;
+            List<SelectListItem> cities = new List<SelectListItem>();
+            List<LibraryReaderModel> model = new List<LibraryReaderModel>();
 
-            model = readerContext.LibraryInfoAbonent(readerId).Select(c => (LibraryReaderModel)c).ToList();
-            cities = readerContext.CityList().Select(c => new SelectListItem
+            if (!WebSecurity.IsAuthenticated) RedirectToAction("Index", "Login");
+            int userId = WebSecurity.GetUserId(User.Identity.Name);
+
+            var reader = context.Readers.FirstOrDefault(c => c.UserId == userId);
+
+            int readerId = 0;
+
+            if (reader != null)
             {
-                Value = c.Id.ToString(),
-                Text = c.Name
-            }).ToList();
-            ViewBag.CitySelectList = cities;
+                readerId = reader.Id;
+            }
 
-            return View(model);
+            if (readerId != 0)
+            {
+
+                model = readerContext.LibraryInfoAbonent(readerId).Select(c => (LibraryReaderModel)c).ToList();
+                cities = readerContext.CityList().Select(c => new SelectListItem
+                {
+                    Value = c.Id.ToString(),
+                    Text = c.Name
+                }).ToList();
+                ViewBag.CitySelectList = cities;
+
+                return View(model);
+            }
+            else return View();
         }
 
         public ActionResult LibraryInfo (int libId)
@@ -79,7 +101,12 @@ namespace WebLib.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LibrariesByCity (int? cityId)
         {
-            List<LibraryReaderModel> model;
+            if (!WebSecurity.IsAuthenticated) RedirectToAction("Index", "Login");
+            int userId = WebSecurity.GetUserId(User.Identity.Name);
+
+            var reader = context.Readers.FirstOrDefault(c => c.UserId == userId);
+
+            List<LibraryReaderModel> model = new List<LibraryReaderModel>();
             int readerId = context.Readers.FirstOrDefault(c => c.UserId == userId).Id;
 
             if (cityId.HasValue)
@@ -95,12 +122,25 @@ namespace WebLib.Controllers
 
         public ActionResult Issues ()
         {
-            List<ReaderIssueModel> model;
-            readerContext = new ReaderPage(context);
-            var dbIssues = readerContext.ReaderIssuesList(readerId).ToList();
+            if (!WebSecurity.IsAuthenticated) RedirectToAction("Login", "Home");
+            int userId = WebSecurity.GetUserId(User.Identity.Name);
 
-            model = dbIssues.Select(c => (ReaderIssueModel)c).ToList();
-            return View(model);
+            var reader = context.Readers.FirstOrDefault(c => c.UserId == userId);
+
+            int readerId;
+
+            if (reader != null)
+            {
+                readerId = reader.Id;
+
+                List<ReaderIssueModel> model;
+                readerContext = new ReaderPage(context);
+                var dbIssues = readerContext.ReaderIssuesList(readerId).ToList();
+
+                model = dbIssues.Select(c => (ReaderIssueModel)c).ToList();
+                return View(model);
+            }
+            else return View();
         }
 
         public ActionResult Books (int page = 1)
@@ -205,6 +245,10 @@ namespace WebLib.Controllers
 
         public ActionResult AddAbonent (int libId)
         {
+            int userId = WebSecurity.GetUserId(User.Identity.Name);
+
+            var reader = context.Readers.FirstOrDefault(c => c.UserId == userId);
+
             TempData["OperationStatus"] = false;
             int readerId = context.Readers.FirstOrDefault(c => c.UserId == userId).Id;
 
@@ -233,6 +277,9 @@ namespace WebLib.Controllers
         [HttpGet]
         public ActionResult ChangeInfo ()
         {
+            if (!WebSecurity.IsAuthenticated) RedirectToAction("Index", "Login");
+            int userId = WebSecurity.GetUserId(User.Identity.Name);
+
             ReaderDataModel model = (ReaderDataModel)readerContext.ReaderData(userId);
 
             return PartialView("~/Views/ReaderPage/_ChangeInfo.cshtml", model);
@@ -269,6 +316,10 @@ namespace WebLib.Controllers
         [HttpGet]
         public ActionResult ChangePassword ()
         {
+            if (!WebSecurity.IsAuthenticated) RedirectToAction("Index", "Login");
+            int userId = WebSecurity.GetUserId(User.Identity.Name);
+
+            var reader = context.Readers.FirstOrDefault(c => c.UserId == userId);
             ChangePasswordModel model = new ChangePasswordModel
             {
                 UserId = userId

@@ -29,6 +29,7 @@
                         <th>
                             Библиотека
                         </th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,20 +37,24 @@
                     {
                         foreach (var book in Model)
                         {
-                            <tr>
-                                <td>
-                                    @book.AuthorFullName
-                                </td>
-                                <td>
-                                    "@book.Title"
-                                </td>
-                                <td>
-                                    @book.DepartmentName
-                                </td>
-                                <td>
-                                    @book.LibraryName
-                                </td>
-                            </tr>
+                    <tr>
+                        <td>
+                            @book.AuthorFullName
+                        </td>
+                        <td>
+                            "@book.Title"
+                        </td>
+                        <td>
+                            @book.DepartmentName
+                        </td>
+                        <td>
+                            @book.LibraryName
+                        </td>
+                        <td>
+                            @Html.ActionLink("Изменить", "EditBook", "ProviderPage", new { id = book.BookId }, null)
+                            | @Html.ActionLink("Удалить", "DeleteBook", "ProviderPage", new { id = book.BookId }, null)
+                        </td>
+                    </tr>
                         } }
                     else
                     {

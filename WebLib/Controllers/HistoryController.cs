@@ -8,6 +8,8 @@ using WebLib.Models;
 
 namespace WebLib.Controllers
 {
+
+    [Authorize(Roles = "admin")]
     public class HistoryController : Controller
     {
         private IHistory history;

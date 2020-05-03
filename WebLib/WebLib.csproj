@@ -20,9 +20,9 @@
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44336</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -240,8 +240,10 @@
     <Compile Include="Models\LibrarianPages\StatusChangeModel.cs" />
     <Compile Include="Models\LibraryModel.cs" />
     <Compile Include="Models\LibraryShortModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ProviderModel.cs" />
     <Compile Include="Models\ProviderPages\AddOrderModel.cs" />
+    <Compile Include="Models\ProviderPages\BookEditModel.cs" />
     <Compile Include="Models\ProviderPages\OrderModel.cs" />
     <Compile Include="Models\ProviderPages\SupplyAddModel.cs" />
     <Compile Include="Models\ProviderPages\SupplyViewModel.cs" />

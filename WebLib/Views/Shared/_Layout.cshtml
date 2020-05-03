@@ -19,7 +19,7 @@
         <div class="container-fluid">
             @Html.ActionLink("WebLib", "Index", "Home", new { @class = "navbar-brand" })
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="../navbar-static-top/">Выход</a></li>
+                <li>@Html.ActionLink("Выйти", "LogOff", "Login")</li>
             </ul>
         </div>
     </div>

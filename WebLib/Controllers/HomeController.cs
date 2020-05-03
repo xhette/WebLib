@@ -10,21 +10,28 @@ using WebMatrix.WebData;
 
 namespace WebLib.Controllers
 {
-    public class HomeController : Controller
+	[AllowAnonymous]
+	public class HomeController : Controller
     {
         public ActionResult Index()
         {
-            return View();
-        }
 
-        public ActionResult About()
-        {
-            return View();
-        }
+			if (User.Identity.IsAuthenticated)
+			{
+				SimpleRoleProvider roles = (SimpleRoleProvider)Roles.Provider;
+				if (roles.IsUserInRole(User.Identity.Name, "admin"))
+					return RedirectToAction("Index", "Admin");
 
-        public ActionResult Contact()
-        {
-            return View();
-        }
+				if (roles.IsUserInRole(User.Identity.Name, "librarian"))
+					return RedirectToAction("Index", "LibrarianPage");
+
+				if (roles.IsUserInRole(User.Identity.Name, "provider"))
+					return RedirectToAction("Index", "ProviderPage");
+
+				if (roles.IsUserInRole(User.Identity.Name, "reader"))
+					return RedirectToAction("Index", "ReaderPage");
+			} 
+			return RedirectToAction("Index", "Login");
+		}
     }
 }

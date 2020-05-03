@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes;
 using WebLib.Models;
 using WebLib.Models.ReaderPages;
+using WebMatrix.WebData;
 
 namespace WebLib.Controllers
 {
+
+    [Authorize(Roles = "admin")]
     public class AdminController : Controller
     {
-        // GET: Admin
+        private SimpleRoleProvider roles = (SimpleRoleProvider)Roles.Provider;
+        private SimpleMembershipProvider membership = (SimpleMembershipProvider)Membership.Provider;
         public ActionResult Authors()
         {
             return View();

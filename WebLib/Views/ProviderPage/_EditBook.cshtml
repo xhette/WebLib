@@ -1,0 +1,44 @@
+﻿@model WebLib.Models.ProviderPages.BookEditModel
+
+        @using (Html.BeginForm("EditBook", "ProviderPage", null, FormMethod.Post))
+        {
+            @Html.HiddenFor(c => c.Book.Id)
+            <div class="modal-header row">
+                <h5 class="modal-title text-center" id="addIssueModal">
+                    <span class="text-center">
+                        Изменить книгу №@Model.Book.Id
+                    </span>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </h5>
+            </div>
+            <div class="modal-body row">
+                <div class="control-group col-md-12 pull-left" style="min-height: 100px;">
+                    <label class="control-label" for="AuthorList">Выберите автора: </label>
+                    <div class="controls">
+                        @Html.DropDownListFor(m => m.Book.AuthorId, new SelectList(Model.Authors, "Id", "FullName", 0), new { @id = "AuthorList", @class = "form-control", @style = "min-width: 100%" })
+                        <p class="help-block">@Html.ValidationMessageFor(m => m.Book.AuthorId, null, new { @class = "text-danger" })</p>
+                    </div>
+                    <label class="control-label" for="Title">Название: </label>
+                    <div class="controls">
+                        @Html.TextBoxFor(m => m.Book.Title, new { @id = "Title", @class = "form-control", @style = "min-width: 100%" })
+                        <p class="help-block">@Html.ValidationMessageFor(m => m.Book.Title, null, new { @class = "text-danger" })</p>
+                    </div>
+                    <label class="control-label" for="LibraryList">Выберите библиотеку: </label>
+                    <div class="controls">
+                        @Html.DropDownListFor(m => m.SelectedLib, new SelectList(Model.Libraries, "Id", "Name", 0), new { @id = "LibraryList", @class = "form-control", @style = "min-width: 100%" })
+                        <p class="help-block">@Html.ValidationMessageFor(m => m.SelectedLib, null, new { @class = "text-danger" })</p>
+                    </div>
+                    <label class="control-label" for="DepartmentList">Выберите отдел: </label>
+                    <div class="controls">
+                        @Html.DropDownListFor(m => m.Book.DepartmentId, new SelectList(Model.Departments, "Id", "Name", 0), new { @id = "DepartmentList", @class = "form-control", @style = "min-width: 100%" })
+                        <p class="help-block">@Html.ValidationMessageFor(m => m.Book.DepartmentId, null, new { @class = "text-danger" })</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-right modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </div>
+}
