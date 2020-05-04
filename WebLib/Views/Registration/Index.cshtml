@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Войти";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<div class="container">
+    <div class="row vertical-align">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-default" style="margin: 150px 0">
+                <div class="panel-body">
+                    <div class="row row-default">
+                        @Html.ActionLink("Регистрация читателя", "RegisterReader", "Registration", new { @class = "btn btn-primary btn-block btn-lg" })
+                    </div>
+                    <div class="row row-default">
+                        @Html.ActionLink("Регистрация библиотекаря", "RegisterEmployee", "Registration", new { type = 1 }, new { @class = "btn btn-primary btn-block btn-lg" })
+                    </div>
+                    <div class="row row-default">
+                        @Html.ActionLink("Регистрация поставщика", "RegisterEmployee", "Registration", new { type = 2 }, new { @class = "btn btn-primary btn-block btn-lg" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

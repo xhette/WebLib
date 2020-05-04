@@ -177,9 +177,11 @@
     <Compile Include="GeneralMethods\ProviderPage.cs" />
     <Compile Include="GeneralMethods\ReaderCardGenerator.cs" />
     <Compile Include="GeneralMethods\ReaderPage.cs" />
+    <Compile Include="GeneralMethods\Registration.cs" />
     <Compile Include="OperationStatusEnum.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserTypeEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

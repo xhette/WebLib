@@ -72,7 +72,7 @@ namespace WebLib.Models.ReaderPages
                 Patronymic = dbReader.Patronymic,
                 PassSeria = dbReader.PassSeria,
                 PassNumber = dbReader.PassNumber,
-                BirthDate = dbReader.BirthDate.HasValue ? dbReader.BirthDate.Value : DateTime.MinValue,
+                BirthDate = dbReader.BirthDate.HasValue ? dbReader.BirthDate.Value : DateTime.Today,
                 Address = dbReader.Address,
                 Phone = dbReader.Phone
             };

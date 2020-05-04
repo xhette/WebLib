@@ -221,6 +221,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProviderPageController.cs" />
     <Compile Include="Controllers\ReaderPageController.cs" />
+    <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\StartController.cs" />
     <Compile Include="Enums\AbonentStatusEnum.cs" />
     <Compile Include="Enums\IssueStatusEnum.cs" />
@@ -249,6 +250,9 @@
     <Compile Include="Models\ProviderPages\SupplyViewModel.cs" />
     <Compile Include="Models\ReaderPages\DepartmentListModel.cs" />
     <Compile Include="Models\ReaderPages\LibraryReaderModel.cs" />
+    <Compile Include="Models\RegisterEmployeeModel.cs" />
+    <Compile Include="Models\RegisterReaderModel.cs" />
+    <Compile Include="Models\RegisterUserModel.cs" />
     <Compile Include="Models\ShopModel.cs" />
     <Compile Include="Models\SupplyModel.cs" />
     <Compile Include="Models\ReaderPages\BookViewModel.cs" />
@@ -489,6 +493,9 @@
     <Content Include="Views\ProviderPage\_BooksByAuthor.cshtml" />
     <Content Include="Views\ProviderPage\_BooksByTitle.cshtml" />
     <Content Include="Views\ProviderPage\_BookSearch.cshtml" />
+    <Content Include="Views\Registration\RegisterReader.cshtml" />
+    <Content Include="Views\Registration\RegisterEmployee.cshtml" />
+    <Content Include="Views\Registration\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

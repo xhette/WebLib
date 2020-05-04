@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "Регистрация";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+@model WebLib.Models.RegisterReaderModel
+
+    <div class="container">
+        <div class="row vertical-align">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-default" style="margin: 150px 0">
+                    <div class="panel-body">
+                        <h3 class="text-center">Регистрация</h3>
+                        @using (Html.BeginForm("RegisterReader", "Registration", null, FormMethod.Post, new { @class = "form-signin" }))
+                        {
+                            <div class="control-group col-md-12" , style="min-height: 100px;">
+                                <!-- Surname -->
+                                <label class="control-label" for="Surname">Логин</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(m => m.User.Login, new { @type = "text", @id = "inputLogin", @class = "form-control", @style = "min-width: 100%" })
+                                    <p class="help-block">@Html.ValidationMessageFor(m => m.User.Login, null, new { @class = "text-danger" })</p>
+                                </div>
+                            </div>
+                            <div class="control-group col-md-12" , style="min-height: 100px;">
+                                <!-- Surname -->
+                                <label class="control-label" for="Surname">Пароль</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(m => m.User.Password, new { @type = "password", @id = "inputPassword", @class = "form-control", @style = "min-width: 100%" })
+                                    <p class="help-block">@Html.ValidationMessageFor(m => m.User.Password, null, new { @class = "text-danger" })</p>
+                                </div>
+                            </div>
+                            <div class="control-group col-md-12" , style="min-height: 100px;">
+                                <!-- Surname -->
+                                <label class="control-label" for="Surname">Повторите пароль</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(m => m.User.ConfirmPassword, new { @type = "password", @id = "confirmPassword", @class = "form-control", @style = "min-width: 100%" })
+                                    <p class="help-block">@Html.ValidationMessageFor(m => m.User.ConfirmPassword, null, new { @class = "text-danger" })</p>
+                                </div>
+                            </div>
+                            <div class="control-group col-md-12" , style="min-height: 100px;">
+                                <!-- Surname -->
+                                <label class="control-label" for="Surname">Фамилия</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(m => m.Reader.Surname, new { @class = "form-control", @id = "Surname", @style = "min-width: 100%" })
+                                    <p class="help-block">@Html.ValidationMessageFor(m => m.Reader.Surname, null, new { @class = "text-danger" })</p>
+                                </div>
+                            </div>
+
+                            <div class="control-group col-md-12" , style="min-height: 100px;">
+                                <!-- Name -->
+                                <label class="control-label" for="Name">Имя</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(m => m.Reader.Name, new { @class = "form-control", @id = "Name", @style = "min-width: 100%" })
+                                    <p class="help-block">@Html.ValidationMessageFor(m => m.Reader.Name, null, new { @class = "text-danger" })</p>
+                                </div>
+                            </div>
+                            <div class="control-group col-md-12" , style="min-height: 100px;">
+                                <!-- Patronymic -->
+                                <label class="control-label" for="Patronymic">Отчество</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(m => m.Reader.Patronymic, new { @class = "form-control", @id = "Patronymic", @style = "min-width: 100%" })
+                                    <p class="help-block">@Html.ValidationMessageFor(m => m.Reader.Patronymic, null, new { @class = "text-danger" })</p>
+                                </div>
+                            </div>
+                            <div class="control-group col-md-12" , style="min-height: 100px;">
+                                <!-- BirthDate -->
+                                <label class="control-label" for="BirthDate">Дата рождения</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(m => m.Reader.BirthDate, "{0:yyyy-MM-dd}", new { @class = "form-control date-input", @id = "BirthDate", @style = "min-width: 100%", type = "date" })
+                                    <p class="help-block">@Html.ValidationMessageFor(m => m.Reader.BirthDate, null, new { @class = "text-danger" })</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="control-group col-md-6" , style="min-height: 100px;">
+                                    <!-- PassSeria -->
+                                    <label class="control-label" for="PassSeria">Серия паспорта</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(m => m.Reader.PassSeria, new { @class = "form-control", @id = "PassSeria", @style = "min-width: 100%" })
+                                        <p class="help-block">@Html.ValidationMessageFor(m => m.Reader.PassSeria, null, new { @class = "text-danger" })</p>
+                                    </div>
+                                </div>
+                                <div class="control-group col-md-6" , style="min-height: 100px;">
+                                    <!-- PassNumber -->
+                                    <label class="control-label" for="PassNumber">Номер паспорта</label>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(m => m.Reader.PassNumber, new { @class = "form-control", @id = "PassNumber", @style = "min-width: 100%" })
+                                        <p class="help-block">@Html.ValidationMessageFor(m => m.Reader.PassNumber, null, new { @class = "text-danger" })</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group col-md-12" , style="min-height: 100px;">
+                                <!-- Address -->
+                                <label class="control-label" for="Address">Адрес</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(m => m.Reader.Address, new { @class = "form-control", @id = "Address", @style = "min-width: 100%" })
+                                    <p class="help-block">@Html.ValidationMessageFor(m => m.Reader.Address, null, new { @class = "text-danger" })</p>
+                                </div>
+                            </div>
+                            <div class="control-group col-md-12" , style="min-height: 100px;">
+                                <!-- Phone -->
+                                <label class="control-label" for="Phone">Телефон</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(m => m.Reader.Phone, new { @class = "form-control", @id = "Phone", @style = "min-width: 100%" })
+                                    <p class="help-block">@Html.ValidationMessageFor(m => m.Reader.Phone, null, new { @class = "text-danger" })</p>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-lg" type="submit">Зарегистрироваться</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+

@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "Регистрация";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+@model WebLib.Models.RegisterEmployeeModel
+
+    <div class="container">
+        <div class="row vertical-align">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-default" style="margin: 150px 0">
+                    <div class="panel-body">
+                        <h3 class="text-center">Регистрация</h3>
+                        @using (Html.BeginForm("RegisterEmployee", "Registration", null, FormMethod.Post, new { @class = "form-signin" }))
+                        {
+                            @Html.HiddenFor(m => m.EmployeeType)
+                            <div class="control-group col-md-12" style="min-height: 100px;">
+                                <!-- Surname -->
+                                <label class="control-label" for="EmployeeId">Идентификатор сотрудника</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(m => m.EmployeeId, new { @class = "form-control", @id = "EmployeeId", @style = "min-width: 100%" })
+                                    <p class="help-block">@Html.ValidationMessageFor(m => m.EmployeeId, null, new { @class = "text-danger" })</p>
+                                </div>
+                            </div>
+
+                            <div class="control-group col-md-12" style="min-height: 100px;">
+                                <!-- Login -->
+                                <label class="control-label" for="Login">Логин</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(m => m.User.Login, new
+                                    {
+                                        @type = "text",
+                                        @id = "inputLogin",
+                                        @class = "form-control", @style = "min-width: 100%"})
+
+                                    <p class="help-block">@Html.ValidationMessageFor(m => m.User.Login, null, new { @class = "text-danger" })</p>
+                                </div>
+                            </div>
+
+                            <div class="control-group col-md-12" , style="min-height: 100px;">
+                                <!-- Surname -->
+                                <label class="control-label" for="Password">Пароль</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(m => m.User.Password, new { @type = "password", @id = "inputPassword", @class = "form-control", @style = "min-width: 100%" })
+                                    <p class="help-block">@Html.ValidationMessageFor(m => m.User.Password, null, new { @class = "text-danger" })</p>
+                                </div>
+                            </div>
+
+                            <div class="control-group col-md-12" , style="min-height: 100px;">
+                                <!-- Surname -->
+                                <label class="control-label" for="ConfirmPassword">Повторите пароль</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(m => m.User.ConfirmPassword, new { @type = "password", @id = "confirmPassword", @class = "form-control", @style = "min-width: 100%" })
+                                    <p class="help-block">@Html.ValidationMessageFor(m => m.User.ConfirmPassword, null, new { @class = "text-danger" })</p>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary btn-lg" type="submit">Зарегистрироваться</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
