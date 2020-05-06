@@ -496,6 +496,18 @@
     <Content Include="Views\Registration\RegisterReader.cshtml" />
     <Content Include="Views\Registration\RegisterEmployee.cshtml" />
     <Content Include="Views\Registration\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Authors.cshtml" />
+    <Content Include="Views\Admin\Books.cshtml" />
+    <Content Include="Views\Admin\Cities.cshtml" />
+    <Content Include="Views\Admin\Departments.cshtml" />
+    <Content Include="Views\Admin\Issues.cshtml" />
+    <Content Include="Views\Admin\Librarians.cshtml" />
+    <Content Include="Views\Admin\Libraries.cshtml" />
+    <Content Include="Views\Admin\Providers.cshtml" />
+    <Content Include="Views\Admin\Readers.cshtml" />
+    <Content Include="Views\Admin\Shops.cshtml" />
+    <Content Include="Views\Admin\Supplies.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

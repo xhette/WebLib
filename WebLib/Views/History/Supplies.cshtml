@@ -38,5 +38,17 @@
                 @Html.ActionLink("Повторить", "SuppliesRedo", "History", new { time = Model.Time, step = Model.Step }, new { @class = "btn btn-block btn-default" })
             </div>
         </div>
+        <div class="row row-default">
+            <div class="col-md-12 text-center" ">
+                @if (Model.Step == 0)
+                {
+                    @Html.ActionLink("Сохранить", "Save", "History", new { table = "Supplies" }, new { @class = "btn btn-block btn-lg btn-success disabled" })
+                }
+                else
+                {
+                    @Html.ActionLink("Сохранить", "Save", "History", new { table = "Supplies" }, new { @class = "btn btn-block btn-lg btn-success" })
+                }
+            </div>
+        </div>
     </div>
 </div>

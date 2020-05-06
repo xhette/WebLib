@@ -332,5 +332,10 @@ namespace WebLib.Controllers
 
             return RedirectToAction("Supplies", "History", new { time = time, step = step });
         }
+
+        public ActionResult Save(string table = "Index")
+        {
+            return RedirectToAction(table, "History");
+        }
     }
 }

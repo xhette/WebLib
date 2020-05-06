@@ -17,13 +17,69 @@ namespace WebLib.Controllers
     {
         private SimpleRoleProvider roles = (SimpleRoleProvider)Roles.Provider;
         private SimpleMembershipProvider membership = (SimpleMembershipProvider)Membership.Provider;
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         public ActionResult Authors()
         {
             return View();
         }
 
-		#region partial lists
-		public ActionResult AuthorsList(string symbols = "")
+        public ActionResult Books()
+        {
+            return View();
+        }
+
+        public ActionResult Cities()
+        {
+            return View();
+        }
+
+        public ActionResult Departments()
+        {
+            return View();
+        }
+
+        public ActionResult Issues()
+        {
+            return View();
+        }
+
+        public ActionResult Librarians()
+        {
+            return View();
+        }
+
+        public ActionResult Libraries()
+        {
+            return View();
+        }
+
+        public ActionResult Providers()
+        {
+            return View();
+        }
+
+        public ActionResult Readers()
+        {
+            return View();
+        }
+
+        public ActionResult Shops()
+        {
+            return View();
+        }
+
+        public ActionResult Supplies()
+        {
+            return View();
+        }
+
+        #region partial lists
+        public ActionResult AuthorsList(string symbols = "")
         {
             AuthorBs author = new AuthorBs();
             List<AuthorModel> model = author.GetList().Where(
