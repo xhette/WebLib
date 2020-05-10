@@ -232,6 +232,8 @@
     <Compile Include="Models\BackupModel.cs" />
     <Compile Include="Models\BookModel.cs" />
     <Compile Include="Models\DepartmentModel.cs" />
+    <Compile Include="Models\EditDepartmentModel.cs" />
+    <Compile Include="Models\EditLibraryModel.cs" />
     <Compile Include="Models\IssueModel.cs" />
     <Compile Include="Models\LibrarianModel.cs" />
     <Compile Include="Models\LibrarianPages\AbonentModel.cs" />
@@ -508,11 +510,24 @@
     <Content Include="Views\Admin\Readers.cshtml" />
     <Content Include="Views\Admin\Shops.cshtml" />
     <Content Include="Views\Admin\Supplies.cshtml" />
+    <Content Include="Views\Admin\EditViews\EditBook.cshtml" />
+    <Content Include="Views\Admin\EditViews\EditAuthor.cshtml" />
+    <Content Include="Views\Admin\EditViews\EditCity.cshtml" />
+    <Content Include="Views\Admin\EditViews\EditDepartment.cshtml" />
+    <Content Include="Views\Admin\EditViews\EditIssue.cshtml" />
+    <Content Include="Views\Admin\EditViews\EditLibrarian.cshtml" />
+    <Content Include="Views\Admin\EditViews\EditLibrary.cshtml" />
+    <Content Include="Views\Admin\EditViews\EditProvider.cshtml" />
+    <Content Include="Views\Admin\EditViews\EditReader.cshtml" />
+    <Content Include="Views\Admin\EditViews\EditShop.cshtml" />
+    <Content Include="Views\Admin\EditViews\EditSupply.cshtml" />
+    <Content Include="Views\ProviderPage\EditBook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Backup\" />
     <Folder Include="Content\Restore\" />
+    <Folder Include="Views\Admin\AddViews\" />
     <Folder Include="Views\Start\" />
   </ItemGroup>
   <ItemGroup>

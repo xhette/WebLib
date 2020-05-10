@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "Изменение книги";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model WebLib.Models.ProviderPages.BookEditModel
+
+@section Sidebar {
+    <div class="col-md-2" id="navbar">
+        <nav class="sidebar">
+            <ul class="list-unstyled navbar-list">
+                <li class="navbar-list-item active-nav-item">
+                    @Html.ActionLink("Просмотр данных", "Index", "Admin")
+                </li>
+                <li class="navbar-list-item">
+                    @Html.ActionLink("Отмена изменений", "Index", "History")
+                </li>
+                <li class="navbar-list-item">
+                    @Html.ActionLink("Резервное копирование", "Index", "Backup")
+                </li>
+            </ul>
+        </nav>
+    </div>
+}
+
+<div class="col-md-10 col-md-offset-2">
+    <div class="page-wrapper">
+
+        <div class="row row-default">
+            <div class="col-md-12">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="@Url.Action( "Books", "Admin")" class="btn btn-default" style="cursor: pointer;">
+                            <i class="fa fa-long-arrow-left"></i> <span style="margin-left: 5px;">Назад</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row row-default">
+            <div class="col-md-12">
+                @using (Html.BeginForm("EditBook", "Admin", null, FormMethod.Post, new { @style = "padding: 0 15em" }))
+                {
+                    @Html.HiddenFor(m => m.Book.Id)
+                    <div class="control-group col-md-12 pull-left" style="min-height: 100px;">
+                        <label class="control-label" for="AuthorList">Выберите автора: </label>
+                        <div class="controls">
+                            @Html.DropDownListFor(m => m.Book.AuthorId, new SelectList(Model.Authors, "Id", "FullName", 0), new { @id = "AuthorList", @class = "form-control", @style = "min-width: 100%" })
+                            <p class="help-block">@Html.ValidationMessageFor(m => m.Book.AuthorId, null, new { @class = "text-danger" })</p>
+                        </div>
+                    </div>
+                    <div class="control-group col-md-12 pull-left" style="min-height: 100px;">
+                        <label class="control-label" for="Title">Название: </label>
+                        <div class="controls">
+                            @Html.TextBoxFor(m => m.Book.Title, new { @id = "Title", @class = "form-control", @style = "min-width: 100%" })
+                            <p class="help-block">@Html.ValidationMessageFor(m => m.Book.Title, null, new { @class = "text-danger" })</p>
+                        </div>
+                    </div>
+                    <div class="control-group col-md-12" , style="min-height: 100px;">
+                        <label class="control-label" for="LibraryList">Выберите библиотеку: </label>
+                        <div class="controls">
+                            @Html.DropDownList("LibraryList", new SelectList(Model.Libraries, "Id", "Name", Model.SelectedLib), new { @id = "LibraryList", @class = "form-control", @style = "min-width: 100%" })
+                        </div>
+                    </div>
+                    <div class="control-group col-md-12" , style="min-height: 100px;">
+                        <label class="control-label" for="DepartmentList">Выберите отдел: </label>
+                        <div class="controls">
+                            @Html.HiddenFor(m => m.Book.DepartmentId, new { @id = "SelectedDepartment" })
+                            @Html.DropDownList("DepartmentList", new SelectList(Model.Departments, "Id", "Name", 0), new { @id = "DepartmentList", @class = "form-control", @style = "min-width: 100%", @onchange = "DepartmentListChange()" })
+                            <p class="help-block">@Html.ValidationMessageFor(m => m.Book.DepartmentId, null, new { @class = "text-danger" })</p>
+                        </div>
+                    </div>
+                    <div class="text-center col-md-12">
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">Сохранить</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        BookListChange();
+    });
+
+    $(function () {
+        $('#LibraryList').change(function () {
+            // получаем выбранный id
+            var id = $(this).val();
+            console.log(id);
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("DepartmentListByLib")/' + id,
+                success: function (data) {
+
+                    $('#BookList').replaceWith(data);
+                    BookListChange();
+                }
+            });
+        })
+    });
+
+    function DepartmentListChange() {
+        var book = $("#DepartmentList").val();
+        console.log(book);
+        var bookInput = $("#SelectedDepartment");
+        bookInput.val(book);
+        console.log(bookInput.val());
+    }
+</script>

@@ -21,6 +21,7 @@ namespace WebLib.Controllers
 
         public ActionResult Authors(DateTime? time, int? step)
         {
+            TempData["IsAdminView"] = false;
             TempworkModel model = new TempworkModel();
 
             if (time.HasValue && step.HasValue)
@@ -34,6 +35,7 @@ namespace WebLib.Controllers
 
         public ActionResult AuthorsUndo(DateTime time, int step)
         {
+            TempData["IsAdminView"] = false;
             history = new HistoryAuthors();
             step = history.Undone(step, time);
 
@@ -42,6 +44,7 @@ namespace WebLib.Controllers
 
         public ActionResult AuthorsRedo(DateTime time, int step)
         {
+            TempData["IsAdminView"] = false;
             history = new HistoryAuthors();
             step = history.Redone(step, time);
 
@@ -50,6 +53,7 @@ namespace WebLib.Controllers
 
         public ActionResult Books(DateTime? time, int? step)
         {
+            TempData["IsAdminView"] = false;
             TempworkModel model = new TempworkModel();
 
             if (time.HasValue && step.HasValue)
@@ -63,6 +67,7 @@ namespace WebLib.Controllers
 
         public ActionResult BooksUndo(DateTime time, int step)
         {
+            TempData["IsAdminView"] = false;
             history = new HistoryBooks();
             step = history.Undone(step, time);
 
@@ -71,6 +76,7 @@ namespace WebLib.Controllers
 
         public ActionResult BooksRedo(DateTime time, int step)
         {
+            TempData["IsAdminView"] = false;
             history = new HistoryBooks();
             step = history.Redone(step, time);
 
@@ -78,6 +84,7 @@ namespace WebLib.Controllers
         }
         public ActionResult Cities(DateTime? time, int? step)
         {
+            TempData["IsAdminView"] = false;
             TempworkModel model = new TempworkModel();
 
             if (time.HasValue && step.HasValue)
@@ -91,6 +98,7 @@ namespace WebLib.Controllers
 
         public ActionResult CitiesUndo(DateTime time, int step)
         {
+            TempData["IsAdminView"] = false;
             history = new HistoryCities();
             step = history.Undone(step, time);
 
@@ -99,6 +107,7 @@ namespace WebLib.Controllers
 
         public ActionResult CitiesRedo(DateTime time, int step)
         {
+            TempData["IsAdminView"] = false;
             history = new HistoryCities();
             step = history.Redone(step, time);
 
@@ -106,6 +115,7 @@ namespace WebLib.Controllers
         }
         public ActionResult Departments(DateTime? time, int? step)
         {
+            TempData["IsAdminView"] = false;
             TempworkModel model = new TempworkModel();
 
             if (time.HasValue && step.HasValue)
@@ -119,6 +129,7 @@ namespace WebLib.Controllers
 
         public ActionResult DepartmentsUndo(DateTime time, int step)
         {
+            TempData["IsAdminView"] = false;
             history = new HistoryDepartments();
             step = history.Undone(step, time);
 
@@ -127,6 +138,7 @@ namespace WebLib.Controllers
 
         public ActionResult DepartmentsRedo(DateTime time, int step)
         {
+            TempData["IsAdminView"] = false;
             history = new HistoryDepartments();
             step = history.Redone(step, time);
 
@@ -134,6 +146,7 @@ namespace WebLib.Controllers
         }
         public ActionResult Issues(DateTime? time, int? step)
         {
+            TempData["IsAdminView"] = false;
             TempworkModel model = new TempworkModel();
 
             if (time.HasValue && step.HasValue)
@@ -147,6 +160,7 @@ namespace WebLib.Controllers
 
         public ActionResult IssuesUndo(DateTime time, int step)
         {
+            TempData["IsAdminView"] = false;
             history = new HistoryIssues();
             step = history.Undone(step, time);
 
@@ -155,6 +169,7 @@ namespace WebLib.Controllers
 
         public ActionResult IssuesRedo(DateTime time, int step)
         {
+            TempData["IsAdminView"] = false;
             history = new HistoryIssues();
             step = history.Redone(step, time);
 
@@ -162,6 +177,7 @@ namespace WebLib.Controllers
         }
         public ActionResult Librarians(DateTime? time, int? step)
         {
+            TempData["IsAdminView"] = false;
             TempworkModel model = new TempworkModel();
 
             if (time.HasValue && step.HasValue)
@@ -175,6 +191,7 @@ namespace WebLib.Controllers
 
         public ActionResult LibrariansUndo(DateTime time, int step)
         {
+            TempData["IsAdminView"] = false;
             history = new HistoryLibrarians();
             step = history.Undone(step, time);
 
@@ -183,6 +200,7 @@ namespace WebLib.Controllers
 
         public ActionResult LibrariansRedo(DateTime time, int step)
         {
+            TempData["IsAdminView"] = false;
             history = new HistoryLibrarians();
             step = history.Redone(step, time);
 
@@ -190,6 +208,7 @@ namespace WebLib.Controllers
         }
         public ActionResult Libraries(DateTime? time, int? step)
         {
+            TempData["IsAdminView"] = false;
             TempworkModel model = new TempworkModel();
 
             if (time.HasValue && step.HasValue)
@@ -203,6 +222,7 @@ namespace WebLib.Controllers
 
         public ActionResult LibrariesUndo(DateTime time, int step)
         {
+            TempData["IsAdminView"] = false;
             history = new HistoryLibraries();
             step = history.Undone(step, time);
 
@@ -211,6 +231,7 @@ namespace WebLib.Controllers
 
         public ActionResult LibrariesRedo(DateTime time, int step)
         {
+            TempData["IsAdminView"] = false;
             history = new HistoryLibraries();
             step = history.Redone(step, time);
 
@@ -219,6 +240,7 @@ namespace WebLib.Controllers
 
         public ActionResult Providers(DateTime? time, int? step)
         {
+            TempData["IsAdminView"] = false;
             TempworkModel model = new TempworkModel();
 
             if (time.HasValue && step.HasValue)
@@ -232,6 +254,7 @@ namespace WebLib.Controllers
 
         public ActionResult ProvidersUndo(DateTime time, int step)
         {
+            TempData["IsAdminView"] = false;
             history = new HistoryProviders();
             step = history.Undone(step, time);
 
@@ -240,6 +263,7 @@ namespace WebLib.Controllers
 
         public ActionResult ProvidersRedo(DateTime time, int step)
         {
+            TempData["IsAdminView"] = false;
             history = new HistoryProviders();
             step = history.Redone(step, time);
 
@@ -248,6 +272,7 @@ namespace WebLib.Controllers
 
         public ActionResult Readers(DateTime? time, int? step)
         {
+            TempData["IsAdminView"] = false;
             TempworkModel model = new TempworkModel();
 
             if (time.HasValue && step.HasValue)
@@ -261,6 +286,7 @@ namespace WebLib.Controllers
 
         public ActionResult ReadersUndo(DateTime time, int step)
         {
+            TempData["IsAdminView"] = false;
             history = new HistoryReaders();
             step = history.Undone(step, time);
 
@@ -269,6 +295,7 @@ namespace WebLib.Controllers
 
         public ActionResult ReadersRedo(DateTime time, int step)
         {
+            TempData["IsAdminView"] = false;
             history = new HistoryReaders();
             step = history.Redone(step, time);
 
@@ -277,6 +304,7 @@ namespace WebLib.Controllers
 
         public ActionResult Shops(DateTime? time, int? step)
         {
+            TempData["IsAdminView"] = false;
             TempworkModel model = new TempworkModel();
 
             if (time.HasValue && step.HasValue)
@@ -290,6 +318,7 @@ namespace WebLib.Controllers
 
         public ActionResult ShopsUndo(DateTime time, int step)
         {
+            TempData["IsAdminView"] = false;
             history = new HistoryLibraries();
             step = history.Undone(step, time);
 
@@ -298,6 +327,7 @@ namespace WebLib.Controllers
 
         public ActionResult ShopsRedo(DateTime time, int step)
         {
+            TempData["IsAdminView"] = false;
             history = new HistoryShops();
             step = history.Redone(step, time);
 
@@ -306,6 +336,7 @@ namespace WebLib.Controllers
 
         public ActionResult Supplies(DateTime? time, int? step)
         {
+            TempData["IsAdminView"] = false;
             TempworkModel model = new TempworkModel();
 
             if (time.HasValue && step.HasValue)
@@ -319,6 +350,7 @@ namespace WebLib.Controllers
 
         public ActionResult SuppliesUndo(DateTime time, int step)
         {
+            TempData["IsAdminView"] = false;
             history = new HistorySupplies();
             step = history.Undone(step, time);
 
@@ -327,6 +359,7 @@ namespace WebLib.Controllers
 
         public ActionResult SuppliesRedo(DateTime time, int step)
         {
+            TempData["IsAdminView"] = false;
             history = new HistorySupplies();
             step = history.Redone(step, time);
 
@@ -335,6 +368,7 @@ namespace WebLib.Controllers
 
         public ActionResult Save(string table = "Index")
         {
+            TempData["IsAdminView"] = false;
             return RedirectToAction(table, "History");
         }
     }

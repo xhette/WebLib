@@ -25,56 +25,67 @@ namespace WebLib.Controllers
 
         public ActionResult Authors()
         {
+            TempData["IsAdminView"] = true;
             return View();
         }
 
         public ActionResult Books()
         {
+            TempData["IsAdminView"] = true;
             return View();
         }
 
         public ActionResult Cities()
         {
+            TempData["IsAdminView"] = true;
             return View();
         }
 
         public ActionResult Departments()
         {
+            TempData["IsAdminView"] = true;
             return View();
         }
 
         public ActionResult Issues()
         {
+            TempData["IsAdminView"] = true;
             return View();
         }
 
         public ActionResult Librarians()
         {
+            TempData["IsAdminView"] = true;
             return View();
         }
 
         public ActionResult Libraries()
         {
+            TempData["IsAdminView"] = true;
             return View();
         }
 
         public ActionResult Providers()
         {
+            TempData["IsAdminView"] = true;
             return View();
         }
 
         public ActionResult Readers()
         {
+            TempData["IsAdminView"] = true;
             return View();
         }
 
         public ActionResult Shops()
         {
+            TempData["IsAdminView"] = true;
             return View();
         }
 
         public ActionResult Supplies()
         {
+            TempData["IsAdminView"] = true;
             return View();
         }
 

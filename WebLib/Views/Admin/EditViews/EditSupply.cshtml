@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Изменение поставки";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model WebLib.Models.ProviderPages.SupplyAddModel
+
+@section Sidebar {
+    <div class="col-md-2" id="navbar">
+        <nav class="sidebar">
+            <ul class="list-unstyled navbar-list">
+                <li class="navbar-list-item active-nav-item">
+                    @Html.ActionLink("Просмотр данных", "Index", "Admin")
+                </li>
+                <li class="navbar-list-item">
+                    @Html.ActionLink("Отмена изменений", "Index", "History")
+                </li>
+                <li class="navbar-list-item">
+                    @Html.ActionLink("Резервное копирование", "Index", "Backup")
+                </li>
+            </ul>
+        </nav>
+    </div>
+}
+
+<div class="col-md-10 col-md-offset-2">
+    <div class="page-wrapper">
+
+        <div class="row row-default">
+            <div class="col-md-12">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="@Url.Action( "Supplies", "Admin")" class="btn btn-default" style="cursor: pointer;">
+                            <i class="fa fa-long-arrow-left"></i> <span style="margin-left: 5px;">Назад</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row row-default">
+            <div class="col-md-12">
+                @using (Html.BeginForm("EditSupply", "Admin", null, FormMethod.Post, new { @style = "padding: 0 15em" }))
+                {
+                    @Html.HiddenFor(m => m.Supply.Id)
+                    <div class="control-group col-md-12 pull-left" style="min-height: 100px;">
+                        <label class="control-label" for="Date">Дата</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(m => m.Supply.Date, "{0:yyyy-MM-dd}", new { @class = "form-control date-input", @id = "Date", @style = "min-width: 100%", type = "date" })
+                            <p class="help-block">@Html.ValidationMessageFor(m => m.Supply.Date, null, new { @class = "text-danger" })</p>
+                        </div>
+                    </div>
+                    <div class="control-group col-md-12 pull-left" style="min-height: 100px;">
+                        <div class="controls">
+                            @Html.DropDownListFor(m => m.Supply.ShopId, new SelectList(Model.Shops, "Id", "Name", 0), new { @id = "ShopList", @class = "form-control", @style = "min-width: 100%" })
+                            <p class="help-block">@Html.ValidationMessageFor(m => m.Supply.ShopId, null, new { @class = "text-danger" })</p>
+                        </div>
+                    </div>
+                    <div class="control-group col-md-12 pull-left" style="min-height: 100px;">
+                        <label class="control-label" for="Summ">Дата</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(m => m.Supply.Summ,new { @class = "form-control", @id = "Summ", @style = "min-width: 100%", type = "date" })
+                            <p class="help-block">@Html.ValidationMessageFor(m => m.Supply.Summ, null, new { @class = "text-danger" })</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

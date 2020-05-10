@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "Изменение библиотекаря";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model WebLib.Models.LibrarianModel
+
+@section Sidebar {
+    <div class="col-md-2" id="navbar">
+        <nav class="sidebar">
+            <ul class="list-unstyled navbar-list">
+                <li class="navbar-list-item active-nav-item">
+                    @Html.ActionLink("Просмотр данных", "Index", "Admin")
+                </li>
+                <li class="navbar-list-item">
+                    @Html.ActionLink("Отмена изменений", "Index", "History")
+                </li>
+                <li class="navbar-list-item">
+                    @Html.ActionLink("Резервное копирование", "Index", "Backup")
+                </li>
+            </ul>
+        </nav>
+    </div>
+}
+
+<div class="col-md-10 col-md-offset-2">
+    <div class="page-wrapper">
+
+        <div class="row row-default">
+            <div class="col-md-12">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="@Url.Action( "Librarians", "Admin")" class="btn btn-default" style="cursor: pointer;">
+                            <i class="fa fa-long-arrow-left"></i> <span style="margin-left: 5px;">Назад</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row row-default">
+            @using (Html.BeginForm("EditLibrarian", "Admin", null, FormMethod.Post, new { @style = "padding: 0 15em" }))
+            {
+                <div class="col-md-12">
+                    @Html.HiddenFor(m => m.UserId)
+                    @Html.HiddenFor(m => m.Id)
+                    <div class="control-group col-md-12" , style="min-height: 100px;">
+                        <!-- Surname -->
+                        <label class="control-label" for="Surname">Фамилия</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(m => m.Surname, new { @class = "form-control", @id = "Surname", @style = "min-width: 100%" })
+                            <p class="help-block">@Html.ValidationMessageFor(m => m.Surname, null, new { @class = "text-danger" })</p>
+                        </div>
+                    </div>
+
+                    <div class="control-group col-md-12" , style="min-height: 100px;">
+                        <!-- Name -->
+                        <label class="control-label" for="Name">Имя</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @id = "Name", @style = "min-width: 100%" })
+                            <p class="help-block">@Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })</p>
+                        </div>
+                    </div>
+                    <div class="control-group col-md-12" , style="min-height: 100px;">
+                        <!-- Patronymic -->
+                        <label class="control-label" for="Patronymic">Отчество</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(m => m.Patronymic, new { @class = "form-control", @id = "Patronymic", @style = "min-width: 100%" })
+                            <p class="help-block">@Html.ValidationMessageFor(m => m.Patronymic, null, new { @class = "text-danger" })</p>
+                        </div>
+                    </div>
+                    <div class="control-group col-md-12" , style="min-height: 100px;">
+                        <!-- Address -->
+                        <label class="control-label" for="Address">Адрес</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @id = "Address", @style = "min-width: 100%" })
+                            <p class="help-block">@Html.ValidationMessageFor(m => m.Address, null, new { @class = "text-danger" })</p>
+                        </div>
+                    </div>
+                    <div class="control-group col-md-12" , style="min-height: 100px;">
+                        <!-- Phone -->
+                        <label class="control-label" for="Phone">Телефон</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @id = "Phone", @style = "min-width: 100%" })
+                            <p class="help-block">@Html.ValidationMessageFor(m => m.Phone, null, new { @class = "text-danger" })</p>
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
+    </div>
+</div>

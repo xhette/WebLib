@@ -1,10 +1,26 @@
 ﻿@model IEnumerable<WebLib.Models.IssueModel>
 
+@{
+    bool isView = false;
+
+    if (TempData["IsAdminView"] != null)
+    {
+        isView = (bool)TempData["IsAdminView"];
+    }
+}
+
+@if (isView)
+{
+    <div class="row row-default text-right">
+        @Html.ActionLink("Добавить", "Add", "Admin", new { @class = "btn btn-primary" })
+    </div>
+}
+
 <table class="table">
     <thead>
         <tr>
             <th class="text-center">
-                ID 
+                ID
             </th>
             <th class="text-center">
                 ID книги
@@ -18,28 +34,39 @@
             <th class="text-center">
                 Дата возврата
             </th>
+            @if (isView)
+            {
+                <th class="text-center"></th>
+            }
         </tr>
     </thead>
     <tbody>
         @foreach (var m in Model)
         {
-        <tr>
-            <td class="text-center">
-                @m.Id
-            </td>
-            <td class="text-center">
-                @m.BookId
-            </td>
-            <td class="text-center">
-                @m.ReaderId
-            </td>
-            <td class="text-center">
-                @(m.IssueDate.HasValue ? m.IssueDate.Value.ToShortDateString() : String.Empty)
-            </td>
-            <td class="text-center">
-                @(m.ReturnDate.HasValue ? m.ReturnDate.Value.ToShortDateString() : String.Empty)
-            </td>
-        </tr>
+            <tr>
+                <td class="text-center">
+                    @m.Id
+                </td>
+                <td class="text-center">
+                    @m.BookId
+                </td>
+                <td class="text-center">
+                    @m.ReaderId
+                </td>
+                <td class="text-center">
+                    @(m.IssueDate.HasValue ? m.IssueDate.Value.ToShortDateString() : String.Empty)
+                </td>
+                <td class="text-center">
+                    @(m.ReturnDate.HasValue ? m.ReturnDate.Value.ToShortDateString() : String.Empty)
+                </td>
+                @if (isView)
+                {
+                    <td class="text-center">
+                        @Html.ActionLink("Изменить", "Edit", "Admin") |
+                        @Html.ActionLink("Удалить", "Delete", "Admin")
+                    </td>
+                }
+            </tr>
         }
     </tbody>
 </table>

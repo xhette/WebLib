@@ -1,5 +1,21 @@
 ﻿@model IEnumerable<WebLib.Models.ShopModel>
 
+@{
+    bool isView = false;
+
+    if (TempData["IsAdminView"] != null)
+    {
+        isView = (bool)TempData["IsAdminView"];
+    }
+}
+
+@if (isView)
+{
+    <div class="row row-default text-right">
+        @Html.ActionLink("Добавить", "Add", "Admin", new { @class = "btn btn-primary" })
+    </div>
+}
+
 <table class="table">
     <thead>
         <tr>
@@ -15,25 +31,36 @@
             <th class="text-center">
                 Телефон
             </th>
+            @if (isView)
+            {
+                <th class="text-center"></th>
+            }
         </tr>
     </thead>
     <tbody>
         @foreach (var m in Model)
         {
-        <tr>
-            <td class="text-center">
-                @m.Id
-            </td>
-            <td class="text-center">
-                @m.Name
-            </td>
-            <td class="text-center">
-                @m.Address
-            </td>
-            <td class="text-center">
-                @m.Phone
-            </td>
-        </tr>
+            <tr>
+                <td class="text-center">
+                    @m.Id
+                </td>
+                <td class="text-center">
+                    @m.Name
+                </td>
+                <td class="text-center">
+                    @m.Address
+                </td>
+                <td class="text-center">
+                    @m.Phone
+                </td>
+                @if (isView)
+                {
+                    <td class="text-center">
+                        @Html.ActionLink("Изменить", "Edit", "Admin") |
+                        @Html.ActionLink("Удалить", "Delete", "Admin")
+                    </td>
+                }
+            </tr>
         }
     </tbody>
 </table>

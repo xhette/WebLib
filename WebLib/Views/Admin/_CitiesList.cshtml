@@ -1,28 +1,58 @@
 ﻿@model IEnumerable<WebLib.Models.CityModel>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th class="text-center">
-                ID
-            </th>
-            <th class="text-center">
-                Название
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var m in Model)
-        {
-            <tr>
-                <td class="text-center">
-                    @m.Id
-                </td>
-                <td class="text-center">
-                    @m.Name
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+@{
+    bool isView = false;
 
+    if (TempData["IsAdminView"] != null)
+    {
+        isView = (bool)TempData["IsAdminView"];
+    }
+}
+
+@if (isView)
+{
+    <div class="row row-default text-right">
+        @Html.ActionLink("Добавить", "Add", "Admin", new { @class = "btn btn-primary" })
+    </div>
+}
+
+    <div class="row row-default">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            ID
+                        </th>
+                        <th class="text-center">
+                            Название
+                        </th>
+                        @if (isView)
+                        {
+                            <th class="text-center"></th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in Model)
+                    {
+                        <tr>
+                            <td class="text-center">
+                                @m.Id
+                            </td>
+                            <td class="text-center">
+                                @m.Name
+                            </td>
+                            @if (isView)
+                            {
+                                <td class="text-center">
+                                    @Html.ActionLink("Изменить", "Edit", "Admin") |
+                                    @Html.ActionLink("Удалить", "Delete", "Admin")
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>

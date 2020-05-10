@@ -1,5 +1,21 @@
 ﻿@model IEnumerable<WebLib.Models.ProviderModel>
 
+@{
+    bool isView = false;
+
+    if (TempData["IsAdminView"] != null)
+    {
+        isView = (bool)TempData["IsAdminView"];
+    }
+}
+
+@if (isView)
+{
+    <div class="row row-default text-right">
+        @Html.ActionLink("Добавить", "Add", "Admin", new { @class = "btn btn-primary" })
+    </div>
+}
+
 <table class="table">
     <thead>
         <tr>
@@ -21,6 +37,10 @@
             <th class="text-center">
                 ID аккаунта
             </th>
+            @if (isView)
+            {
+                <th class="text-center"></th>
+            }
         </tr>
     </thead>
     <tbody>
@@ -45,6 +65,13 @@
                 <td class="text-center">
                     @(m.UserId.HasValue ? m.UserId.Value.ToString() : String.Empty)
                 </td>
+                @if (isView)
+                {
+                    <td class="text-center">
+                        @Html.ActionLink("Изменить", "Edit", "Admin") |
+                        @Html.ActionLink("Удалить", "Delete", "Admin")
+                    </td>
+                }
             </tr>
         }
     </tbody>
