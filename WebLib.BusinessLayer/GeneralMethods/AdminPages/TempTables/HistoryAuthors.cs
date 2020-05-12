@@ -75,7 +75,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 						}
 
 						context.Database.ExecuteSqlCommand("ENABLE TRIGGER AuthorsHistory ON Authors");
-						context.Database.ExecuteSqlCommand("DISABLE TRIGGER AuthorsInsert ON Authors");
+						context.Database.ExecuteSqlCommand("ENABLE TRIGGER AuthorsInsert ON Authors");
 
 					}
 

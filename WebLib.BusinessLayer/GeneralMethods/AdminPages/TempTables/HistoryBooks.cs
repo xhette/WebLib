@@ -11,7 +11,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 {
 	public class HistoryBooks : IHistory
 	{
-		public int Redone(int current, DateTime time)
+		public int Undone(int current, DateTime time)
 		{
 			{
 				int step = current;
@@ -87,7 +87,7 @@ namespace WebLib.BusinessLayer.GeneralMethods.AdminPages.TempTables
 			}
 		}
 
-		public int Undone(int current, DateTime time)
+		public int Redone(int current, DateTime time)
 		{
 			int step = current;
 

@@ -12,7 +12,7 @@
 @if (isView)
 {
     <div class="row row-default text-right">
-        @Html.ActionLink("Добавить", "Add", "Admin", new { @class = "btn btn-primary" })
+        @Html.ActionLink("Добавить", "AddBook", "Admin", new { @class = "btn btn-primary" })
     </div>
 }
 
@@ -56,8 +56,8 @@
                 @if (isView)
                 {
                     <td class="text-center">
-                        @Html.ActionLink("Изменить", "Edit", "Admin") |
-                        @Html.ActionLink("Удалить", "Delete", "Admin")
+                        @Html.ActionLink("Изменить", "EditBook", "Admin", new { id = m.Id }, null) |
+                        @Html.ActionLink("Удалить", "DeleteBook", "Admin", new { id = m.Id }, null)
                     </td>
                 }
             </tr>

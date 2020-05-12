@@ -42,7 +42,7 @@
         <div class="row row-default">
             <div class="col-md-12">
 
-                @using (Html.BeginForm("EditIssue", "Admin", null, FormMethod.Post, new { @style = "padding: 0 15em" }))
+                @using (Html.BeginForm("AddIssue", "Admin", null, FormMethod.Post, new { @style = "padding: 0 15em" }))
                 {
                     @Html.HiddenFor(m => m.Id)
                     <div class="control-group col-md-12 pull-left" style="min-height: 100px;">
@@ -80,6 +80,9 @@
                             @Html.TextBoxFor(model => model.ReturnDate, "{0:yyyy-MM-dd}", new { @class = "form-control datepicker", @id = "ReturnDate", @style = "min-width: 100%; line-height: 20px", type = "date" })
                             <p class="help-block">@Html.ValidationMessageFor(m => m.ReturnDate, null, new { @class = "text-danger" })</p>
                         </div>
+                    </div>
+                    <div class="text-center col-md-12">
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">Сохранить</button>
                     </div>
                 }
             </div>

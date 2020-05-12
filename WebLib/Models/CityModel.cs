@@ -24,5 +24,18 @@ namespace WebLib.Models
 				};
 			}
 		}
+
+		public static explicit operator CityDTO(CityModel dto)
+		{
+			if (dto == null) return null;
+			else
+			{
+				return new CityDTO
+				{
+					Id = dto.Id,
+					Name = dto.Name
+				};
+			}
+		}
 	}
 }

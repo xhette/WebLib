@@ -41,7 +41,7 @@
 
         <div class="row row-default">
             <div class="col-md-12">
-                @using (Html.BeginForm("EditShop", "Admin", null, FormMethod.Post, new { @style = "padding: 0 15em" }))
+                @using (Html.BeginForm("AddShop", "Admin", null, FormMethod.Post, new { @style = "padding: 0 15em" }))
                 {
                     @Html.HiddenFor(m => m.Id)
                     <div class="control-group col-md-12 pull-left" style="min-height: 100px;">
@@ -64,6 +64,9 @@
                             @Html.TextBoxFor(m => m.Phone, new { @id = "Phone", @class = "form-control", @style = "min-width: 100%" })
                             <p class="help-block">@Html.ValidationMessageFor(m => m.Phone, null, new { @class = "text-danger" })</p>
                         </div>
+                    </div>
+                    <div class="text-center col-md-12">
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">Сохранить</button>
                     </div>
                 }
             </div>

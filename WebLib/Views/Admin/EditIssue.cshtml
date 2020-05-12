@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewBag.Title = "Изменение выдачи";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model WebLib.Models.LibrarianPages.EditIssueModel
+
+@section Sidebar {
+    <div class="col-md-2" id="navbar">
+        <nav class="sidebar">
+            <ul class="list-unstyled navbar-list">
+                <li class="navbar-list-item active-nav-item">
+                    @Html.ActionLink("Просмотр данных", "Index", "Admin")
+                </li>
+                <li class="navbar-list-item">
+                    @Html.ActionLink("Отмена изменений", "Index", "History")
+                </li>
+                <li class="navbar-list-item">
+                    @Html.ActionLink("Резервное копирование", "Index", "Backup")
+                </li>
+            </ul>
+        </nav>
+    </div>
+}
+
+<div class="col-md-10 col-md-offset-2">
+    <div class="page-wrapper">
+
+        <div class="row row-default">
+            <div class="col-md-12">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="@Url.Action( "Issues", "Admin")" class="btn btn-default" style="cursor: pointer;">
+                            <i class="fa fa-long-arrow-left"></i> <span style="margin-left: 5px;">Назад</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row row-default">
+            <div class="col-md-12">
+
+                @using (Html.BeginForm("EditIssue", "Admin", null, FormMethod.Post, new { @style = "padding: 0 15em" }))
+                {
+                    @Html.HiddenFor(m => m.Id)
+                    <div class="control-group col-md-12 pull-left" style="min-height: 100px;">
+                        <label class="control-label" for="AuthorList">Автор </label>
+                        <div class="controls">
+                            @Html.DropDownList("AuthorList", new SelectList(Model.Authors, "Id", "FullName", Model.SelectedAuthor), new { @id = "AuthorList", @class = "form-control", @style = "min-width: 100%" })
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="control-group col-md-12 pull-left" style="min-height: 100px;">
+                        <label class="control-label" for="BookList">Книга </label>
+                        <div class="controls">
+                            @Html.HiddenFor(m => m.SelectedBook, new { @id = "SelectedBookId" })
+                            @Html.DropDownList("BookList", new SelectList(Model.Books, "Id", "Title", 0), new { @id = "BookList", @class = "form-control", @style = "min-width: 100%", @onchange = "BookListChange()" })
+                            <p class="help-block">@Html.ValidationMessageFor(m => m.SelectedBook, null, new { @class = "text-danger" })</p>
+                        </div>
+                    </div>
+                    <div class="control-group col-md-12 pull-left" style="min-height: 100px;">
+                        <label class="control-label" for="ReaderList">Читатель </label>
+                        <div class="controls">
+                            @Html.DropDownListFor(m => m.SelectedReader, new SelectList(Model.Readers, "Id", "FullName", 0), new { @id = "ReaderList", @class = "form-control", @style = "min-width: 100%" })
+                            <p class="help-block">@Html.ValidationMessageFor(m => m.SelectedReader, null, new { @class = "text-danger" })</p>
+                        </div>
+                    </div>
+                    <div class="control-group col-md-12" , style="min-height: 100px;">
+                        <label class="control-label" for="IssueDate">Дата выдачи</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.IssueDate, "{0:yyyy-MM-dd}", new { @class = "form-control datepicker", @id = "IssueDate", @style = "min-width: 100%; line-height: 20px", type = "date" })
+                            <p class="help-block">@Html.ValidationMessageFor(m => m.IssueDate, null, new { @class = "text-danger" })</p>
+                        </div>
+                    </div>
+                    <div class="control-group col-md-12" , style="min-height: 100px;">
+                        <label class="control-label" for="ReturnDate">Дата возврата</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(model => model.ReturnDate, "{0:yyyy-MM-dd}", new { @class = "form-control datepicker", @id = "ReturnDate", @style = "min-width: 100%; line-height: 20px", type = "date" })
+                            <p class="help-block">@Html.ValidationMessageFor(m => m.ReturnDate, null, new { @class = "text-danger" })</p>
+                        </div>
+                    </div>
+                    <div class="text-center col-md-12">
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">Сохранить</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        BookListChange();
+    });
+
+    $(function () {
+        $('#AuthorList').change(function () {
+            // получаем выбранный id
+            var id = $(this).val();
+            console.log(id);
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("BookListByAuthor")/' + id,
+                success: function (data) {
+
+                    $('#BookList').replaceWith(data);
+                    BookListChange();
+                }
+            });
+        })
+    });
+
+    function BookListChange() {
+        var book = $("#BookList").val();
+        console.log(book);
+        var bookInput = $("#SelectedBookId");
+        bookInput.val(book);
+        console.log(bookInput.val());
+    }
+</script>

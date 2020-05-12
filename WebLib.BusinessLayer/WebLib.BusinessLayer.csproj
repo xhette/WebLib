@@ -171,6 +171,7 @@
     <Compile Include="GeneralMethods\AdminPages\TempTables\HistorySupplies.cs" />
     <Compile Include="GeneralMethods\AdminPages\TempTables\IHistory.cs" />
     <Compile Include="GeneralMethods\AdminPages\TempTables\HistoryProviders.cs" />
+    <Compile Include="GeneralMethods\AdminRepository.cs" />
     <Compile Include="GeneralMethods\Generic\GenericRepository.cs" />
     <Compile Include="GeneralMethods\Generic\IGenericRepository.cs" />
     <Compile Include="GeneralMethods\LibrarianPage.cs" />

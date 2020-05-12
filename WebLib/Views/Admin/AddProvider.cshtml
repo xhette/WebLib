@@ -1,10 +1,10 @@
 ﻿
 @{
-    ViewBag.Title = "Изменение библиотекаря";
+    ViewBag.Title = "Изменение поставщика";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model WebLib.Models.LibrarianModel
+@model WebLib.Models.ProviderModel
 
 @section Sidebar {
     <div class="col-md-2" id="navbar">
@@ -31,7 +31,7 @@
             <div class="col-md-12">
                 <ul class="nav nav-tabs">
                     <li class="active">
-                        <a href="@Url.Action( "Librarians", "Admin")" class="btn btn-default" style="cursor: pointer;">
+                        <a href="@Url.Action( "Providers", "Admin")" class="btn btn-default" style="cursor: pointer;">
                             <i class="fa fa-long-arrow-left"></i> <span style="margin-left: 5px;">Назад</span>
                         </a>
                     </li>
@@ -40,7 +40,7 @@
         </div>
 
         <div class="row row-default">
-            @using (Html.BeginForm("EditLibrarian", "Admin", null, FormMethod.Post, new { @style = "padding: 0 15em" }))
+            @using (Html.BeginForm("AddProvider", "Admin", null, FormMethod.Post, new { @style = "padding: 0 15em" }))
             {
                 <div class="col-md-12">
                     @Html.HiddenFor(m => m.UserId)
@@ -78,16 +78,11 @@
                             <p class="help-block">@Html.ValidationMessageFor(m => m.Address, null, new { @class = "text-danger" })</p>
                         </div>
                     </div>
-                    <div class="control-group col-md-12" , style="min-height: 100px;">
-                        <!-- Phone -->
-                        <label class="control-label" for="Phone">Телефон</label>
-                        <div class="controls">
-                            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @id = "Phone", @style = "min-width: 100%" })
-                            <p class="help-block">@Html.ValidationMessageFor(m => m.Phone, null, new { @class = "text-danger" })</p>
-                        </div>
-                    </div>
+                </div>
+                <div class="text-center col-md-12">
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">Сохранить</button>
                 </div>
             }
-            </div>
+        </div>
     </div>
 </div>
