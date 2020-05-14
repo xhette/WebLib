@@ -58,9 +58,9 @@
                         </div>
                     </div>
                     <div class="control-group col-md-12 pull-left" style="min-height: 100px;">
-                        <label class="control-label" for="Summ">Дата</label>
+                        <label class="control-label" for="Summ">Сумма</label>
                         <div class="controls">
-                            @Html.TextBoxFor(m => m.Supply.Summ, new { @class = "form-control", @id = "Summ", @style = "min-width: 100%", type = "date" })
+                            @Html.TextBoxFor(m => m.Supply.Summ, new { @class = "form-control", @id = "Summ", @style = "min-width: 100%" })
                             <p class="help-block">@Html.ValidationMessageFor(m => m.Supply.Summ, null, new { @class = "text-danger" })</p>
                         </div>
                     </div>

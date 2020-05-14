@@ -91,7 +91,7 @@ namespace WebLib.Utils
 
 
 		}
-		private static void DeleteUserIfExist (string userName)
+		public static void DeleteUserIfExist (string userName)
 		{
 			if (membership.GetUser(userName, false) != null)
 			{

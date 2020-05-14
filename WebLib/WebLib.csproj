@@ -235,6 +235,7 @@
     <Compile Include="Models\EditDepartmentModel.cs" />
     <Compile Include="Models\EditLibraryModel.cs" />
     <Compile Include="Models\IssueModel.cs" />
+    <Compile Include="Models\LibrarianEditModel.cs" />
     <Compile Include="Models\LibrarianModel.cs" />
     <Compile Include="Models\LibrarianPages\AbonentModel.cs" />
     <Compile Include="Models\LibrarianPages\AddIssueModel.cs" />
@@ -514,7 +515,6 @@
     <Content Include="Views\Admin\EditAuthor.cshtml" />
     <Content Include="Views\Admin\EditCity.cshtml" />
     <Content Include="Views\Admin\EditDepartment.cshtml" />
-    <Content Include="Views\Admin\EditIssue.cshtml" />
     <Content Include="Views\Admin\EditLibrarian.cshtml" />
     <Content Include="Views\Admin\EditLibrary.cshtml" />
     <Content Include="Views\Admin\EditProvider.cshtml" />
@@ -526,7 +526,6 @@
     <Content Include="Views\Admin\AddBook.cshtml" />
     <Content Include="Views\Admin\AddCity.cshtml" />
     <Content Include="Views\Admin\AddDepartment.cshtml" />
-    <Content Include="Views\Admin\AddIssue.cshtml" />
     <Content Include="Views\Admin\AddLibrarian.cshtml" />
     <Content Include="Views\Admin\AddLibrary.cshtml" />
     <Content Include="Views\Admin\AddProvider.cshtml" />

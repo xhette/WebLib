@@ -8,6 +8,7 @@ using WebLib.BusinessLayer.DTO;
 using WebLib.BusinessLayer.GeneralMethods.AdminPages.Classes;
 using WebLib.DataLayer;
 using WebLib.Models;
+using WebLib.Models.LibrarianPages;
 using WebLib.Models.ProviderPages;
 using WebLib.Models.ReaderPages;
 using WebMatrix.WebData;
@@ -508,49 +509,581 @@ namespace WebLib.Controllers
             model.Libraries = libBs.GetList().Select(c => (LibraryModel)c).ToList();
             return View(model);
         }
+		#endregion
+
+		#region Issues
+		public ActionResult Issues()
+        {
+            TempData["IsAdminView"] = true;
+            return View();
+        }
+
+        public ActionResult DeleteIssue(int id)
+        {
+            IssueBs bs = new IssueBs();
+
+            var result = bs.Delete(id);
+
+            if (result.Code == BusinessLayer.OperationStatusEnum.Success)
+            {
+                TempData["OperationStatus"] = true;
+                TempData["OpearionMessage"] = "Выдача успешно удалена";
+            }
+            else
+            {
+                TempData["OperationStatus"] = false;
+                TempData["OpearionMessage"] = "Произошла ошибка при удалении выдачи";
+            }
+
+            return RedirectToAction("Issues", "Admin");
+        }
+		#endregion
+
+		#region Librarians
+		public ActionResult Librarians()
+        {
+            TempData["IsAdminView"] = true;
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult AddLibrarian()
+        {
+            LibrarianEditModel model = new LibrarianEditModel();
+
+            LibraryBs libbs = new LibraryBs();
+            model.Libraries = libbs.GetList().Select(c => (LibraryModel)c).ToList();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddLibrarian(LibrarianEditModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                LibrarianBs bs = new LibrarianBs();
+
+                var result = bs.Add((LibrarianDataDTO)model);
+
+                if (result.Code == BusinessLayer.OperationStatusEnum.Success)
+                {
+                    TempData["OperationStatus"] = true;
+                    TempData["OpearionMessage"] = "Данные успешно обновлены";
+                }
+                else
+                {
+                    TempData["OperationStatus"] = false;
+                    TempData["OpearionMessage"] = "Произошла ошибка при обновлении данных";
+                }
+
+                return RedirectToAction("Librarians", "Admin");
+            }
+
+            LibraryBs libbs = new LibraryBs();
+            model.Libraries = libbs.GetList().Select(c => (LibraryModel)c).ToList();
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult EditLibrarian(int id)
+        {
+            LibrarianBs librarianBs = new LibrarianBs();
+
+            LibrarianEditModel model = (LibrarianEditModel)librarianBs.GetById(id);
+
+            LibraryBs libbs = new LibraryBs();
+            model.Libraries = libbs.GetList().Select(c => (LibraryModel)c).ToList();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditLibrarian(LibrarianEditModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                LibrarianBs bs = new LibrarianBs();
+
+                var result = bs.Update((LibrarianDataDTO)model);
+
+                if (result.Code == BusinessLayer.OperationStatusEnum.Success)
+                {
+                    TempData["OperationStatus"] = true;
+                    TempData["OpearionMessage"] = "Данные успешно обновлены";
+                }
+                else
+                {
+                    TempData["OperationStatus"] = false;
+                    TempData["OpearionMessage"] = "Произошла ошибка при обновлении данных";
+                }
+
+                return RedirectToAction("Librarians", "Admin");
+            }
+
+            LibraryBs libbs = new LibraryBs();
+            model.Libraries = libbs.GetList().Select(c => (LibraryModel)c).ToList();
+
+            return View(model);
+        }
+
+        public ActionResult DeleteLibrarian(int id)
+        {
+            LibrarianBs bs = new LibrarianBs();
+
+            var result = bs.Delete(id);
+
+            if (result.Code == BusinessLayer.OperationStatusEnum.Success)
+            {
+                TempData["OperationStatus"] = true;
+                TempData["OpearionMessage"] = "Данные успешно удалены";
+            }
+            else
+            {
+                TempData["OperationStatus"] = false;
+                TempData["OpearionMessage"] = "Произошла ошибка при удалении данных";
+            }
+
+            return RedirectToAction("Librarians", "Admin");
+        }
         #endregion
 
-        public ActionResult Issues()
-        {
-            TempData["IsAdminView"] = true;
-            return View();
-        }
-
-        public ActionResult Librarians()
-        {
-            TempData["IsAdminView"] = true;
-            return View();
-        }
-
+        #region Libraries
         public ActionResult Libraries()
         {
             TempData["IsAdminView"] = true;
             return View();
         }
 
+        [HttpGet]
+        public ActionResult AddLibrary()
+        {
+            EditLibraryModel model = new EditLibraryModel();
+
+            CityBs bs = new CityBs();
+            model.Cities = bs.GetList().Select(c => (CityModel)c).ToList();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddLibrary(EditLibraryModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                LibraryBs bs = new LibraryBs();
+                var result = bs.Add((LibraryDTO)model);
+
+                if (result.Code == BusinessLayer.OperationStatusEnum.Success)
+                {
+                    TempData["OperationStatus"] = true;
+                    TempData["OpearionMessage"] = "Данные успешно обновлены";
+                }
+                else
+                {
+                    TempData["OperationStatus"] = false;
+                    TempData["OpearionMessage"] = result.Message;
+                }
+
+                return RedirectToAction("Libraries", "Admin");
+            }
+
+            CityBs citybs = new CityBs();
+            model.Cities = citybs.GetList().Select(c => (CityModel)c).ToList();
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult EditLibrary(int id)
+        {
+            LibraryBs libbs = new LibraryBs();
+            EditLibraryModel model = (EditLibraryModel)libbs.GetById(id);
+
+            CityBs bs = new CityBs();
+            model.Cities = bs.GetList().Select(c => (CityModel)c).ToList();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditLibrary(EditLibraryModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                LibraryBs bs = new LibraryBs();
+                var result = bs.Update((LibraryDTO)model);
+
+                if (result.Code == BusinessLayer.OperationStatusEnum.Success)
+                {
+                    TempData["OperationStatus"] = true;
+                    TempData["OpearionMessage"] = "Данные успешно обновлены";
+                }
+                else
+                {
+                    TempData["OperationStatus"] = false;
+                    TempData["OpearionMessage"] = result.Message;
+                }
+
+                return RedirectToAction("Libraries", "Admin");
+            }
+
+            CityBs citybs = new CityBs();
+            model.Cities = citybs.GetList().Select(c => (CityModel)c).ToList();
+            return View(model);
+        }
+
+        public ActionResult DeleteLibrary(int id)
+        {
+            LibraryBs bs = new LibraryBs();
+            var result = bs.Delete(id);
+
+            if (result.Code == BusinessLayer.OperationStatusEnum.Success)
+            {
+                TempData["OperationStatus"] = true;
+                TempData["OpearionMessage"] = "Данные успешно обновлены";
+            }
+            else
+            {
+                TempData["OperationStatus"] = false;
+                TempData["OpearionMessage"] = result.Message;
+            }
+
+            return RedirectToAction("Libraries", "Admin");
+        }
+        #endregion
+
+        #region Providers
         public ActionResult Providers()
         {
             TempData["IsAdminView"] = true;
             return View();
         }
 
+        [HttpGet]
+        public ActionResult AddProvider()
+        {
+            ProviderModel model = new ProviderModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddProvider(ProviderModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                ProviderBs bs = new ProviderBs();
+
+                var result = bs.Add((ProviderDataDTO)model);
+
+                if (result.Code == BusinessLayer.OperationStatusEnum.Success)
+                {
+                    TempData["OperationStatus"] = true;
+                    TempData["OpearionMessage"] = "Данные успешно обновлены";
+                }
+                else
+                {
+                    TempData["OperationStatus"] = false;
+                    TempData["OpearionMessage"] = "Произошла ошибка при обновлении данных";
+                }
+
+                return RedirectToAction("Providers", "Admin");
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult EditProvider(int id)
+        {
+            ProviderBs bs = new ProviderBs();
+
+            ProviderModel model = (ProviderModel)bs.GetById(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditProvider(ProviderModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                ProviderBs bs = new ProviderBs();
+
+                var result = bs.Update((ProviderDataDTO)model);
+
+                if (result.Code == BusinessLayer.OperationStatusEnum.Success)
+                {
+                    TempData["OperationStatus"] = true;
+                    TempData["OpearionMessage"] = "Данные успешно обновлены";
+                }
+                else
+                {
+                    TempData["OperationStatus"] = false;
+                    TempData["OpearionMessage"] = "Произошла ошибка при обновлении данных";
+                }
+
+                return RedirectToAction("Providers", "Admin");
+            }
+
+            return View(model);
+        }
+
+        public ActionResult DeleteProvider(int id)
+        {
+            ProviderBs bs = new ProviderBs();
+
+            var result = bs.Delete(id);
+
+            if (result.Code == BusinessLayer.OperationStatusEnum.Success)
+            {
+                TempData["OperationStatus"] = true;
+                TempData["OpearionMessage"] = "Данные успешно удалены";
+            }
+            else
+            {
+                TempData["OperationStatus"] = false;
+                TempData["OpearionMessage"] = "Произошла ошибка при удалении данных";
+            }
+
+            return RedirectToAction("Providers", "Admin");
+        }
+        #endregion
+
+        #region Readers
         public ActionResult Readers()
         {
             TempData["IsAdminView"] = true;
             return View();
         }
 
-        public ActionResult Shops()
+        public ActionResult DeleteReader (int id)
+        {
+            ReaderBs bs = new ReaderBs();
+            var reader = bs.GetById(id);
+
+            if (reader.UserId != null)
+            {
+                var user = context.Users.FirstOrDefault(c => c.Id == reader.UserId);
+                if (user != null) 
+                {
+                    string userName = user.Name;
+                    Utils.CreateAccounts.DeleteUserIfExist(userName);
+                }
+            }
+
+            var result = bs.Delete(id);
+
+            if (result.Code == BusinessLayer.OperationStatusEnum.Success)
+            {
+                TempData["OperationStatus"] = true;
+                TempData["OpearionMessage"] = "Читатель успешно удален";
+            }
+            else
+            {
+                TempData["OperationStatus"] = false;
+                TempData["OpearionMessage"] = "Произошла ошибка при удалении читателя";
+            }
+
+            return RedirectToAction("Readers", "Admin");
+        }
+		#endregion
+
+		#region Shops
+		public ActionResult Shops()
         {
             TempData["IsAdminView"] = true;
             return View();
         }
 
+        [HttpGet]
+        public ActionResult AddShop()
+        {
+            ShopModel model = new ShopModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddShop(ShopModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                ShopBs bs = new ShopBs();
+                var result = bs.Add((ShopDTO)model);
+
+                if (result.Code == BusinessLayer.OperationStatusEnum.Success)
+                {
+                    TempData["OperationStatus"] = true;
+                    TempData["OpearionMessage"] = "Магазин успешно добавлен";
+
+                    return RedirectToAction("Shops", "Admin");
+                }
+                else
+                {
+                    TempData["OperationStatus"] = false;
+                    TempData["OpearionMessage"] = result.Message;
+                }
+            }
+
+            return View( model);
+        }
+
+        [HttpGet]
+        public ActionResult EditShop(int id)
+        {
+            ShopBs bs = new ShopBs();
+            ShopModel model = (ShopModel)bs.GetById(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditShop(ShopModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                ShopBs bs = new ShopBs();
+                var result = bs.Update((ShopDTO)model);
+
+                if (result.Code == BusinessLayer.OperationStatusEnum.Success)
+                {
+                    TempData["OperationStatus"] = true;
+                    TempData["OpearionMessage"] = "Данные успешно обновлены";
+
+                    return RedirectToAction("Shops", "Admin");
+                }
+                else
+                {
+                    TempData["OperationStatus"] = false;
+                    TempData["OpearionMessage"] = result.Message;
+                }
+            }
+
+            return View(model);
+        }
+
+        public ActionResult DeleteShop(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                ShopBs bs = new ShopBs();
+                var result = bs.Delete(id);
+
+                if (result.Code == BusinessLayer.OperationStatusEnum.Success)
+                {
+                    TempData["OperationStatus"] = true;
+                    TempData["OpearionMessage"] = "Данные успешно обновлены";
+                }
+                else
+                {
+                    TempData["OperationStatus"] = false;
+                    TempData["OpearionMessage"] = result.Message;
+                }
+            }
+            return RedirectToAction("Shops", "Admin");
+        }
+        #endregion
+
+        #region Supplies
         public ActionResult Supplies()
         {
             TempData["IsAdminView"] = true;
             return View();
         }
+
+        [HttpGet]
+        public ActionResult AddSupply()
+        {
+            ShopBs bs = new ShopBs();
+            SupplyAddModel model = new SupplyAddModel();
+            model.Shops = bs.GetList().Select(c => (ShopModel)c).ToList();
+            model.Supply.ShopId = model.Shops.FirstOrDefault().Id;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddSupply(SupplyAddModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                SupplyBs bs = new SupplyBs();
+                var result = bs.Add((SupplyDTO)model.Supply);
+
+                if (result.Code == BusinessLayer.OperationStatusEnum.Success)
+                {
+                    TempData["OperationStatus"] = true;
+                    TempData["OpearionMessage"] = "Поставка успешно добавлена";
+
+                    return RedirectToAction("Supplies", "Admin");
+                }
+                else
+                {
+                    TempData["OperationStatus"] = false;
+                    TempData["OpearionMessage"] = result.Message;
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult EditSupply(int id)
+        {
+            ShopBs bs = new ShopBs();
+            SupplyBs supplyBs = new SupplyBs();
+            SupplyAddModel model = (SupplyAddModel)supplyBs.GetById(id);
+            model.Shops = bs.GetList().Select(c => (ShopModel)c).ToList();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditSupply(SupplyAddModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                SupplyBs bs = new SupplyBs();
+                var result = bs.Update((SupplyDTO)model.Supply);
+
+                if (result.Code == BusinessLayer.OperationStatusEnum.Success)
+                {
+                    TempData["OperationStatus"] = true;
+                    TempData["OpearionMessage"] = "Поставка успешно изменена";
+
+                    return RedirectToAction("Supplies", "Admin");
+                }
+                else
+                {
+                    TempData["OperationStatus"] = false;
+                    TempData["OpearionMessage"] = result.Message;
+                }
+            }
+
+            return View(model);
+        }
+
+        public ActionResult DeleteSupply(int id)
+        {
+            SupplyBs bs = new SupplyBs();
+            var result = bs.Delete(id);
+
+            if (result.Code == BusinessLayer.OperationStatusEnum.Success)
+            {
+                TempData["OperationStatus"] = true;
+                TempData["OpearionMessage"] = "Поставка успешно удалена";
+            }
+            else
+            {
+                TempData["OperationStatus"] = false;
+                TempData["OpearionMessage"] = result.Message;
+            }
+
+            return RedirectToAction("Supplies", "Admin");
+        }
+        #endregion
 
         #region partial lists
         public ActionResult AuthorsList(string symbols = "")

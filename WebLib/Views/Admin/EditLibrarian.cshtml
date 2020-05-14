@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model WebLib.Models.LibrarianModel
+@model WebLib.Models.LibrarianEditModel
 
 @section Sidebar {
     <div class="col-md-2" id="navbar">
@@ -43,14 +43,14 @@
             @using (Html.BeginForm("EditLibrarian", "Admin", null, FormMethod.Post, new { @style = "padding: 0 15em" }))
             {
             <div class="col-md-12">
-                @Html.HiddenFor(m => m.UserId)
-                @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(m => m.Librarian.UserId)
+                @Html.HiddenFor(m => m.Librarian.Id)
                 <div class="control-group col-md-12" , style="min-height: 100px;">
                     <!-- Surname -->
                     <label class="control-label" for="Surname">Фамилия</label>
                     <div class="controls">
-                        @Html.TextBoxFor(m => m.Surname, new { @class = "form-control", @id = "Surname", @style = "min-width: 100%" })
-                        <p class="help-block">@Html.ValidationMessageFor(m => m.Surname, null, new { @class = "text-danger" })</p>
+                        @Html.TextBoxFor(m => m.Librarian.Surname, new { @class = "form-control", @id = "Surname", @style = "min-width: 100%" })
+                        <p class="help-block">@Html.ValidationMessageFor(m => m.Librarian.Surname, null, new { @class = "text-danger" })</p>
                     </div>
                 </div>
 
@@ -58,32 +58,39 @@
                     <!-- Name -->
                     <label class="control-label" for="Name">Имя</label>
                     <div class="controls">
-                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @id = "Name", @style = "min-width: 100%" })
-                        <p class="help-block">@Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })</p>
+                        @Html.TextBoxFor(m => m.Librarian.Name, new { @class = "form-control", @id = "Name", @style = "min-width: 100%" })
+                        <p class="help-block">@Html.ValidationMessageFor(m => m.Librarian.Name, null, new { @class = "text-danger" })</p>
                     </div>
                 </div>
                 <div class="control-group col-md-12" , style="min-height: 100px;">
                     <!-- Patronymic -->
                     <label class="control-label" for="Patronymic">Отчество</label>
                     <div class="controls">
-                        @Html.TextBoxFor(m => m.Patronymic, new { @class = "form-control", @id = "Patronymic", @style = "min-width: 100%" })
-                        <p class="help-block">@Html.ValidationMessageFor(m => m.Patronymic, null, new { @class = "text-danger" })</p>
+                        @Html.TextBoxFor(m => m.Librarian.Patronymic, new { @class = "form-control", @id = "Patronymic", @style = "min-width: 100%" })
+                        <p class="help-block">@Html.ValidationMessageFor(m => m.Librarian.Patronymic, null, new { @class = "text-danger" })</p>
                     </div>
                 </div>
                 <div class="control-group col-md-12" , style="min-height: 100px;">
                     <!-- Address -->
                     <label class="control-label" for="Address">Адрес</label>
                     <div class="controls">
-                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @id = "Address", @style = "min-width: 100%" })
-                        <p class="help-block">@Html.ValidationMessageFor(m => m.Address, null, new { @class = "text-danger" })</p>
+                        @Html.TextBoxFor(m => m.Librarian.Address, new { @class = "form-control", @id = "Address", @style = "min-width: 100%" })
+                        <p class="help-block">@Html.ValidationMessageFor(m => m.Librarian.Address, null, new { @class = "text-danger" })</p>
                     </div>
                 </div>
                 <div class="control-group col-md-12" , style="min-height: 100px;">
                     <!-- Phone -->
                     <label class="control-label" for="Phone">Телефон</label>
                     <div class="controls">
-                        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @id = "Phone", @style = "min-width: 100%" })
-                        <p class="help-block">@Html.ValidationMessageFor(m => m.Phone, null, new { @class = "text-danger" })</p>
+                        @Html.TextBoxFor(m => m.Librarian.Phone, new { @class = "form-control", @id = "Phone", @style = "min-width: 100%" })
+                        <p class="help-block">@Html.ValidationMessageFor(m => m.Librarian.Phone, null, new { @class = "text-danger" })</p>
+                    </div>
+                </div>
+                <div class="control-group col-md-12 pull-left" style="min-height: 100px;">
+                    <label class="control-label" for="Name">Библиотека</label>
+                    <div class="controls">
+                        @Html.DropDownListFor(m => m.Librarian.LibraryId, new SelectList(Model.Libraries, "Id", "Name", 0), new { @id = "LibraryList", @class = "form-control", @style = "min-width: 100%" })
+                        <p class="help-block">@Html.ValidationMessageFor(m => m.Librarian.LibraryId, null, new { @class = "text-danger" })</p>
                     </div>
                 </div>
                 <div class="text-center col-md-12">
