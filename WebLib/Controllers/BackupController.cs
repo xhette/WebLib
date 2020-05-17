@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebLib.BusinessLayer.GeneralMethods.AdminPages;
 using WebLib.DataLayer;
 
 namespace WebLib.Controllers
@@ -17,23 +18,19 @@ namespace WebLib.Controllers
             return View();
         }
 
-        public ActionResult BackupDb()
+        public ActionResult Backup()
         {
             string path = Server.MapPath("~/Content/Backup");
             byte[] backup = BackupMethods.BackupDb(path);
             return File(backup, "application/zip", "backup.zip");
         }
 
-        public ActionResult RestoreDb(HttpPostedFileBase file)
+        public ActionResult Restore(HttpPostedFileBase file)
         {
             if (file != null)
             {
                 string path = Server.MapPath("~/Content/Restore");
-                string name = "LibraryDbRestore";
-                string date = DateTime.Today.ToString("dd-MM-yyyy");
-
-                string folderName = name + "-" + date;
-                string filePath = String.Format("{0}\\{1}", path, folderName);
+                string filePath = String.Format("{0}\\{1}", path, Guid.NewGuid());
                 Directory.CreateDirectory(filePath);
                 file.SaveAs(filePath + "\\" + file.FileName);
                 BackupMethods.RestoreDb(filePath);
